@@ -1,0 +1,51 @@
+<div class="noselect" layout="horizontal" layout-fill>
+
+  <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
+    <header>
+      <md-toolbar layout="row" layout-align="center center">
+
+        <section class="chunk1"></section>
+
+        <section flex layout="row" layout-align="center center">
+          <md-button href="#" class="md-raised" ng-click="main.article.expanded=false">Reset</md-button>
+        </section>
+
+        <section class="chunk2">Wauh?</section>
+
+      </md-toolbar>    
+    </header>
+
+    <div class="techs mid-section" layout-align="center" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe>
+      <md-card class="article-card" ng-class="{'disabled': main.shouldSwipe}" scrolly>
+        <md-card-content>
+          <div class="source-area" ng-class="{'expanded': main.article.expanded}">
+            Source: {{main.article.source}}<br/>
+            Publisher: {{main.article.publisher}}<br/>
+          </div>
+          <h3 class="md-title">{{ main.article.headline }}</h3>
+          <div>
+            <img class="pull-right" draggable="false" src="assets/images/oldman.png"/>
+            <p ng-repeat="pcontent in main.article.bodyLines track by $index">{{ pcontent }}</p>
+          </div>
+        </md-card-content>
+        <!-- div class="md-action-buttons">
+          <md-button ng-href="{{ awesomeThing.url }}">Website</md-button>
+        </div -->
+      </md-card>
+      <div ng-if="main.shouldSwipe && main.inSwipeLeft" class="swipe-left-flag">Fake</div>
+      <div ng-if="main.shouldSwipe && main.inSwipeRight" class="swipe-right-flag">Real</div>
+    </div>
+
+    <footer>
+      <md-toolbar layout="row" layout-align="center center">
+
+        <section flex layout="row" layout-align="center center">
+          <md-button href="#" class="md-raised" ng-click="main.article.expanded=false">Reset</md-button>
+        </section>
+
+      </md-toolbar>    
+    </footer>
+  
+  </md-content>
+
+</div>
