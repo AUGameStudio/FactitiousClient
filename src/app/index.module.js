@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('proto', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ngMaterial', 'toastr']);
+    .module('proto', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ngMaterial']);
 
 })();

@@ -8,7 +8,7 @@
     .directive('trackSwipe', trackSwipe);
 
   /** @ngInject */
-  function MainController($log) {
+  function MainController($scope, $log, swiperService) {
     var vm = this;
 
     vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
@@ -25,6 +25,10 @@
     vm.curProgress = 5;
     vm.maxProgress = 15;
 
+    vm.swipeLeft = swipeLeft;
+    vm.swipeRight = swipeRight;
+    vm.showHint = showHint;
+
     activate();
 
     function activate() {
@@ -36,6 +40,32 @@
       vm.article.body.split('\n\n').forEach(function(pcontent) {
         vm.article.bodyLines.push(pcontent.replace('\n', 'BR'));
       });
+    }
+
+    function swipeLeft() {
+        if (vm.shouldSwipe) return;
+        vm.shouldSwipe = true;
+        vm.inSwipeLeft = true;
+        swiperService.swipeCard($scope, $('.article-card'), 'left')
+            .then(function() {
+                $log.log('Main swiped!')
+                vm.shouldSwipe = false;
+            });
+    }
+
+    function swipeRight() {
+        if (vm.shouldSwipe) return;
+        vm.shouldSwipe = true;
+        vm.inSwipeRight = true;
+        swiperService.swipeCard($scope, $('.article-card'), 'right')
+            .then(function() {
+                $log.log('Main swiped!')
+                vm.shouldSwipe = false;
+            });
+    }
+
+    function showHint() {
+        vm.article.expanded = true;
     }
 
 
@@ -67,7 +97,7 @@
   }
 
   /** @ngInject */
-  function trackSwipe($log, $timeout) {
+  function trackSwipe($log, $timeout, swiperService) {
 
     return {
       restrict: 'A',
@@ -100,35 +130,17 @@
 
       function trackUp(e) {
         if ((scope.main.inSwipeLeft || scope.main.inSwipeRight) && shouldSwipe) {
-          var sgn = (scope.main.inSwipeLeft ? -1 : 1);
-
-          elm.find('.article-card').css('myprop', '0');
-
-          $(elm.find('.article-card')).animate({
-              myprop: 1
-            }, {
-              step: function(now, tween){
-                $log.log(now);
-                elm.find('.article-card').css('transform', 'translateX('+(dragX+sgn*now*600)+'px)')
-              },
-              complete: function() {
-                $log.log('ended')
-                $timeout(function() {
-                  elm.find('.article-card').css('transform', '');
-                }, 100);
-                scope.main.inSwipeLeft = scope.main.inSwipeRight = scope.main.article.expanded = false;
-                scope.main.shouldSwipe = shouldSwipe = false;
-              $(elm.find('.article-card')).scrollTop(1);
-                scope.$apply();
-              }
-            }, 500); 
+          swiperService.swipeCard(scope, elm.find('.article-card'), (scope.main.inSwipeLeft ? 'left' : 'right'), dragX)
+            .then(function() {
+              $log.log('swiped');
+              scope.main.shouldSwipe = shouldSwipe = false;
+            });
         } else {
           elm.find('.article-card').css('transform', '');
           scope.main.inSwipeLeft = scope.main.inSwipeRight = false;
           scope.main.shouldSwipe = shouldSwipe = false;
         }
         releaseListeners();
-        $log.log(e);
         scope.$apply();
       }
 
