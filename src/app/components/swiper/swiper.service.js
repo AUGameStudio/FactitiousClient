@@ -24,7 +24,6 @@
 				myprop: 1
 			}, {
 				step: function(now, tween){
-					$log.log(now);
 					elm.css('transform', 'translateX('+(dragX+sgn*now*600)+'px)')
 			  	},
 			  	complete: function() {

@@ -8,7 +8,7 @@
 		.directive('trackSwipe', trackSwipe);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout) {
 		var vm = this;
 
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
@@ -69,6 +69,9 @@
 
 		function showHint() {
 			vm.article.expanded = true;
+			$timeout(function() {
+				$('.article-card').scrollTop($('.article-card').scrollTop()+50);
+			}, 250);
 		}
 
 	}
@@ -81,43 +84,83 @@
 		};
 
 		function link(scope, elm) {
-			$timeout(function() {$(elm).scrollTop(1);}, 100);
-			scope.$watch(function() {return scope.main.article.expanded;}, function() {
-				if (!scope.main.article.expanded) {
-					// $(elm).scrollTop(1);
-				}
-			});
-			var canExpand = false;
-			elm.on('touchmove', function(e) {
-				scope.main.article.expanded = true;
-				scope.$apply();
-				$log.log('mousewheel');
-			});
-			elm.on('touchstart', function(e) {
-				canExpand = (elm[0].scrollHeight-(elm.scrollTop()+elm.innerHeight())<=10);
-				$log.log('mousedown '+canExpand);
-			});
-			elm.on('touchend', function(e) {
-				$log.log('mouseup');
-				if (canExpand && elm[0].scrollHeight-(elm.scrollTop()+elm.innerHeight())<=0) {
-					scope.main.article.expanded = true;
-					scope.$apply();
-				}
-				canExpand = false; 
-			});
-			elm.on('scroll', function(e) {
-				// $log.log(e);
-				$log.log(elm.scrollTop(), elm[0].clientHeight, elm.outerHeight(), elm[0].scrollHeight, elm[0].scrollHeight-(elm.scrollTop()+elm.innerHeight()));
+			var mode = "atBottom";
+			var couldExpand = false;
+			var refractoryTime = 100;
+			var refractoryTimer;
 
-				
-				if (elm.scrollTop()<=0 && !scope.main.inSwipeLeft && !scope.main.inSwipeRight) {
-					scope.main.article.expanded = true;
-					scope.$apply();
-				} else if (canExpand && elm[0].scrollHeight-(elm.scrollTop()+elm.innerHeight())<=10) {
-					scope.main.article.expanded = true;
-					scope.$apply();
+			if (mode=="atTop") {
+				$timeout(function() {$(elm).scrollTop(1);}, 100);
+				scope.$watch(function() {return scope.main.article.expanded;}, function() {
+					if (!scope.main.article.expanded) {
+						$(elm).scrollTop(1);
+					}
+				});
+				elm.on('scroll', function(e) {
+					if (elm.scrollTop()<=0 && !scope.main.inSwipeLeft && !scope.main.inSwipeRight) {
+						scope.main.article.expanded = true;
+						scope.$apply();
+					}
+				});
+			} else {
+
+				elm.on('mousewheel', trackScrollStartEnd);
+				elm.on('touchmove', trackScrollStartEnd);
+
+				var srcHeight = elm.find('.source-area').innerHeight();
+				var scrollMax = elm[0].scrollHeight-elm.innerHeight();
+
+				elm.on('scroll', function(e) {
+					// $log.log(e);
+					/*
+					var srcHeight = elm.find('.source-area').innerHeight();
+					var scrollMax = elm[0].scrollHeight-elm.innerHeight();
+					if (!scope.main.article.expanded) {
+						if (couldExpand) {
+							if (elm.scrollTop()>=scrollMax) {
+								scope.main.article.expanded = true;
+								scope.$apply();
+							} else {
+								couldExpand = false;
+							}
+						}
+					}
+					*/
+					$log.log(elm.scrollTop(), scrollMax);
+				});
+			}
+
+			function trackScrollStartEnd(e) {
+				if (scope.main.article.expanded) return;
+				if (!refractoryTimer) {
+					// startingScroll...
+					$log.log('start scroll: '+e.type);
+					if (atScrollBottom() && couldExpand) {
+						$log.log('expand it!');
+						scope.main.article.expanded = true;
+						scope.$apply();
+						$timeout(function() {
+							$(elm.scrollTop(elm.scrollTop()+50));
+						}, 250);
+						return;
+					}
+				} else {
+					$timeout.cancel(refractoryTimer);
 				}
-			});
+				refractoryTimer = $timeout(onScrollEnd, refractoryTime);
+			}
+
+			function onScrollEnd() {
+				$log.log('at scroll end');
+				couldExpand = atScrollBottom();
+				refractoryTimer = null;
+			}
+
+			function atScrollBottom() {
+				var scrollMax = elm[0].scrollHeight-elm.innerHeight();
+				return elm.scrollTop()>= scrollMax;
+			}
+
 		}
 	}
 
