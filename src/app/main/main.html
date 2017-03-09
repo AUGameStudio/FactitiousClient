@@ -4,7 +4,7 @@
     <header>
       <md-toolbar layout="row" layout-align="center center">
 
-        <section class="chunk1"></section>
+        <section class="chunk1"><mute-unmute></mute-unmute></section>
 
         <section flex layout="row" layout-align="center center">
           <md-button href="#" class="md-raised" ng-click="main.article.expanded=false">Reset</md-button>
@@ -18,14 +18,19 @@
     <div class="techs mid-section" layout-align="center" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe>
       <md-card class="article-card" ng-class="{'disabled': main.shouldSwipe}" scrolly>
         <md-card-content>
-          <div class="source-area" ng-class="{'expanded': main.article.expanded}">
+          <!-- div class="source-area" ng-class="{'expanded': main.article.expanded}">
             Source: {{main.article.source}}<br/>
             Publisher: {{main.article.publisher}}<br/>
-          </div>
+          </div -->
+          <div>{{main.debugStr}}</div>
           <h3 class="md-title">{{ main.article.headline }}</h3>
           <div>
             <img class="pull-right" draggable="false" src="assets/images/oldman.png"/>
             <p ng-repeat="pcontent in main.article.bodyLines track by $index">{{ pcontent }}</p>
+          </div>
+          <div class="source-area" ng-class="{'expanded': main.article.expanded}">
+            Source: {{main.article.source}}<br/>
+            Publisher: {{main.article.publisher}}<br/>
           </div>
         </md-card-content>
         <!-- div class="md-action-buttons">

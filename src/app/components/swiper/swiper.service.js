@@ -5,7 +5,7 @@
 		.service('swiperService', swiperService);
 
 	/** @ngInject */
-	function swiperService($log, $q, $timeout) {
+	function swiperService($log, $q, $timeout, audioService) {
 		var service = {
 			swipeCard: swipeCard
 		};
@@ -39,6 +39,9 @@
 					// scope.$apply();
 				}
 			}, 500);
+
+	        // audioService.playSoundEffect('moreSlideIn_whoosh.m4a');
+
 
 			return deferred.promise;
 

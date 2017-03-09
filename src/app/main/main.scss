@@ -71,7 +71,7 @@ header, footer {
 
 	.chunk1, .chunk2 {
 		width: 150px;
-		padding: 5px;
+		padding: 5px 10px;
 	}
 
 	.chunk2 {
@@ -116,4 +116,14 @@ header, footer {
 
 .tilted-right {
 	transform: rotate(0deg) translate(20px,0);
+}
+
+
+mute-unmute {
+	div {
+		outline: none;
+	}
+	i.mute-unmute {
+		font-size: xx-large;
+	}
 }

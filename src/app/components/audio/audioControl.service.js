@@ -1,3 +1,11 @@
+/*
+
+See Apple Doc at:
+
+https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/PlayingandSynthesizingSounds/PlayingandSynthesizingSounds.html#//apple_ref/doc/uid/TP40009523-CH6-SW1
+
+*/
+
 (function() {
 	'use strict';
 
@@ -5,16 +13,37 @@
 		.service('audioService', audioService);
 
 	/** @ngInject */
-	function audioService($log, $window, $cookies, $interval) {
+	function audioService($log, $window, $cookies, $interval, $http) {
 		var soundEffect;
 
 		$log.log('getting... "'+$cookies.get('muted')+'" '+($cookies.get('muted')==='true'));
+
+		var audioContext = new ($window.AudioContext || $window.webkitAudioContext)();
+
+		var audioPath = 'assets/audio/';
+
+		var soundBuffers = {};
+
+		loadSound('silent', 'silent.mp3');
+		loadSound('whoosh', 'whoosh.mp3');
 
 		var service = {
 
 			muted: ($cookies.get('muted')==='true'),
 
-			audioPath: 'assets/audio/',
+			audioPath: audioPath,
+
+			playACSound: function(soundName) {
+				if (service.muted) {
+					return;
+				}
+				var source = audioContext.createBufferSource();
+		        source.buffer = soundBuffers[soundName];
+		        source.connect(audioContext.destination);
+								
+		        // Play the sound
+		        source.start(0);
+   			},
 
 			stopSoundEffect: function() {
 				if (soundEffect) {
@@ -49,5 +78,19 @@
 		};
 
 		return service;
+
+		function loadSound(soundName, soundPath) {
+			soundPath = soundPath || soundName;
+
+			$http.get(audioPath+soundPath, {responseType:'arraybuffer'})
+				.then(function(response) {
+					// soundBuffers['moreSlideIn_whoosh.m4a'] = wkAudioContext.createBuffer(response.data, false);
+
+					audioContext.decodeAudioData(response.data, function(buffer) {
+	        			soundBuffers[soundName] = buffer;
+	        		});
+	        	});
+
+		}
 	}
 })();
