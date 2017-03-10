@@ -23,12 +23,22 @@
 		};
 		vm.article.body += '\n\n'+vm.article.body;
 
-		vm.curProgress = 5;
-		vm.maxProgress = 15;
+		vm.totalScore = 0;
+		vm.curProgress = 0;
+		vm.maxProgress = 10;
+		vm.progressPips = [];
+		for (var i=0; i<vm.maxProgress; i++) {
+			vm.progressPips.push('');
+		}
 
 		vm.swipeLeft = swipeLeft;
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
+		vm.nextQuestion = nextQuestion;
+
+		vm.state = 'showArticle';
+
+		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
 		activate();
 
@@ -50,8 +60,10 @@
 			audioService.playACSound('whoosh');
 			swiperService.swipeCard($scope, $('.article-card'), 'left', dragX)
 				.then(function() {
-					$log.log('Main swiped!')
+					$log.log('Main swiped left!')
 					vm.shouldSwipe = false;
+					scoreSwipe('left');
+					vm.state = 'showResult';
 				});
 		}
 
@@ -62,8 +74,10 @@
 			audioService.playACSound('whoosh');
 			swiperService.swipeCard($scope, $('.article-card'), 'right', dragX)
 				.then(function() {
-					$log.log('Main swiped!')
+					$log.log('Main swiped right!')
 					vm.shouldSwipe = false;
+					scoreSwipe('right');
+					vm.state = 'showResult';
 				});
 		}
 
@@ -72,6 +86,30 @@
 			$timeout(function() {
 				$('.article-card').scrollTop($('.article-card').scrollTop()+50);
 			}, 250);
+		}
+
+		function scoreSwipe(swipeDir) {
+			vm.progressPips[vm.curProgress] = (Math.random()>0.5 ? 'win' : 'lose');
+			if (vm.progressPips[vm.curProgress]==='win') {
+				vm.totalScore += 50;
+				vm.mood = 'assets/icons/ic_mood_black_24px.svg';
+			} else {
+				vm.mood = 'assets/icons/ic_mood_bad_black_24px.svg';
+			}
+		}
+
+		function nextQuestion() {
+			if (vm.curProgress<vm.maxProgress-1) {
+				vm.curProgress += 1;
+			} else {
+				vm.progressPips = [];
+				for (var i=0; i<vm.maxProgress; i++) {
+					vm.progressPips.push('');
+				}
+				vm.curProgress = 0;
+			}
+			vm.state = 'showArticle';
+			vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 		}
 
 	}
@@ -190,7 +228,7 @@
 			}
 
 			function trackDown(e) {
-				if (scope.main.shouldSwipe) {
+				if (scope.main.shouldSwipe || scope.main.state !== 'showArticle') {
 					// debounce...
 					return;
 				}

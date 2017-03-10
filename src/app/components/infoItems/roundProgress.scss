@@ -1,0 +1,23 @@
+round-progress {
+	.progress-holder {
+		display: flex;
+		flex-direction: row;
+    	justify-content: flex-end;
+    }
+	
+	.progress-pip {
+		border: 2px solid whitesmoke;
+		width: 10px;
+		height: 24px;
+		margin: 0px 1px;
+		background-color: black;
+
+		&.correct {
+			background-color: green;
+		}
+		&.incorrect {
+			background-color: red;
+		}
+	}
+
+}

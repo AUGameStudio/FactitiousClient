@@ -3,10 +3,14 @@
   flex-flow: column;
   align-items: center;
   width: 100%;
+  flex: 1 1 auto;
 
   md-card {
     width: 90%;
     max-width: 400px;
+	font-size: 0.9em;
+
+	box-sizing: border-box;
 
     img.pull-right {
       float: right;
@@ -14,9 +18,9 @@
       margin-left: 0.5em;
     }
 
+	overflow: scroll;
+
 	&.article-card {
-		overflow: scroll;
-		font-size: 0.9em;
 		flex: 1 1 auto;
 
 		&.disabled {
@@ -25,10 +29,15 @@
 			border: solid 1px #888;
 		}
 
-		&.fly-left {
-			transition: translate 1.0s;
-			transform: translate(-100px);
-			background-color: red;
+	}
+
+	&.results-card {
+		position: relative;
+		right: 0px;
+
+		&.moving {
+			transition: right 0.5s;
+			right: 100px;
 		}
 	}
 
@@ -69,9 +78,21 @@
 header, footer {
 	flex: 0 0 auto;
 
+	.nav-top-btns {
+		flex: 1 0 auto;	
+	}
+
 	.chunk1, .chunk2 {
 		width: 150px;
 		padding: 5px 10px;
+	}
+
+	.chunk1 {
+		display: flex;
+		.score {
+			padding-left: 5px
+
+		}
 	}
 
 	.chunk2 {
@@ -119,11 +140,15 @@ header, footer {
 }
 
 
+i.material-icons {
+	font-size: xx-large;
+}
+
 mute-unmute {
 	div {
 		outline: none;
 	}
-	i.mute-unmute {
+	i.xmute-unmute {
 		font-size: xx-large;
 	}
 }
