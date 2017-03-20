@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('proto')
+    .module('fact2')
     .config(config);
 
   /** @ngInject */

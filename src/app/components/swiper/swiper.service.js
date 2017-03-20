@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('proto')
+	angular.module('fact2')
 		.service('swiperService', swiperService);
 
 	/** @ngInject */

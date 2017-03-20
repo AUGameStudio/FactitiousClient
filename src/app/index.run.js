@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('proto')
+    .module('fact2')
     .run(runBlock);
 
   /** @ngInject */

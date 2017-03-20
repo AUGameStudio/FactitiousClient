@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('proto')
+    .module('fact2')
     .constant('malarkey', malarkey)
     .constant('moment', moment);
 

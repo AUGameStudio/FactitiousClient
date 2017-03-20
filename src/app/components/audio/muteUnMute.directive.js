@@ -2,7 +2,7 @@
 (function() {
 	'use strict';
 
-	angular.module('proto')
+	angular.module('fact2')
 		.directive('muteUnmute', muteUnmute);
 
 	function muteUnmute($log, audioService) {

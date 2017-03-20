@@ -2,13 +2,13 @@
 	'use strict';
 
 	angular
-		.module('proto')
+		.module('fact2')
 		.controller('MainController', MainController)
 		.directive('scrolly', scrolly)
 		.directive('trackSwipe', trackSwipe);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window, $timeout) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService) {
 		var vm = this;
 
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
@@ -39,6 +39,13 @@
 		vm.state = 'showArticle';
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
+
+		articleService.getArticle('116')
+			.then(function(response) {
+				$log.log(response);
+				$log.log(Object.keys(response));
+				vm.article.headline = response.headline;
+			});
 
 		activate();
 

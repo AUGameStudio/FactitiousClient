@@ -9,7 +9,7 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 (function() {
 	'use strict';
 
-	angular.module('proto')
+	angular.module('fact2')
 		.service('audioService', audioService);
 
 	/** @ngInject */

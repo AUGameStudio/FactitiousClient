@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('proto')
+	angular.module('fact2')
 		.directive('roundProgress', roundProgress);
 
 	/** @ngInject */
