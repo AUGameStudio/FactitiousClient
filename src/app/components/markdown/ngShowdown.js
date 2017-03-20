@@ -1,23 +1,24 @@
 (function (angular, showdown) {
 
   'use strict';
-  console.log('ngShowdown');
 
+  /*
   // Conditional load for NodeJS
   if (typeof require !== 'undefined') {
     angular = require('angular');
     showdown = require('showdown');
   }
+  */
 
   //Check if AngularJs and Showdown is defined and only load ng-Showdown if both are present
   if (typeof angular !== 'undefined' && typeof showdown !== 'undefined') {
     (function (module, showdown) {
 
       module.provider('$showdown', ngShowdown)
-        .directive('sdModelToHtml', ['$showdown', '$sce', markdownToHtmlDirective]) //<-- DEPRECATED: will be removed in the next major version release
-        .directive('markdownToHtml', ['$showdown', '$sce', markdownToHtmlDirective])
-        .filter('sdStripHtml', ['$showdown', stripHtmlFilter]) //<-- DEPRECATED: will be removed in the next major version release
-        .filter('stripHtml', ['$showdown', stripHtmlFilter]);
+        .directive('sdModelToHtml', markdownToHtmlDirective) //<-- DEPRECATED: will be removed in the next major version release
+        .directive('markdownToHtml', markdownToHtmlDirective)
+        .filter('sdStripHtml', stripHtmlFilter) //<-- DEPRECATED: will be removed in the next major version release
+        .filter('stripHtml', stripHtmlFilter);
 
       /**
        * Angular Provider
@@ -111,6 +112,7 @@
        * @param {$sce} $sce
        * @returns {*}
        */
+      /** @ngInject */
       function markdownToHtmlDirective($showdown, $sce) {
         return {
           restrict: 'A',
@@ -124,7 +126,8 @@
           scope.$watch('model', function (newValue) {
             var val;
             var showdownHTML;
-            if (typeof newValue === 'string') {
+            // if (typeof newValue === 'string') {
+            if (angular.isString(newValue)) {
               showdownHTML = $showdown.makeHtml(newValue);
               val = $sce.trustAsHtml(showdownHTML);
             } else {
@@ -140,6 +143,7 @@
        *
        * @returns {Function}
        */
+      /** @ngInject */
       function stripHtmlFilter($showdown) {
         return function (text) {
           return $showdown.stripHtml(text);

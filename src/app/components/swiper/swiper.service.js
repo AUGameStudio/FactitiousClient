@@ -25,21 +25,21 @@
 			}, {
 				step: function(now, tween){
 					elm.css('transform', 'translateX('+(dragX+sgn*now*600)+'px)')
-			  	},
-			  	complete: function() {
+				},
+				complete: function() {
 					$log.log('ended')
 					$timeout(function() {
 						elm.css('transform', '');
 					}, 100);
 					scope.main.inSwipeLeft = scope.main.inSwipeRight = scope.main.article.expanded = false;
 					scope.main.shouldSwipe = false;
-			  		$(elm).scrollTop(1);
-			  		deferred.resolve();
+					$(elm).scrollTop(1);
+					deferred.resolve();
 					// scope.$apply();
 				}
 			}, 500);
 
-	        // audioService.playSoundEffect('moreSlideIn_whoosh.m4a');
+			// audioService.playSoundEffect('moreSlideIn_whoosh.m4a');
 
 
 			return deferred.promise;

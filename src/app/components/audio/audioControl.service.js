@@ -38,12 +38,12 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 					return;
 				}
 				var source = audioContext.createBufferSource();
-		        source.buffer = soundBuffers[soundName];
-		        source.connect(audioContext.destination);
+				source.buffer = soundBuffers[soundName];
+				source.connect(audioContext.destination);
 								
-		        // Play the sound
-		        source.start(0);
-   			},
+				// Play the sound
+				source.start(0);
+			},
 
 			stopSoundEffect: function() {
 				if (soundEffect) {
@@ -87,9 +87,9 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 					// soundBuffers['moreSlideIn_whoosh.m4a'] = wkAudioContext.createBuffer(response.data, false);
 
 					audioContext.decodeAudioData(response.data, function(buffer) {
-	        			soundBuffers[soundName] = buffer;
-	        		});
-	        	});
+						soundBuffers[soundName] = buffer;
+					});
+				});
 
 		}
 	}

@@ -8,6 +8,12 @@
   "globals": {
     "angular": true,
     "module": true,
-    "inject": true
+    "inject": true,
+    "$": true,
+    "moment": true,
+    "showdown": true
+  },
+  "rules": {
+    "no-unused-vars": 1
   }
 }
