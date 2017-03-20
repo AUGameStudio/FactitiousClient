@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('factitious')
+	angular.module('proto')
 		.service('gameState', gameState);
 
 	/** @ngInject */
@@ -23,4 +23,4 @@
 		return service;
 		
 	}
-})
+})();
