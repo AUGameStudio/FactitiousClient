@@ -2,17 +2,24 @@
 	<div class="ae-container" layout="row" layout-align="space-between stretch">
 
 		<div class="edit-section">
-			<h1>Article Edit Main</h1>
+			<h1>Factitious2 Article Edit</h1>
 
 			<select ng-model="main.selectedArticleId"
 				ng-options="option.article_id as option.label for option in main.articleList"></select>
 
+			<md-radio-group ng-model="main.articleType" layout="row">
+				<md-radio-button ng-value="'notNews'">not news</md-radio-button>
+				<md-radio-button ng-value="'news'">news</md-radio-button>
+			</md-radio-group>
+			
 			<div class="obj-label">Headline</div>
 			<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
 			<div class="obj-label">Body</div>
 			<textarea class="body-edit" ng-model="main.article.body"></textarea>
 			<div class="obj-label">Source Hint</div>
 			<textarea class="source-edit" ng-model="main.article.info.source"></textarea>
+			<div class="obj-label">Payoff Content</div>
+			<textarea class="payoff-edit" ng-model="main.article.info.references"></textarea>
 		</div>
 
 		<div class="preview-section">
@@ -28,7 +35,7 @@
 			<div class="header">Payoff Display</div>
 
 			<div class="article-section">
-				<article-display main="main"></article-display>
+				<article-payoff main="main"></article-payoff>
 			</div>
 			<div class="footer"></div>
 		</div>

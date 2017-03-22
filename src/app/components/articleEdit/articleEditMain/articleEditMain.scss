@@ -4,22 +4,12 @@ article-edit-main {
 
 	padding: 10px 20px;
 
+	h1 {
+		margin: 5px 0px;
+	}
+
 	.ae-container {
 		width: 100%;
-	}
-
-	textarea {
-		width: 80%;
-		resize: none;
-		margin-left: 10px;
-	}
-
-	textarea.body-edit {
-		height: 300px;
-	}
-
-	textarea.source-edit {
-		height: 60px;
 	}
 
 	.edit-section {
@@ -28,6 +18,34 @@ article-edit-main {
 		select {
 			max-width: 300px;
 		}
+
+		md-radio-group {
+			margin: 5px 0px;
+		}
+
+		.obj-label {
+			padding-top: 5px;
+		}
+	
+		textarea {
+			width: 80%;
+			resize: none;
+			margin-left: 10px;
+
+			&.body-edit {
+				height: 200px;
+			}
+
+			&.source-edit {
+				height: 60px;
+			}
+
+			&.payoff-edit {
+				height: 120px;
+			}
+
+		}
+
 	}
 
 	.preview-section {
@@ -61,7 +79,13 @@ article-edit-main {
 	display: flex;
 	flex-flow: column;
 	align-items: center;
+	justify-content: center;
 	flex: 1 1 auto;
+
+	background: #d8d7d6;
+	padding: 10px 0px;
+	overflow: hidden;
+	position: relative;
 
 	md-card {
 		width: 90%;

@@ -17,25 +17,36 @@
 		function controller($scope) {
 			var vm = this;
 
-			vm.state = "showArticle"
-
 			vm.articleList = [];
 			vm.selectedArticleId = '';
 			vm.articleExpanded = true; // always show source area
 			vm.article = {};
+			vm.articleType = 'notNews'; // helper for backward compatibility
+
+			vm.showHint = showHint;
+
 
 			fetchArticleList()
 				.then(function() {
 					vm.selectedArticleId = vm.articleList[0].article_id;
-					// fetchArticleInfo(vm.articleList[0].article_id);
 				});
 
 			$scope.$watch(function() {return vm.selectedArticleId; }, function() {
 				$log.log('select article: '+ vm.selectedArticleId);
 				if (vm.selectedArticleId) {
-					fetchArticleInfo(vm.selectedArticleId);
+					fetchArticleInfo(vm.selectedArticleId)
+						.then(function() {
+							$('.article-card').scrollTop(0);
+							// vm.articleExpanded = false; // always show source area
+
+							vm.articleType = (vm.article.article_type==='news' ? 'news' : 'notNews');
+						});
 				}
 			});
+
+			function showHint() {
+				vm.articleExpanded = true;
+			}
 
 			function fetchArticleList() {
 				return articleService.getArticleList()
@@ -51,7 +62,7 @@
 			}
 
 			function fetchArticleInfo(id) {
-				articleService.getArticle(id)
+				return articleService.getArticle(id)
 					.then(function(article) {
 						vm.article = article;
 
