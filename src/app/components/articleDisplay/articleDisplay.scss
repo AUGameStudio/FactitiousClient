@@ -11,10 +11,18 @@
 
 	&.expanded {
 		transition: max-height 0.5s;
-		max-height: 5em;
+		max-height: initial;
 		border: none;
 		background-color: #2a363a;
 		padding: 5px;
+	}
+
+	p:first-child {
+		margin-top: 0px;
+	}
+
+	p:last-child {
+		margin-bottom: 0px;
 	}
 }
 

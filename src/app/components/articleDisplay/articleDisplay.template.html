@@ -2,16 +2,15 @@
         <md-card-content>
           <h3 class="md-title">{{ ad.main.article.headline }}</h3>
           <div>
-            <img class="pull-right" draggable="false" src="assets/images/oldman.png"/>
-            <p ng-repeat="pcontent in ad.main.article.bodyLines track by $index">{{ pcontent }}</p>
+            <img class="pull-right" draggable="false" ng-src="{{ad.main.article.photo_url}}"/>
+            <div sd-model-to-html="ad.main.article.body"></div>
           </div>
-          <div class="source-area" ng-class="{'expanded': ad.main.article.expanded}">
-            Source: {{ad.main.article.source}}<br/>
-            Publisher: {{ad.main.article.publisher}}<br/>
+
+          <div sd-model-to-html="ad.main.article.info.source" class="source-area" ng-class="{'expanded': ad.main.articleExpanded}">
           </div>
 
           <div layout="row" layout-align="center center">
-            <md-button href="#" class="md-raised f2-button" ng-click="ad.main.showHint()" ng-show="ad.main.state=='showArticle' && !ad.main.article.expanded">show source</md-button>
+            <md-button href="#" class="md-raised f2-button" ng-click="ad.main.showHint()" ng-show="ad.main.state=='showArticle' && !ad.main.articleExpanded">show source</md-button>
           </div>
         </md-card-content>
 	</md-card>

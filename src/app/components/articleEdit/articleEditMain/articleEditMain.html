@@ -1,25 +1,37 @@
 <div>
-	<h1>Article Edit Main</h1>
-
 	<div class="ae-container" layout="row" layout-align="space-between stretch">
-		
+
 		<div class="edit-section">
+			<h1>Article Edit Main</h1>
+
+			<select ng-model="main.selectedArticleId"
+				ng-options="option.article_id as option.label for option in main.articleList"></select>
+
 			<div class="obj-label">Headline</div>
-			<textarea class="headline-edit" ng-model="main.articleInfo.headline"></textarea>
+			<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
 			<div class="obj-label">Body</div>
-			<textarea class="body-edit" ng-model="main.articleInfo.body"></textarea>
+			<textarea class="body-edit" ng-model="main.article.body"></textarea>
+			<div class="obj-label">Source Hint</div>
+			<textarea class="source-edit" ng-model="main.article.info.source"></textarea>
 		</div>
 
 		<div class="preview-section">
-			<div class="header"></div>
-			<div class="article-body">
-				<div>{{main.articleInfo.headline}}</div>
-				<div>
-					<img ng-src="{{main.articleInfo.photo_url}}">
-					<div sd-model-to-html="main.articleInfo.body"></div>
-				</div>
+			<div class="header">Article Display</div>
+
+			<div class="article-section">
+				<article-display main="main"></article-display>
 			</div>
 			<div class="footer"></div>
 		</div>
+
+		<div class="preview-section" style="margin-left: 10px;">
+			<div class="header">Payoff Display</div>
+
+			<div class="article-section">
+				<article-display main="main"></article-display>
+			</div>
+			<div class="footer"></div>
+		</div>
+
 	</div>
 </div>

@@ -17,22 +17,49 @@
 		function controller($scope) {
 			var vm = this;
 
-			vm.articleList = [];
-			vm.selectedArticleId = 116;
-			vm.articleInfo = {};
+			vm.state = "showArticle"
 
-			fetchArticleInfo(vm.selectedArticleId);
+			vm.articleList = [];
+			vm.selectedArticleId = '';
+			vm.articleExpanded = true; // always show source area
+			vm.article = {};
+
+			fetchArticleList()
+				.then(function() {
+					vm.selectedArticleId = vm.articleList[0].article_id;
+					// fetchArticleInfo(vm.articleList[0].article_id);
+				});
+
+			$scope.$watch(function() {return vm.selectedArticleId; }, function() {
+				$log.log('select article: '+ vm.selectedArticleId);
+				if (vm.selectedArticleId) {
+					fetchArticleInfo(vm.selectedArticleId);
+				}
+			});
+
+			function fetchArticleList() {
+				return articleService.getArticleList()
+					.then(function(articleList) {
+						var maxLen = 60;
+						articleList.forEach(function(article) {
+							article.label = article.article_id+': '+(article.headline.length< maxLen ? article.headline : article.headline.substr(0,maxLen)+'...');
+						})
+						vm.articleList = articleList;
+
+						$log.log(articleList);
+					});
+			}
 
 			function fetchArticleInfo(id) {
 				articleService.getArticle(id)
-					.then(function(articleInfo) {
-						vm.articleInfo = articleInfo;
+					.then(function(article) {
+						vm.article = article;
 
-						vm.articleInfo.body = '';
+						vm.article.body = '';
 						['chunk1', 'chunk2', 'chunk3'].forEach(function(chunkKey) {
-							vm.articleInfo.body += vm.articleInfo[chunkKey].trim()+'\n\n';
+							vm.article.body += vm.article[chunkKey].trim()+'\n\n';
 						});
-						$log.log(vm.articleInfo);
+						$log.log(vm.article);
 					})
 			}
 		}
