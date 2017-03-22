@@ -15,7 +15,8 @@
 			controller: controller,
 			controllerAs: 'ad',
 			bindToController: true,
-			templateUrl: 'app/components/articleDisplay/articleDisplay.template.html'
+			templateUrl: 'app/components/articleDisplay/articleDisplay.template.html',
+			replace: true
 		};
 
 		function controller($scope) {

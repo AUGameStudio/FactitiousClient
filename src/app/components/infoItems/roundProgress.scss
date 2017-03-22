@@ -8,14 +8,18 @@ round-progress {
 	.progress-pip {
 		border: 2px solid whitesmoke;
 		width: 10px;
-		height: 24px;
-		margin: 0px 1px;
+		height: 10px;
+		border-radius: 5px;
+		margin: 0px 2px;
+		box-sizng: border-box;
 		background-color: black;
 
 		&.correct {
+			border-color: green;
 			background-color: green;
 		}
 		&.incorrect {
+			border-color: red;
 			background-color: red;
 		}
 	}

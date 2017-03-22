@@ -1,3 +1,31 @@
-article-display {
-	display: block;
+.source-area {
+	max-height: 0px;
+	overflow: hidden;
+	border: 1px solid white;
+	background-color: white;
+	box-sizing: border-box;
+	color: white;
+	padding: 0px;
+	font-style: italic;
+	font-size: 0.9em;
+
+	&.expanded {
+		transition: max-height 0.5s;
+		max-height: 5em;
+		border: none;
+		background-color: #2a363a;
+		padding: 5px;
+	}
+}
+
+a.md-button.md-raised.f2-button {
+	color: white;
+	background: #2a363a;
+	text-transform: lowercase;
+	font-size: 1.2em;
+
+	&:hover {
+		color: white;
+		background: slategray;
+	}
 }
