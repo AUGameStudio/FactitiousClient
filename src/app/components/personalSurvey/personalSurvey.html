@@ -1,0 +1,13 @@
+  <md-card class="article-card personal-survey">
+      <md-card-content>
+        <h3 class="md-title">{{ ad.main.article.headline }}</h3>
+        <div>
+          <img class="pull-right" draggable="false" src="assets/images/oldman.png"/>
+          <p ng-repeat="pcontent in ad.main.article.bodyLines track by $index">{{ pcontent }}</p>
+        </div>
+        <div class="source-area" ng-class="{'expanded': ad.main.article.expanded}">
+          Source: {{ad.main.article.source}}<br/>
+          Publisher: {{ad.main.article.publisher}}<br/>
+        </div>
+      </md-card-content>
+	</md-card>

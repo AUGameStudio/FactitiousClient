@@ -1,0 +1,25 @@
+<div>
+	<h1>Article Edit Main</h1>
+
+	<div class="ae-container" layout="row" layout-align="space-between stretch">
+		
+		<div class="edit-section">
+			<div class="obj-label">Headline</div>
+			<textarea class="headline-edit" ng-model="main.articleInfo.headline"></textarea>
+			<div class="obj-label">Body</div>
+			<textarea class="body-edit" ng-model="main.articleInfo.body"></textarea>
+		</div>
+
+		<div class="preview-section">
+			<div class="header"></div>
+			<div class="article-body">
+				<div>{{main.articleInfo.headline}}</div>
+				<div>
+					<img ng-src="{{main.articleInfo.photo_url}}">
+					<div sd-model-to-html="main.articleInfo.body"></div>
+				</div>
+			</div>
+			<div class="footer"></div>
+		</div>
+	</div>
+</div>

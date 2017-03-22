@@ -1,0 +1,40 @@
+article-edit-main {
+	display: block;
+	background: white;
+	width: 100%;
+
+	.ae-container {
+		width: 100%;
+	}
+
+	textarea.body-edit {
+		display: block;
+		height: 300px;
+	}
+
+	.preview-section {
+		width: 300px;
+
+		.header {
+			height: 40px;
+			background: #2a363a;
+			width: 100%;
+		}
+
+		.footer {
+			height: 40px;
+			background: #2a363a;
+			width: 100%;
+		}
+
+		img {
+			float: right;
+			width: 50%;
+		}
+
+		.article-body {
+			height: 500px;
+			overflow: scroll;
+		}
+	}
+}
