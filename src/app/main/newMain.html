@@ -1,0 +1,52 @@
+<div class="noselect" layout="horizontal" layout-fill>
+
+  <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
+    <header>
+      <md-toolbar layout="row" layout-align="center center">
+
+        <round-progress class="chunk2" progress-pips="main.progressPips"></round-progress>
+
+        <section class="nav-top-btns" flex layout="row" layout-align="center center">
+          <!-- md-button href="#" class="md-fab md-mini" ng-click="main.article.expanded=false">
+            <md-icon-->
+
+              <!-- i class="material-icons" ng-click="main.article.expanded=false">sentiment_neutral</i -->
+              <md-icon md-svg-src="{{main.mood}}" 
+                ng-click="main.article.expanded=false"
+                style="background-color: whitesmoke; height: 48px; width:48px;"></md-icon>
+
+            <!-- /md-icon>
+          </md-button -->
+        </section>
+
+        <section class="chunk1"><mute-unmute></mute-unmute><i class="material-icons">menu</i></section>
+
+      </md-toolbar>    
+    </header>
+
+    <article-display ng-if="main.state=='showArticle'" class="article-section" 
+      ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}"
+      main="main" track-swipe>
+    </article-display>
+
+    <div ng-if="main.state=='showResult'" class="article-section">
+        <article-payoff main="main"></article-payoff>
+    </div>
+
+    <footer>
+      <md-toolbar class="article-bottombar" layout="row" layout-align="center center">
+
+        <section flex layout="row" layout-align="center center">
+          <md-button class="md-raised" ng-click="main.swipeLeft()" ng-disabled="main.state!='showArticle'">Fake</md-button>
+          <!-- md-button class="md-raised" ng-click="main.showHint()" ng-disabled="main.state!='showArticle' || main.article.expanded">Hint</md-button -->
+          <md-button class="md-raised" ng-click="main.nextQuestion()" xng-disabled="main.state!='showArticle' || main.article.expanded">Hint</md-button>
+          <!-- round-progress progress-pips="main.progressPips"></round-progress -->
+          <md-button class="md-raised" ng-click="main.swipeRight()" ng-disabled="main.state!='showArticle'">Real</md-button>
+        </section>
+
+      </md-toolbar>    
+    </footer>
+  
+  </md-content>
+
+</div>

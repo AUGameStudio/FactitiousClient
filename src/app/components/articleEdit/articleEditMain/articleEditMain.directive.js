@@ -66,10 +66,13 @@
 					.then(function(article) {
 						vm.article = article;
 
+						/*
 						vm.article.body = '';
 						['chunk1', 'chunk2', 'chunk3'].forEach(function(chunkKey) {
 							vm.article.body += vm.article[chunkKey].trim()+'\n\n';
 						});
+						*/
+						
 						$log.log(vm.article);
 					})
 			}

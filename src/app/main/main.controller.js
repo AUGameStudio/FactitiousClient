@@ -5,7 +5,8 @@
 		.module('fact2')
 		.controller('MainController', MainController)
 		.directive('scrolly', scrolly)
-		.directive('trackSwipe', trackSwipe);
+		.directive('trackSwipe', trackSwipe)
+		.directive('debounce', debounce);
 
 	/** @ngInject */
 	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService) {
@@ -17,8 +18,12 @@
 
 		vm.article = {
 			headline: 'This is the headline. This will always be the headline.',
-			source: 'Op-Ed Article, Albert Camus',
-			publisher: 'Bourbaki News',
+			info: {
+				source: 'Op-Ed Article, Albert Camus',
+				publisher: 'Bourbaki News',
+				references: 'Source: abcnews.com.co\n\nThis is one of the trickiest kinds of fake news. It mimics a real news site, down to the logo. Look carefully at the URL -- this is not ABC news! '
+			},
+			photo_url: 'assets/images/oldman.png',
 			body: 'Electron capture is a decay which happens in many proton-rich, heavy nuclei. You can envision the situation in your title as "forced electron capture".\n\nSquishing atoms together at such high densities makes it energetically favorable for electrons to be destroyed so that the resulting particles can occupy lower energy levels.\n\nThere\'s no need to think about nuclei at the quark level, but you certainly can. The actual matter in neutron stars is in the form of exotic phases of nuclear matter rather than discrete nuclei, but anyway what I said above gives a good heuristic description.\n\nIt\'s not just the electron that turns into a neutrino and neutron, it\'s both the electron and the proton, so there\'s no net change of charge.'
 		};
 		vm.article.body += '\n\n'+vm.article.body;
@@ -40,17 +45,18 @@
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
-		articleService.getArticle('116')
+		articleService.getArticle(106)
 			.then(function(response) {
 				$log.log(response);
 				$log.log(Object.keys(response));
 				vm.article.headline = response.headline;
+				vm.article = response;
 			});
 
 		activate();
 
 		function activate() {
-			prepArticle();
+			// prepArticle();
 		}
 
 		function prepArticle() {
@@ -89,7 +95,7 @@
 		}
 
 		function showHint() {
-			vm.article.expanded = true;
+			vm.articleExpanded = true;
 			$timeout(function() {
 				$('.article-card').scrollTop($('.article-card').scrollTop()+50);
 			}, 250);
@@ -117,6 +123,7 @@
 			}
 			vm.state = 'showArticle';
 			vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
+			vm.articleExpanded = false;
 		}
 
 	}
@@ -309,6 +316,22 @@
 				}
 			}
 
+		}
+	}
+
+	/** @ngInject */
+	function debounce($log, $timeout) {
+		return {
+			restrict: 'A',
+			link: link
+		};
+
+		function link(scope, elm) {
+			elm.css({'pointer-events': 'none'});
+
+			$timeout(function() {
+				elm.css({'pointer-events': 'initial'});
+			}, 200);
 		}
 	}
 })();

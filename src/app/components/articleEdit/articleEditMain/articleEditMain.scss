@@ -19,6 +19,30 @@ article-edit-main {
 			max-width: 300px;
 		}
 
+		.ae-ctl-row {
+			display: flex;
+			padding: 3px 0px;
+		}
+
+		.ae-button {
+			cursor: pointer;
+			margin-right: 3px;
+			padding: 3px 5px;
+			border-radius: 5px;
+			color: white;
+			background: slategray;
+
+			&:hover {
+				background: lightgray;
+			}
+
+			&.disabled {
+				pointer-events: none;
+				background: lightgray;
+				color: slategray;
+			}
+		}
+
 		md-radio-group {
 			margin: 5px 0px;
 		}
@@ -28,7 +52,7 @@ article-edit-main {
 		}
 	
 		textarea {
-			width: 80%;
+			width: 90%;
 			resize: none;
 			margin-left: 10px;
 
@@ -52,6 +76,7 @@ article-edit-main {
 		width: 350px;
 		height: 600px;
 		display: flex;
+		
 		flex-flow: column;
 		align-items: center;
 		flex: 0 0 auto;
@@ -60,7 +85,7 @@ article-edit-main {
 			box-sizing: border-box;
 			text-align: center;
 			color: white;
-			height: 40px;
+			height: 64px;
 			background: #2a363a;
 			padding-top: 10px;
 			width: 100%;

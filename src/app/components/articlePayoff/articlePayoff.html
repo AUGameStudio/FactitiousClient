@@ -1,11 +1,13 @@
-      <md-card class="results-card">
+      <md-card class="results-card" debounce>
         <md-card-content>
           <h3 class="md-title">Your results!</h3>
             
           <div>
             <p>Your chose 'Me', meaning You. You should have chosen 'You', meaning Me!</p>
             <div sd-model-to-html="main.article.info.references"></div>
-            <md-button href="#" class="md-raised f2-button" ng-click="main.nextQuestion()">Next</md-button>
+            <div layout="row" layout-align="center center"> 
+              <md-button class="md-raised f2-button md-no-ink" ng-click="main.nextQuestion()">Next</md-button>
+            </div>
           </div>
         </md-card-content>
       </md-card>

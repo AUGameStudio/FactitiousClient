@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('fact2', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ngMaterial', 'ng-showdown']);
+    .module('fact2', ['ngAnimate', 'ngCookies', 'ngSanitize', 'ui.router', 'ngMaterial', 'ng-showdown']);
 
 })();

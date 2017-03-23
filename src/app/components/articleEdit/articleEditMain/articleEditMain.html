@@ -7,6 +7,13 @@
 			<select ng-model="main.selectedArticleId"
 				ng-options="option.article_id as option.label for option in main.articleList"></select>
 
+			<hr></hr>
+
+			<div class="ae-ctl-row">
+				<div class="ae-button">Save Changes...</div>
+				<div class="ae-button">Revert</div>
+			</div>
+
 			<md-radio-group ng-model="main.articleType" layout="row">
 				<md-radio-button ng-value="'notNews'">not news</md-radio-button>
 				<md-radio-button ng-value="'news'">news</md-radio-button>
@@ -25,9 +32,8 @@
 		<div class="preview-section">
 			<div class="header">Article Display</div>
 
-			<div class="article-section">
-				<article-display main="main"></article-display>
-			</div>
+			<article-display main="main" class="article-section"></article-display>
+
 			<div class="footer"></div>
 		</div>
 

@@ -1,3 +1,12 @@
+article-display {
+	display: block;
+
+}
+
+h3.md-title {
+	margin-top: 0px;
+}
+
 .source-area {
 	max-height: 0px;
 	overflow: hidden;
@@ -14,7 +23,7 @@
 		max-height: initial;
 		border: none;
 		background-color: #2a363a;
-		padding: 5px;
+		padding: 10px 15px;
 	}
 
 	p:first-child {
@@ -26,14 +35,38 @@
 	}
 }
 
-a.md-button.md-raised.f2-button {
+.f2-button, .md-raised.f2-button {
 	color: white;
 	background: #2a363a;
 	text-transform: lowercase;
 	font-size: 1.2em;
 
 	&:hover {
-		color: white;
-		background: slategray;
+		color: darkgray;
 	}
+}
+
+.swipe-left-flag, .swipe-right-flag {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	padding: 0px;
+	text-align: center;
+	background: rgba(0,0,0,0.5);
+	color: white;
+	font-size: 2em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 30%;
+	opacity: 0.75;
+}
+.swipe-left-flag {
+	left: 10%;
+	background: #e84a5f; /* rgba(128,128,64,0.75); */
+}
+.swipe-right-flag {
+	right: 10%;
+	background: #46a575; /* rgba(128,64,128,0.75); */
 }

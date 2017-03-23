@@ -24,7 +24,10 @@
       </md-toolbar>    
     </header>
 
-    <div class="techs mid-section" layout-align="center" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe>
+    <!-- div class="techs mid-section" layout-align="center" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe -->
+    <article-display class="article-section" ng-if="main.state=='showArticle'" main="main" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe></article-display>
+
+    <div ng-if="main.state=='showResult'" class="article-section" layout-align="center" ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}" track-swipe>
 
 
       <article-display ng-if="main.state=='showArticle'" main="main"></article-display>
@@ -50,7 +53,7 @@
           <div>
             <img class="pull-right" draggable="false" src="assets/images/oldman.png"/>
             <p>Your chose 'Me', meaning You. You should have chosen 'You', meaning Me!</p>
-            <md-button href="#" class="md-raised f2-button" ng-click="main.nextQuestion()">Next</md-button>
+            <md-button class="md-raised f2-button" ng-click="main.nextQuestion()">Next</md-button>
           </div>
         </md-card-content>
       </md-card>

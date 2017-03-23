@@ -16,11 +16,12 @@
 			controllerAs: 'ad',
 			bindToController: true,
 			templateUrl: 'app/components/articleDisplay/articleDisplay.template.html',
-			replace: true
+			replace: false
 		};
 
 		function controller($scope) {
 			var vm = this;
+			$scope.main = vm.main;
 		}
 	}
 })();
