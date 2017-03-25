@@ -5,6 +5,10 @@ article-display {
 
 h3.md-title {
 	margin-top: 0px;
+	p:first-child {
+		margin-top: 0px;
+	}
+
 }
 
 .source-area {
@@ -15,7 +19,6 @@ h3.md-title {
 	box-sizing: border-box;
 	color: white;
 	padding: 0px;
-	font-style: italic;
 	font-size: 0.9em;
 
 	&.expanded {

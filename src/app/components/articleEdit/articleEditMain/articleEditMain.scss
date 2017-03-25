@@ -15,6 +15,8 @@ article-edit-main {
 	.edit-section {
 		flex: 1 1 auto;
 
+		margin-right: 20px;
+
 		select {
 			max-width: 300px;
 		}
@@ -24,7 +26,7 @@ article-edit-main {
 			padding: 3px 0px;
 		}
 
-		.ae-button {
+		input[type=file]+label, .ae-button {
 			cursor: pointer;
 			margin-right: 3px;
 			padding: 3px 5px;
@@ -41,6 +43,20 @@ article-edit-main {
 				background: lightgray;
 				color: slategray;
 			}
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		.input-file {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+
 		}
 
 		md-radio-group {
@@ -49,23 +65,28 @@ article-edit-main {
 
 		.obj-label {
 			padding-top: 5px;
+			font-weight: bold;
 		}
 	
 		textarea {
-			width: 90%;
+			width: 95%;
 			resize: none;
 			margin-left: 10px;
 
 			&.body-edit {
-				height: 200px;
+				height: 160px;
 			}
 
 			&.source-edit {
 				height: 60px;
 			}
 
+			&.source-label-edit {
+				height: 1em;
+			}
+
 			&.payoff-edit {
-				height: 120px;
+				height: 100px;
 			}
 
 		}
@@ -73,8 +94,8 @@ article-edit-main {
 	}
 
 	.preview-section {
-		width: 350px;
-		height: 600px;
+		width: 375px;
+		height: 576px;
 		display: flex;
 		
 		flex-flow: column;
@@ -95,6 +116,36 @@ article-edit-main {
 		img {
 			float: right;
 			width: 50%;
+		}
+
+		&.sim-iPhone5s {
+			width: 320px;
+			height: 477px;
+		}
+
+		&.sim-iPhone6 {
+			width: 375px;
+			height: 576px;
+		}
+
+		&.sim-iPhone6sP {
+			width: 414px;
+			height: 644px;
+		}
+
+		&.sim-iPhone6sPChrome {
+			width: 414px;
+			height: 676px;
+		}
+
+		&.sim-galaxyS7 {
+			width: 360px;
+			height: 576px;
+		}
+
+		&.sim-pixel7 {
+			width: 412px;
+			height: 620px;
 		}
 
 	}

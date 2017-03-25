@@ -5,7 +5,7 @@
 		.directive('articleDisplay', articleDisplay);
 
 	/** @ngInject */
-	function articleDisplay($log) {
+	function articleDisplay($log, $timeout) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -16,12 +16,24 @@
 			controllerAs: 'ad',
 			bindToController: true,
 			templateUrl: 'app/components/articleDisplay/articleDisplay.template.html',
-			replace: false
+			link: link
 		};
 
 		function controller($scope) {
 			var vm = this;
 			$scope.main = vm.main;
+		}
+
+		function link(scope, elm, attrs, ctlr) {
+			$timeout(function() {
+				var w = elm.outerWidth();
+				var h = elm.outerHeight();
+
+				$log.log(w+' x '+(h+128));
+
+				ctlr.w = w;
+				ctlr.h = h+128;
+			}, 1000);
 		}
 	}
 })();

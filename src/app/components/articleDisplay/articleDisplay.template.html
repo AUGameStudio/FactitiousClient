@@ -2,7 +2,8 @@
       <div>
         
         <md-card-content>
-          <h3 class="md-title">{{ ad.main.article.headline }}</h3>
+          <!-- div>{{ad.w}} x {{ad.h}}</div -->
+          <h3 class="md-title" sd-model-to-html="ad.main.article.headline"></h3>
           <div>
             <img class="pull-right" draggable="false" ng-src="{{ad.main.article.photo_url}}"/>
             <div sd-model-to-html="ad.main.article.body"></div>
@@ -16,7 +17,7 @@
           </div>
         </md-card-content>
 
-        <div class="source-area" sd-model-to-html="ad.main.article.info.source" ng-class="{'expanded': ad.main.articleExpanded}">
+        <div class="source-area" ng-if="ad.main.article.showSourceHint" sd-model-to-html="ad.main.article.showSourceHint" ng-class="{'expanded': ad.main.articleExpanded}">
         </div>
 
       </div>

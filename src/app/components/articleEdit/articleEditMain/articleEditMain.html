@@ -10,11 +10,16 @@
 			<hr></hr>
 
 			<div class="ae-ctl-row">
-				<div class="ae-button">Save Changes...</div>
-				<div class="ae-button">Revert</div>
+				<div class="ae-button" ng-class="{disabled: !main.articleHasChanged}">Save Changes...</div>
+				<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">Revert</div>
 			</div>
 
-			<md-radio-group ng-model="main.articleType" layout="row">
+		    <div class="ae-select-image ae-ctl-row">
+		    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
+		    	<label for="input-file">Set Image...</label>
+		    </div>
+
+			<md-radio-group ng-model="main.article.articleType" layout="row">
 				<md-radio-button ng-value="'notNews'">not news</md-radio-button>
 				<md-radio-button ng-value="'news'">news</md-radio-button>
 			</md-radio-group>
@@ -22,28 +27,42 @@
 			<div class="obj-label">Headline</div>
 			<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
 			<div class="obj-label">Body</div>
-			<textarea class="body-edit" ng-model="main.article.body"></textarea>
-			<div class="obj-label">Source Hint</div>
-			<textarea class="source-edit" ng-model="main.article.info.source"></textarea>
+			<textarea ng-change="main.onChange()" class="body-edit" ng-model="main.article.body"></textarea>
+			<div class="obj-label">"show source" Content</div>
+			<textarea class="source-edit" ng-model="main.article.showSourceHint"></textarea>
+			<div class="obj-label">Payoff "Source: " Link Label</div>
+			<textarea class="source-label-edit" ng-model="main.article.sourceName"></textarea>
+			<div class="obj-label">Payoff "Source: " Link URL</div>
+			<textarea xclass="source-edit" ng-model="main.article.sourceUrl"></textarea>
 			<div class="obj-label">Payoff Content</div>
-			<textarea class="payoff-edit" ng-model="main.article.info.references"></textarea>
+			<textarea class="payoff-edit" ng-model="main.article.payoffText"></textarea>
 		</div>
 
-		<div class="preview-section">
-			<div class="header">Article Display</div>
+		<div class="preview-panes" layout="column">
+			<div layout="row">
+				<div class="preview-section" ng-class="main.simClass">
+					<div class="header">Article Display</div>
 
-			<article-display main="main" class="article-section"></article-display>
+					<article-display main="main" class="article-section"></article-display>
 
-			<div class="footer"></div>
-		</div>
+					<div class="footer"></div>
+				</div>
 
-		<div class="preview-section" style="margin-left: 10px;">
-			<div class="header">Payoff Display</div>
+				<div class="preview-section" ng-class="main.simClass" style="margin-left: 10px;">
+					<div class="header">Payoff Display</div>
 
-			<div class="article-section">
-				<article-payoff main="main"></article-payoff>
+					<div class="article-section">
+						<article-payoff main="main"></article-payoff>
+					</div>
+					<div class="footer"></div>
+				</div>
 			</div>
-			<div class="footer"></div>
+			<div style="width: 600px;">
+				<div>Approximate form factor...</div>
+				<md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
+					<md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>
+				</md-radio-group>
+			</div>
 		</div>
 
 	</div>
