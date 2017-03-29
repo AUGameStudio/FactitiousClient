@@ -24,7 +24,6 @@
 			elm.on('change', function(e) {
 
 				if (e.target.files && e.target.files.length==1) {
-					$log.log('try to upload...');
 					scope.loadImageFile({'fileObject':e.target.files[0]});
 				}
 

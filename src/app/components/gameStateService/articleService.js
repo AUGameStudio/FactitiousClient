@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function articleService($log, $http, $q) {
-		var serviceUrl = "api/article/";
+		var serviceUrl = "/api/article/";
 
 		var deprecatedDBase = true;
 
@@ -66,28 +66,32 @@
 			return deferred.promise;
 		}
 
-		function putArticleImage(fileObject) {
-			var deferred = $q.defer();
-			var r = new FileReader();
+		function putArticleImage(fileObject, pk) {
+			var formData = new FormData();
 
-			r.onloadend = function(e){
-				var data = e.target.result;
-				//send your binary data via $http or $resource or do anything else with it
-				$http.post(serviceUrl+'postarticleimage/', {'hello':'there'}, {headers: {'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'}})
+			formData.append('photo', fileObject);
+			formData.append('pk', pk);
+
+			var request = {
+				method: 'POST',
+				url: serviceUrl+'postarticleimage/',
+				data: formData,
+				headers: {
+					'Content-Type': undefined,
+					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
+               	}				
+			};
+
+			return $http(request)
 					.then(function(response) {
 						$log.log('success');
 						$log.log(response);
-						deferred.resolve('OK');
 					},
 					function(response) {
 						$log.log('success');
 						$log.log(response);
-						deferred.resolve('Damn');
 					});
-			}
-			r.readAsBinaryString(fileObject);
 
-			return deferred.promise;
 		}
 
 		function getArticleList() {
@@ -101,7 +105,6 @@
 			var textBodyKeys = ['headline', 'body', 'showSourceHint', 'sourceName', 'payoffText'];
 
 			textBodyKeys.forEach(function(textKey) {
-				$log.log(textKey);
 				article[textKey] = article[textKey].replace(/\r\n/g, '\n');
 			});
 		}
@@ -132,7 +135,7 @@
 			if (article.info.references) {
 				var refLines = article.info.references.split('\n');
 				var sourceName = refLines[0];
-				$log.log('|'+sourceName+"|");
+
 				if (sourceName.indexOf('Source')>=0) {
 					refLines = refLines.slice(1);
 					article.sourceName = sourceName.replace('Source:', '').trim();

@@ -63,7 +63,6 @@
 
 			$scope.$watch(function() {return angular.toJson(vm.article); }, function(newJson) {
 				vm.articleHasChanged = newJson!==angular.toJson(cleanArticle);
-				$log.log('dirty '+vm.articleHasChanged);
 			});
 
 			function onChange() {
@@ -82,8 +81,6 @@
 							article.label = article.article_id+': '+(article.headline.length< maxLen ? article.headline : article.headline.substr(0,maxLen)+'...');
 						})
 						vm.articleList = articleList;
-
-						$log.log(articleList);
 					});
 			}
 
@@ -91,23 +88,21 @@
 				return articleService.getArticle(id)
 					.then(function(article) {
 						vm.article = article;
-
-						/*
-						vm.article.body = '';
-						['chunk1', 'chunk2', 'chunk3'].forEach(function(chunkKey) {
-							vm.article.body += vm.article[chunkKey].trim()+'\n\n';
-						});
-						*/
-						
-						$log.log(vm.article);
 					})
 			}
 
 			function selectImage(fileObject) {
-				$log.log('articleEditMain: Upload Image');
+				$log.log('articleEditMain: Select Image');
 				$log.log(fileObject);
+				/*
 				vm.article.photo_url = URL.createObjectURL(fileObject);
 				$log.log(vm.article.photo_url);
+				*/
+				articleService.putArticleImage(fileObject, vm.article.pk)
+					.then(function() {
+						$log.log('oy!');
+						revertArticle(); // reloads updated data, one hopes!
+					});
 			}
 
 			function revertArticle() {
