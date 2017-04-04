@@ -8,7 +8,7 @@
 	function articleService($log, $http, $q) {
 		var serviceUrl = "/api/article/";
 
-		var deprecatedDBase = true;
+		var deprecatedDBase = false;
 
 		var service = {
 			getArticle: getArticle,
@@ -16,7 +16,9 @@
 
 			putArticle: putArticle,
 			getArticleImageForPreview: getArticleImageForPreview,
-			putArticleImage: putArticleImage
+			putArticleImage: putArticleImage,
+
+			getBlankArticle: getBlankArticle
 
 		};
 
@@ -42,15 +44,43 @@
 		}
 
 		function putArticle(article) {
-			return $http.post(serviceUrl+'postarticle/', article, {headers: {'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'}})
-				.then(function(response) {
-					$log.log('success');
-					$log.log(response);
-				},
-				function(response) {
-					$log.log('failed');
-					$log.log(response);
-				});
+			var keys = ["body", "sourceHint", "articleType", "headline", 
+							"payoffContent", "payoffSourceUrl", "payoffSourceLabel"];
+
+			var formData = new FormData();
+			keys.forEach(function(key) {
+				formData.append(key, article[key]);
+			});
+
+			if (article.photoFileObject) {
+				formData.append('photo', article.photoFileObject);
+			}
+
+			if (article.pk) {
+				formData.append('pk', article.pk);
+			}
+
+			var request = {
+				method: 'POST',
+				url: serviceUrl+'postarticle/',
+				data: formData,
+				headers: {
+					'Content-Type': undefined,
+					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
+               	}
+			};
+
+			return $http(request)
+					.then(function(response) {
+						$log.log('success');
+						$log.log(response);
+						return response.data;
+					},
+					function(response) {
+						$log.log('failed');
+						$log.log(response);
+					});
+
 		}
 
 		function getArticleImageForPreview(fileObject) {
@@ -79,7 +109,7 @@
 				headers: {
 					'Content-Type': undefined,
 					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
-               	}				
+               	}
 			};
 
 			return $http(request)
@@ -101,8 +131,19 @@
 				});
 		}
 
+		function getBlankArticle() {
+			return $http.get(serviceUrl+'newarticle/')
+				.then(function(response) {
+					var article = response.data;
+					$log.log(Object.keys(article));
+					return article;
+				});
+		}
+
+		/* dealing with old version... */
+
 		function stripEolNonsense(article) {
-			var textBodyKeys = ['headline', 'body', 'showSourceHint', 'sourceName', 'payoffText'];
+			var textBodyKeys = ['headline', 'body', 'sourceHint', 'payoffSourceLabel', 'payoffContent'];
 
 			textBodyKeys.forEach(function(textKey) {
 				article[textKey] = article[textKey].replace(/\r\n/g, '\n');
@@ -122,35 +163,35 @@
 			});
 			article.body = article.body.trim();
 
-			article.showSourceHint = article.info.source
+			article.sourceHint = article.info.source
 										.split('\n')
 										.filter(isNotBlank)
 										.join('\n\n').trim();
 
-			article.sourceUrl = article.source_URL;
+			article.payoffSourceUrl = article.source_URL;
 
-			article.sourceName = '';
-			article.payoffText = '';
+			article.payoffSourceLabel = '';
+			article.payoffContent = '';
 
 			if (article.info.references) {
 				var refLines = article.info.references.split('\n');
-				var sourceName = refLines[0];
+				var payoffSourceLabel = refLines[0];
 
-				if (sourceName.indexOf('Source')>=0) {
+				if (payoffSourceLabel.indexOf('Source')>=0) {
 					refLines = refLines.slice(1);
-					article.sourceName = sourceName.replace('Source:', '').trim();
-					article.sourceUrl = article.source_URL.split('\n')[0];
-					if (article.sourceUrl) {
-						article.sourceUrl = article.sourceUrl.replace(/"/g, '');
-						if (article.sourceUrl.indexOf('http')!==0) {
-							article.sourceUrl = 'http://'+article.sourceUrl;
+					article.payoffSourceLabel = payoffSourceLabel.replace('Source:', '').trim();
+					article.payoffSourceUrl = article.source_URL.split('\n')[0];
+					if (article.payoffSourceUrl) {
+						article.payoffSourceUrl = article.payoffSourceUrl.replace(/"/g, '');
+						if (article.payoffSourceUrl.indexOf('http')!==0) {
+							article.payoffSourceUrl = 'http://'+article.payoffSourceUrl;
 						}
 
 						
 					}
 				}
 
-				article.payoffText = refLines.filter(isNotBlank)
+				article.payoffContent = refLines.filter(isNotBlank)
 									.join('\n\n').trim();
 
 			}

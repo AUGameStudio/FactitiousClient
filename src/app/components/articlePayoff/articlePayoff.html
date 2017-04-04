@@ -5,10 +5,10 @@
           <div>
             <p>Your chose 'Me', meaning you. You should have chosen 'You', meaning me!</p>
 
-            <p ng-if="main.article.sourceName && main.article.sourceUrl">Source: <a target="_blank" ng-href="{{main.article.sourceUrl | addHttp}}">{{main.article.sourceName}}</a></p>
-            <p ng-if="main.article.sourceName && !main.article.sourceUrl">Source: {{main.article.sourceName}}</p>
+            <p ng-if="main.article.payoffSourceLabel && main.article.payoffSourceUrl">Source: <a target="_blank" ng-href="{{main.article.payoffSourceUrl | addHttp}}">{{main.article.payoffSourceLabel}}</a></p>
+            <p ng-if="main.article.payoffSourceLabel && !main.article.payoffSourceUrl">Source: {{main.article.payoffSourceLabel}}</p>
             
-            <div sd-model-to-html="main.article.payoffText"></div>
+            <div sd-model-to-html="main.article.payoffContent"></div>
             <div layout="row" layout-align="center center"> 
               <md-button class="md-raised f2-button md-no-ink" ng-click="main.nextQuestion()">Next</md-button>
             </div>

@@ -41,6 +41,8 @@
 			vm.selectImage = selectImage;
 			vm.onChange = onChange;
 			vm.revertArticle = revertArticle;
+			vm.saveArticle = saveArticle;
+			vm.addArticle = addArticle;
 
 
 			fetchArticleList()
@@ -94,10 +96,14 @@
 			function selectImage(fileObject) {
 				$log.log('articleEditMain: Select Image');
 				$log.log(fileObject);
-				/*
+
 				vm.article.photo_url = URL.createObjectURL(fileObject);
+				vm.article.photoFileObject = fileObject;
+
 				$log.log(vm.article.photo_url);
-				*/
+
+				return;
+
 				articleService.putArticleImage(fileObject, vm.article.pk)
 					.then(function() {
 						$log.log('oy!');
@@ -110,6 +116,33 @@
 					.then(function() {
 						$('.article-card').scrollTop(0);
 						// vm.articleExpanded = false; // always show source area
+						cleanArticle = angular.copy(vm.article);
+					});
+			}
+
+			function saveArticle() {
+				return articleService.putArticle(vm.article)
+					.then(function(article) {
+						$log.log('success saving');
+						var origPk = vm.article.pk;
+						vm.article = article;
+						cleanArticle = angular.copy(vm.article);
+						vm.articleHasChanged = false;
+						fetchArticleList()
+							.then(function() {
+								vm.selectedArticleId = vm.article.article_id;
+							});
+					},
+					function(result) {
+						$log.log('failure');
+					});
+			}
+
+			function addArticle() {
+				return articleService.getBlankArticle()
+					.then(function(article) {
+						vm.article = article;
+						vm.selectedArticleId = undefined;
 						cleanArticle = angular.copy(vm.article);
 					});
 			}

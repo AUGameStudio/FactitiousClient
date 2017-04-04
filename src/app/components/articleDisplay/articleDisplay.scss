@@ -3,6 +3,10 @@ article-display {
 
 }
 
+.article-panel {
+	border-radius: 10px;	
+}
+
 h3.md-title {
 	margin-top: 0px;
 	p:first-child {
@@ -25,7 +29,7 @@ h3.md-title {
 		transition: max-height 0.5s;
 		max-height: initial;
 		border: none;
-		background-color: #2a363a;
+		background-color: #219083;
 		padding: 10px 15px;
 	}
 
@@ -40,7 +44,7 @@ h3.md-title {
 
 .f2-button, .md-raised.f2-button {
 	color: white;
-	background: #2a363a;
+	background: #219083;
 	text-transform: lowercase;
 	font-size: 1.2em;
 

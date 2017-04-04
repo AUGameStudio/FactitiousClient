@@ -104,6 +104,8 @@ article-edit-main {
 		align-items: center;
 		flex: 0 0 auto;
 
+		background: url(../assets/images/bg/bg-rep.png);
+
 		.header, .footer {
 			box-sizing: border-box;
 			text-align: center;
@@ -113,6 +115,10 @@ article-edit-main {
 			padding-top: 10px;
 			width: 100%;
 			flex: 0 0 auto;
+		}
+
+		.footer {
+			background: none;
 		}
 
 		img {
@@ -160,7 +166,6 @@ article-edit-main {
 	justify-content: center;
 	flex: 1 1 auto;
 
-	background: #d8d7d6;
 	padding: 10px 0px;
 	overflow: hidden;
 	position: relative;
@@ -170,7 +175,7 @@ article-edit-main {
 		max-width: 400px;
 		font-size: 0.9em;
 
-		box-sizing: border-box;
+		box-sizing: border-box;		
 
 		img.pull-right {
 			float: right;
@@ -183,12 +188,18 @@ article-edit-main {
 		&.article-card {
 			flex: 1 1 auto;
 
+			border-radius: 10px;
+
 			&.disabled {
 				pointer-events: none;
 				overflow: hidden;
 				border: solid 1px #888;
 			}
 
+		}
+
+		&.results-card {
+			border-radius: 10px;
 		}
 	}  
 }

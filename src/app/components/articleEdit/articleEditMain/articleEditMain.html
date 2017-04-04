@@ -7,12 +7,17 @@
 			<select ng-model="main.selectedArticleId"
 				ng-options="option.article_id as option.label for option in main.articleList"></select>
 
-			<hr></hr>
-
-			<div class="ae-ctl-row">
-				<div class="ae-button" ng-class="{disabled: !main.articleHasChanged}">Save Changes...</div>
-				<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">Revert</div>
+			<div layout="row" layout-align="space between">
+				<div class="ae-ctl-row">
+					<div class="ae-button" ng-click="main.saveArticle()" ng-class="{disabled: !main.articleHasChanged}">Save Changes...</div>
+					<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">Revert</div>
+				</div>
+				<div class="ae-ctl-row">
+					<div class="ae-button" ng-click="main.addArticle()" ng-class="{disabled: main.articleHasChanged}">New...</div>
+				</div>
 			</div>
+
+			<hr></hr>
 
 		    <div class="ae-select-image ae-ctl-row">
 		    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
@@ -29,13 +34,13 @@
 			<div class="obj-label">Body</div>
 			<textarea ng-change="main.onChange()" class="body-edit" ng-model="main.article.body"></textarea>
 			<div class="obj-label">"show source" Content</div>
-			<textarea class="source-edit" ng-model="main.article.showSourceHint"></textarea>
+			<textarea class="source-edit" ng-model="main.article.sourceHint"></textarea>
 			<div class="obj-label">Payoff "Source: " Link Label</div>
-			<textarea class="source-label-edit" ng-model="main.article.sourceName"></textarea>
+			<textarea class="source-label-edit" ng-model="main.article.payoffSourceLabel"></textarea>
 			<div class="obj-label">Payoff "Source: " Link URL</div>
-			<textarea xclass="source-edit" ng-model="main.article.sourceUrl"></textarea>
+			<textarea xclass="source-edit" ng-model="main.article.payoffSourceUrl"></textarea>
 			<div class="obj-label">Payoff Content</div>
-			<textarea class="payoff-edit" ng-model="main.article.payoffText"></textarea>
+			<textarea class="payoff-edit" ng-model="main.article.payoffContent"></textarea>
 		</div>
 
 		<div class="preview-panes" layout="column">

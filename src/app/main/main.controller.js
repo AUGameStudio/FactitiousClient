@@ -45,7 +45,7 @@
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
-		articleService.getArticle(106)
+		articleService.getArticle(125)
 			.then(function(response) {
 				$log.log(response);
 				$log.log(Object.keys(response));

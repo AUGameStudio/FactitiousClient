@@ -24,6 +24,8 @@
 	&.article-card {
 		flex: 1 1 auto;
 
+		border-radius: 10px;
+
 		&.disabled {
 			pointer-events: none;
 			overflow: hidden;
@@ -53,17 +55,19 @@
 	max-height: 800px;
 	display: flex;
 	flex-direction: column;
-	background-color: rgb(63,81,181);
+
+	background: url(../assets/images/bg/bg-rep.png);
+
 	&.is-mobile-safari {
 		height: calc(100vh - 68px);
 	}
 }
 
 md-toolbar:not(.md-menu-toolbar) {
-	background-color: #2a363a;
+	background-color: #40bcae; /* #2a363a; */
 
 	&.article-bottombar {
-		background-color: #d8d7d6;
+		background: none;
 	}
 }
 
