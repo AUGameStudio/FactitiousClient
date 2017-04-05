@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3007.43 75.43 26.74 26.739">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #2a363a;
+      }
+    </style>
+  </defs>
+  <g id="menu_button" data-name="menu button" transform="translate(3007.43 75.43)">
+    <g id="Group_23" data-name="Group 23" transform="translate(0 0)">
+      <circle id="Ellipse_2" data-name="Ellipse 2" class="cls-1" cx="13.37" cy="13.37" r="13.37"/>
+    </g>
+    <g id="menu_button-2" data-name="menu button" transform="translate(7.748 7.444)">
+      <g id="Group_24" data-name="Group 24">
+        <path id="Path_9" data-name="Path 9" class="cls-2" d="M5.1,9.458H16.343v2.887H5.1ZM5.1,4.9H16.343V7.787H5.1Z" transform="translate(-5.1 -4.9)"/>
+      </g>
+      <g id="Group_25" data-name="Group 25" transform="translate(0 9.116)">
+        <path id="Path_10" data-name="Path 10" class="cls-2" d="M5.1,10.9H16.343v2.887H5.1Z" transform="translate(-5.1 -10.9)"/>
+      </g>
+    </g>
+  </g>
+</svg>

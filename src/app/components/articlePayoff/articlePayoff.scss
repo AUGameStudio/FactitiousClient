@@ -1,0 +1,31 @@
+.payoff-header {
+
+	.payoff-header-content {
+		color: white;
+		font-weight: bold;
+		font-size: 24px;
+		background: #40bcae;
+		padding: 5px 15px;
+		text-align: center;
+	}
+	.wedge {
+		height: 10px;
+		svg {
+			display: block;
+			height: 100%;
+			width: 100%;
+			fill: #40bcae;
+		}
+		transform: scale(-1,-1);
+	}
+
+}
+
+&.results-card {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+
+	md-card-content {
+		padding-top: 0px;
+	}
+}

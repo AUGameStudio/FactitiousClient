@@ -24,7 +24,7 @@
 	&.article-card {
 		flex: 1 1 auto;
 
-		border-radius: 10px;
+		border-radius: 20px;
 
 		&.disabled {
 			pointer-events: none;
@@ -94,9 +94,11 @@ header, footer {
 	}
 
 	.chunk2 {
-		text-align: right;
+		justify-content: flex-start;
 	}
 }
+
+
 
 .mid-section {
 	/* flex: 1 1 auto; */

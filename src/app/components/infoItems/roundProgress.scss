@@ -6,21 +6,23 @@ round-progress {
     }
 	
 	.progress-pip {
-		border: 2px solid whitesmoke;
-		width: 10px;
-		height: 10px;
-		border-radius: 5px;
-		margin: 0px 2px;
+		border: 2px solid #40bcae;
+		width: 14px;
+		height: 14px;
+		border-radius: 7px;
+		margin: 0px 0px;
 		box-sizng: border-box;
 		background-color: #9eddd6;
 
 		&.correct {
-			border-color: green;
-			background-color: green;
+			background-color: white;
 		}
 		&.incorrect {
-			border-color: red;
-			background-color: red;
+			background-color: white;
+		}
+
+		&.current {
+			border-color: white;
 		}
 	}
 

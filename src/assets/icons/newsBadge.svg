@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2500.745 233.7 141.081 141.081">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #46a575;
+        opacity: 0.692;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 39px;
+        font-family: WorkSans-Bold, Work Sans;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_467" data-name="Group 467" transform="translate(2340)">
+    <g id="Group_47" data-name="Group 47" transform="translate(160.745 233.7)">
+      <ellipse id="Ellipse_5" data-name="Ellipse 5" class="cls-1" cx="70.541" cy="70.541" rx="70.541" ry="70.541"/>
+    </g>
+    <text id="news" class="cls-2" transform="translate(179 279)"><tspan x="1.313" y="36">news</tspan></text>
+  </g>
+</svg>

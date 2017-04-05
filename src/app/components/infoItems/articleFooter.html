@@ -1,0 +1,21 @@
+    <footer>
+      <!-- md-toolbar class="article-bottombar" layout="row" layout-align="center center" -->
+
+        <section flex layout="row" layout-align="space-around center" style="height: 56px;">
+
+          <!-- md-button class="md-raised" ng-click="main.swipeLeft()" ng-disabled="main.state!='showArticle'">Fake</md-button -->
+          <div class="fake-button" ng-click="main.swipeLeft()" ng-class="{disabled : main.state!='showArticle'}"></div>
+
+          <!-- md-button class="md-raised" ng-click="main.nextQuestion()" xng-disabled="main.state!='showArticle' || main.article.expanded">Hint</md-button -->
+
+          <div class="scoring-loaf">
+            <div class="sl-score">19</div>
+            <div class="sl-info">round 3</div>
+          </div>
+
+          <div class="news-button" ng-click="main.swipeRight()" ng-class="{disabled: main.state!='showArticle'}"></md-button>
+
+        </section>
+
+      <!-- /md-toolbar -->    
+    </footer>

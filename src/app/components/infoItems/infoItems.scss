@@ -1,0 +1,65 @@
+article-footer {
+	display: block;
+	width: 100%;
+
+	.flex-bar {
+		height: 56px;
+		display: flex;
+	}
+
+	section {
+		margin: 0 30px;
+		height: 56px;
+	}
+
+	footer {
+		.fake-button, .news-button {
+			height: 46px;
+			width: 46px;
+			cursor: pointer;
+
+			margin: 0px 20px;
+
+			&.disabled {
+				pointer-events: none;
+				opacity: 0.5;
+			}
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		.fake-button {
+			background: url(../assets/icons/xButton.svg);
+		}
+		.news-button {
+			background: url(../assets/icons/checkButton.svg);
+		}
+
+		.scoring-loaf {
+			text-align: center;
+			background: #105d54;
+			padding: 5px;
+			padding-top: 2px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			width: 70px;
+			align-self: flex-end;
+
+			color: white;
+			
+			.sl-score {
+				font-size: 24px;
+				font-weight: bold;
+
+			}
+			.sl-info {
+				font-size: 12px;
+				font-weight: bold;
+			}
+		}
+	}
+
+
+}

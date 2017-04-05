@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2748.63 83.083 16.24 15.181">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="sound_button" data-name="sound button" transform="translate(2748.63 83.446)">
+    <path id="Path_99" data-name="Path 99" class="cls-1" d="M2.8,4.513H.853A.812.812,0,0,0,0,5.235V8.848a.828.828,0,0,0,.853.843H2.8l5.121,3.492V.9Z" transform="translate(0 0.102)"/>
+    <g id="Group_109" data-name="Group 109" transform="translate(9.998 0.4)">
+      <path id="Path_100" data-name="Path 100" class="cls-2" d="M9.9,14.008a8.628,8.628,0,0,0,3.17-6.864A8.781,8.781,0,0,0,10.144.4" transform="translate(-7.827 -0.4)"/>
+      <path id="Path_101" data-name="Path 101" class="cls-2" d="M8.444,2a6.682,6.682,0,0,1,1.951,4.817A6.69,6.69,0,0,1,8.2,11.754" transform="translate(-8.2 -0.073)"/>
+    </g>
+  </g>
+</svg>

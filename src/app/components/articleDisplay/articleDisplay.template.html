@@ -1,8 +1,8 @@
     <md-card class="article-card" ng-class="{'disabled': main.shouldSwipe}" debounce>
       <div>
         
-        <div class="source-area" ng-if="main.article.sourceHint" sd-model-to-html="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
-        </div>
+        <!-- div class="source-area" ng-if="main.article.sourceHint" sd-model-to-html="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
+        </div -->
 
         <md-card-content>
           <!-- div>{{ad.w}} x {{ad.h}}</div -->
@@ -20,12 +20,14 @@
           </div>
         </md-card-content>
 
-        <!-- div class="source-area" ng-if="main.article.sourceHint" sd-model-to-html="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
-        </div -->
+        <div class="source-area" ng-if="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
+          <div class="wedge"></div>
+          <div class="source-area-content" sd-model-to-html="main.article.sourceHint"></div>
+        </div>
 
       </div>
 	</md-card>
 
-  <div ng-if="main.shouldSwipe && main.inSwipeLeft" class="swipe-left-flag"><div>not<br/>news</div></div>
+  <div ng-if="main.shouldSwipe && main.inSwipeLeft" class="swipe-left-flag"><div>fake</div></div>
   <div ng-if="main.shouldSwipe && main.inSwipeRight" class="swipe-right-flag"><div>news</div></div>
 
