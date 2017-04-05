@@ -1,19 +1,8 @@
 <div class="noselect" layout="horizontal" layout-fill>
 
   <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
-    <header>
-      <md-toolbar layout="row" layout-align="center center">
 
-        <div class="chunk1" style="justify-content: flex-start;">
-          <mute-unmute></mute-unmute>
-        </div>
-
-        <round-progress xclass="chunk2" progress-pips="main.progressPips" cur-progress="main.curProgress"></round-progress>
-
-        <section class="chunk1"><i class="material-icons">menu</i></section>
-
-      </md-toolbar>    
-    </header>
+    <article-header main="main"></article-header>
 
     <article-display ng-if="main.state=='showArticle'" class="article-section" 
       ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}"

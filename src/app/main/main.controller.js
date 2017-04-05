@@ -36,6 +36,8 @@
 			vm.progressPips.push('');
 		}
 
+		vm.inSwipe = false;
+
 		vm.swipeLeft = swipeLeft;
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
@@ -45,7 +47,7 @@
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
-		articleService.getArticle(125)
+		articleService.getArticle(128)
 			.then(function(response) {
 				$log.log(response);
 				$log.log(Object.keys(response));
@@ -70,6 +72,7 @@
 			// if (vm.shouldSwipe) return;
 			vm.shouldSwipe = true;
 			vm.inSwipeLeft = true;
+			vm.inSwipe = true;
 			audioService.playACSound('whoosh');
 			swiperService.swipeCard($scope, $('.article-card'), 'left', dragX)
 				.then(function() {
@@ -77,6 +80,7 @@
 					vm.shouldSwipe = false;
 					scoreSwipe('left');
 					vm.state = 'showResult';
+					vm.inSwipe = false;
 				});
 		}
 
@@ -84,6 +88,7 @@
 			// if (vm.shouldSwipe) return;
 			vm.shouldSwipe = true;
 			vm.inSwipeRight = true;
+			vm.inSwipe = true;
 			audioService.playACSound('whoosh');
 			swiperService.swipeCard($scope, $('.article-card'), 'right', dragX)
 				.then(function() {
@@ -91,6 +96,7 @@
 					vm.shouldSwipe = false;
 					scoreSwipe('right');
 					vm.state = 'showResult';
+					vm.inSwipe = false;
 				});
 		}
 
@@ -227,8 +233,8 @@
 		function link(scope, elm) {
 			var anchorX, dragX;
 
-			var triggerThreshold = 50;
-			var swipeThreshold = 150;
+			var triggerThreshold = 20;
+			var swipeThreshold = 100;
 			var shouldSwipe = false;
 
 			var canTouch = 'ontouchstart' in $window;
@@ -263,17 +269,6 @@
 					} else {
 						scope.main.swipeRight(dragX);
 					}
-					/*
-
-						audioService.playACSound('whoosh');
-						swiperService.swipeCard(scope, elm.find('.article-card'), (scope.main.inSwipeLeft ? 'left' : 'right'), dragX)
-							.then(function() {
-									$log.log('swiped');
-									scope.main.shouldSwipe = shouldSwipe = false;
-							});
-					}
-					*/
-
 				} else {
 					elm.find('.article-card').css('transform', '');
 					scope.main.inSwipeLeft = scope.main.inSwipeRight = false;

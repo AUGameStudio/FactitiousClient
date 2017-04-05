@@ -17,7 +17,8 @@
 
       .state('articleEdit', {
         url: '/',
-        templateUrl: 'app/main/articleEdit.html'
+        // templateUrl: 'app/main/articleEdit.html'
+        template: '<article-edit-main></article-edit-main>'
       })
 
       ;

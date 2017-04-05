@@ -67,7 +67,7 @@
 				headers: {
 					'Content-Type': undefined,
 					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
-               	}
+				}
 			};
 
 			return $http(request)
@@ -109,7 +109,7 @@
 				headers: {
 					'Content-Type': undefined,
 					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
-               	}
+				}
 			};
 
 			return $http(request)

@@ -25,7 +25,12 @@
 
 			vm.articleExpanded = true; // always show source area
 			vm.article = {};
-			// vm.articleType = 'notNews'; // helper for backward compatibility
+			vm.curProgress = 0;
+			vm.maxProgress = 10;
+			vm.progressPips = [];
+			for (var i=0; i<vm.maxProgress; i++) {
+				vm.progressPips.push('');
+			}
 
 			vm.simClasses = [
 				{simClass: 'sim-iPhone5s', label: 'iPhone 5s'},
@@ -100,15 +105,6 @@
 				vm.article.photo_url = URL.createObjectURL(fileObject);
 				vm.article.photoFileObject = fileObject;
 
-				$log.log(vm.article.photo_url);
-
-				return;
-
-				articleService.putArticleImage(fileObject, vm.article.pk)
-					.then(function() {
-						$log.log('oy!');
-						revertArticle(); // reloads updated data, one hopes!
-					});
 			}
 
 			function revertArticle() {
