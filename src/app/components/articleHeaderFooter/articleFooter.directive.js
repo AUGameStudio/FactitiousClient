@@ -8,7 +8,7 @@
 	function articleFooter($log) {
 		return {
 			restrict: 'E',
-			templateUrl: 'app/components/infoItems/articleFooter.html'
+			templateUrl: 'app/components/articleHeaderFooter/articleFooter.html'
 		};
 	}
 

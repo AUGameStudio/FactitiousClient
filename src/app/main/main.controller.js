@@ -12,6 +12,12 @@
 	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService) {
 		var vm = this;
 
+		// to fix various iPhone / iPad oddities...
+		/*
+		var vh = $('body').outerHeight();
+		$('.bigboy').css({'height': vh+'px'});
+		*/
+
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
 		vm.isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		vm.debugStr = ''+('webkitAudioContext' in $window);
@@ -42,6 +48,8 @@
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
 		vm.nextQuestion = nextQuestion;
+
+		vm.showBurger = true;
 
 		vm.state = 'showArticle';
 

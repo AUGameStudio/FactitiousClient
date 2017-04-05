@@ -11,7 +11,7 @@
 			scope: {
 				main: '='
 			},
-			templateUrl: 'app/components/infoItems/articleHeader.html'
+			templateUrl: 'app/components/articleHeaderFooter/articleHeader.html'
 		};
 	}
 })();

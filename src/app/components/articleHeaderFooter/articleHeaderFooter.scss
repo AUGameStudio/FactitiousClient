@@ -67,7 +67,8 @@ article-footer {
 article-header {
 	display: block;
 	flex: 0 0 auto;
-
+	z-index: 1;
+	
 	header {
 		height: 56px;
 
