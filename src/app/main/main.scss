@@ -200,3 +200,18 @@ mute-unmute {
 
 
 }
+
+.round-banner {
+	position: absolute;
+	background: url(../assets/images/bg/duotone.svg);
+	text-align: center;
+	width: 150%;
+	color: white;
+	padding: 20px;
+	font-size: 28px;
+	font-weight: bold;
+	transform: rotate(-10deg) translateX(0%);
+	box-sizing: border-box;
+	top: 40%;
+	left: -25%;
+}

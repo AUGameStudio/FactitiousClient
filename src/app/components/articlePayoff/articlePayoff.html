@@ -1,7 +1,7 @@
       <md-card class="results-card" debounce>
 
         <div class="payoff-header">
-          <div class="payoff-header-content">You're right/wrong!</div>
+          <div class="payoff-header-content">{{ payoffType==='correct' ? 'correct!' : 'incorrect!' }}</div>
           <div class="wedge">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
               preserveAspectRatio="none" viewBox="0 0 1000 1000">

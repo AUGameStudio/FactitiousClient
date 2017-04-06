@@ -11,7 +11,8 @@
 			restrict: 'E',
 			replace: true,
 			scope: {
-				main: '='
+				main: '=',
+				payoffType: '='
 			},
 			templateUrl: 'app/components/articlePayoff/articlePayoff.html'
 		};

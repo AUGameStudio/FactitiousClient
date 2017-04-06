@@ -14,16 +14,23 @@ round-progress {
 		box-sizing: border-box;
 		background-color: #9eddd6;
 
-		&.correct {
-			background-color: white;
-		}
-		&.incorrect {
-			background-color: white;
-		}
-
 		&.current {
 			border-color: white;
 		}
+
+		&.correct {
+			background-color: white;
+			&.current {
+				border-color: white;
+			}
+		}
+		&.incorrect {
+			background-color: #219083;
+			&.current {
+				border-color: #219083;
+			}
+		}
+
 	}
 
 }

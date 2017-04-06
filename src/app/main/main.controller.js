@@ -9,7 +9,7 @@
 		.directive('debounce', debounce);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState) {
 		var vm = this;
 
 		// to fix various iPhone / iPad oddities...
@@ -34,7 +34,6 @@
 		};
 		vm.article.body += '\n\n'+vm.article.body;
 
-		vm.totalScore = 0;
 		vm.curProgress = 0;
 		vm.maxProgress = 10;
 		vm.progressPips = [];
@@ -48,13 +47,15 @@
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
 		vm.nextQuestion = nextQuestion;
+		vm.startOver = startOver;
 
-		vm.showBurger = true;
+		vm.showBurger = false;
 
 		vm.state = 'showArticle';
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
+		/*
 		articleService.getArticle(128)
 			.then(function(response) {
 				$log.log(response);
@@ -62,11 +63,19 @@
 				vm.article.headline = response.headline;
 				vm.article = response;
 			});
+		*/
 
 		activate();
 
 		function activate() {
-			// prepArticle();
+			gameState.totalScore = 0;
+			gameState.roundNumber = 0;
+			gameState.articleNumber = 0;
+
+			articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
+				.then(function(response) {
+					vm.article = response;
+				});
 		}
 
 		function prepArticle() {
@@ -86,7 +95,7 @@
 				.then(function() {
 					$log.log('Main swiped left!')
 					vm.shouldSwipe = false;
-					scoreSwipe('left');
+					scoreSwipe('notNews');
 					vm.state = 'showResult';
 					vm.inSwipe = false;
 				});
@@ -102,7 +111,7 @@
 				.then(function() {
 					$log.log('Main swiped right!')
 					vm.shouldSwipe = false;
-					scoreSwipe('right');
+					scoreSwipe('news');
 					vm.state = 'showResult';
 					vm.inSwipe = false;
 				});
@@ -116,28 +125,47 @@
 		}
 
 		function scoreSwipe(swipeDir) {
-			vm.progressPips[vm.curProgress] = (Math.random()>0.5 ? 'win' : 'lose');
-			if (vm.progressPips[vm.curProgress]==='win') {
-				vm.totalScore += 50;
+			var roundInfo = gameState.roundInfo[gameState.roundNumber];
+			roundInfo.progressPips[gameState.articleNumber] = (swipeDir===vm.article.articleType ? 'win' : 'lose');
+			if (roundInfo.progressPips[gameState.articleNumber]==='win') {
+				gameState.totalScore += 5;
 				vm.mood = 'assets/icons/ic_mood_black_24px.svg';
+				vm.payoffType = 'correct';
 			} else {
 				vm.mood = 'assets/icons/ic_mood_bad_black_24px.svg';
+				vm.payoffType = 'incorrect';
 			}
 		}
 
 		function nextQuestion() {
-			if (vm.curProgress<vm.maxProgress-1) {
-				vm.curProgress += 1;
+			var roundInfo = gameState.roundInfo[gameState.roundNumber];
+			if (gameState.articleNumber<roundInfo.articleIds.length-1) {
+				gameState.articleNumber += 1;
+				articleService.getArticle(roundInfo.articleIds[gameState.articleNumber])
+					.then(function(response) {
+						vm.article = response;
+						vm.state = 'showArticle';
+						vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
+						vm.articleExpanded = false;
+					});
 			} else {
-				vm.progressPips = [];
-				for (var i=0; i<vm.maxProgress; i++) {
-					vm.progressPips.push('');
-				}
-				vm.curProgress = 0;
+				gameState.roundNumber += 1;
+				gameState.articleNumber = 0;
+				articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
+					.then(function(response) {
+						vm.article = response;
+						vm.state = 'showArticle';
+						vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
+						vm.articleExpanded = false;
+					});
 			}
+		}
+
+		function startOver() {
+			gameState.resetGame();
+			activate();
+			vm.showBurger = false;
 			vm.state = 'showArticle';
-			vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
-			vm.articleExpanded = false;
 		}
 
 	}
