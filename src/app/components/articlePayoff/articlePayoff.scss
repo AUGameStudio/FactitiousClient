@@ -29,3 +29,16 @@
 		padding-top: 0px;
 	}
 }
+
+@keyframes popupPayoff {
+	from { transform: scale(0.5); }
+	to   { transform: scale(1.0); }
+}
+
+.popup-payoff {
+	pointer-events: none;
+	animation-name: popupPayoff;
+	animation-duration: 0.25s;
+	animation-delay: 0s;            
+}
+

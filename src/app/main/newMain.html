@@ -1,13 +1,13 @@
 <div class="noselect" layout="horizontal" layout-fill>
 
-  <md-content class="bigboy sim-iPhone6sP" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
+  <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
 
     <article-header main="main"></article-header>
 
     <div class="article-lower-pane">
 
       <article-display ng-if="main.state=='showArticle'" class="article-section" 
-        ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight}"
+        ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight, 'slide-in-article': main.slideInArticle}"
         main="main" track-swipe>
       </article-display>
 
@@ -15,7 +15,16 @@
           <article-payoff main="main" payoff-type="main.payoffType"></article-payoff>
       </div>
 
+      <div ng-if="main.state=='showRoundResult'" class="article-section">
+          <round-payoff main="main" payoff-type="main.payoffType"></round-payoff>
+      </div>
+
+      <div ng-if="main.state=='prepareArticle'" class="article-section">
+      </div>
+
       <article-footer></article-footer>
+
+      <div ng-if="main.showRoundBanner" class="round-banner">round {{main.roundNumber+1}}</div>
 
       <div class="dialog-blocker" ng-if="main.showBurger"></div>
 
@@ -30,8 +39,6 @@
           <h3>about</h3>
           <p>Here's a blurb about factitious. Bacon ipsum dolor amet in boudin ribeye in jerky pork loin irure. Tri-tip eiusmod non incididunt tongue leberkas nulla in irure commodo flank. Culpa id doner labore veniam tempor. Irure jowl ex quis, shoulder boudin sint prosciutto et cow dolore reprehenderit.</p>
       </div>
-
-      <div ng-if="false" class="round-banner">round 2</div>
 
     </div>
 

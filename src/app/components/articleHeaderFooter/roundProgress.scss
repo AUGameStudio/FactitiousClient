@@ -1,8 +1,11 @@
 round-progress {
+	display: block;
+	width: 100%;
+
 	.progress-holder {
 		display: flex;
 		flex-direction: row;
-    	justify-content: flex-end;
+    	justify-content: center;
     }
 	
 	.progress-pip {
@@ -15,7 +18,8 @@ round-progress {
 		background-color: #9eddd6;
 
 		&.current {
-			border-color: white;
+			border-color: #9eddd6;
+			background-color: #40bcae;
 		}
 
 		&.correct {
@@ -32,5 +36,24 @@ round-progress {
 		}
 
 	}
+
+}
+
+.round-payoff round-progress {
+	.progress-holder {
+		margin: 15px;
+	}
+
+	.progress-pip {
+		width: 18px;
+		height: 18px;
+		border-radius: 9px;
+		margin: 0px 2px;
+
+		&.current.correct {
+			border-color: #40bcae;
+		}
+	}
+
 
 }

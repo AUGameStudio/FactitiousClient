@@ -47,6 +47,7 @@
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
 		vm.nextQuestion = nextQuestion;
+		vm.nextRound = nextRound;
 		vm.startOver = startOver;
 
 		vm.showBurger = false;
@@ -55,15 +56,22 @@
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
-		/*
-		articleService.getArticle(128)
-			.then(function(response) {
-				$log.log(response);
-				$log.log(Object.keys(response));
-				vm.article.headline = response.headline;
-				vm.article = response;
-			});
-		*/
+		gameState.resetGame();
+
+		$scope.$watch(function() {return gameState.roundNumber;}, function() {
+			vm.showRoundBanner = true;
+			vm.roundNumber = gameState.roundNumber;
+			$timeout(function() {
+				vm.showRoundBanner = false;
+			}, 2000);
+		});
+
+		$scope.$watch(function() {return vm.article;}, function() {
+			vm.slideInArticle = true;
+			$timeout(function() {
+				vm.slideInArticle = false;
+			}, 750);
+		})
 
 		activate();
 
@@ -72,9 +80,11 @@
 			gameState.roundNumber = 0;
 			gameState.articleNumber = 0;
 
+			vm.state = 'prepareArticle';
 			articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
 				.then(function(response) {
 					vm.article = response;
+					vm.state = 'showArticle';
 				});
 		}
 
@@ -141,6 +151,7 @@
 			var roundInfo = gameState.roundInfo[gameState.roundNumber];
 			if (gameState.articleNumber<roundInfo.articleIds.length-1) {
 				gameState.articleNumber += 1;
+				vm.state = 'prepareArticle';
 				articleService.getArticle(roundInfo.articleIds[gameState.articleNumber])
 					.then(function(response) {
 						vm.article = response;
@@ -149,8 +160,17 @@
 						vm.articleExpanded = false;
 					});
 			} else {
-				gameState.roundNumber += 1;
+				vm.state = 'showRoundResult';
+			}
+		}
+
+		function nextRound() {
+			gameState.roundNumber += 1;
+			if (gameState.roundNumber>=gameState.roundInfo.length) {
+				startOver();
+			} else {
 				gameState.articleNumber = 0;
+				vm.state = 'prepareArticle';
 				articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
 					.then(function(response) {
 						vm.article = response;
@@ -165,7 +185,6 @@
 			gameState.resetGame();
 			activate();
 			vm.showBurger = false;
-			vm.state = 'showArticle';
 		}
 
 	}

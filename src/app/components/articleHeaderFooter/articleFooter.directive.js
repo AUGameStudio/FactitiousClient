@@ -13,7 +13,11 @@
 		};
 
 		function controller($scope) {
+			var main = $scope.main;
 			$scope.gameState = gameState;
+			$scope.disableButtons = function() {
+				return (main.state!='showArticle' || main.inSwipe || main.slideInArticle || main.showRoundBanner);
+			};
 		}
 	}
 

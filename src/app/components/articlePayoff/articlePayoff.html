@@ -1,27 +1,27 @@
-      <md-card class="results-card" debounce>
+<md-card class="results-card popup-payoff" debounce>
 
-        <div class="payoff-header">
-          <div class="payoff-header-content">{{ payoffType==='correct' ? 'correct!' : 'incorrect!' }}</div>
-          <div class="wedge">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-              preserveAspectRatio="none" viewBox="0 0 1000 1000">
-              <polygon points="0,0 1000,1000, 0,1000, 0,0"></polygon>
-            </svg>
-          </div>
-        </div>
+  <div class="payoff-header">
+    <div class="payoff-header-content">{{ payoffType==='correct' ? 'correct!' : 'incorrect!' }}</div>
+    <div class="wedge">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+        preserveAspectRatio="none" viewBox="0 0 1000 1000">
+        <polygon points="0,0 1000,1000, 0,1000, 0,0"></polygon>
+      </svg>
+    </div>
+  </div>
 
-        <md-card-content>
-            
-          <div>
-            <p>Your chose 'Me', meaning you. You should have chosen 'You', meaning me!</p>
+  <md-card-content>
+      
+    <div>
+      <p>Your chose 'Me', meaning you. You should have chosen 'You', meaning me!</p>
 
-            <p ng-if="main.article.payoffSourceLabel && main.article.payoffSourceUrl">Source: <a target="_blank" ng-href="{{main.article.payoffSourceUrl | addHttp}}">{{main.article.payoffSourceLabel}}</a></p>
-            <p ng-if="main.article.payoffSourceLabel && !main.article.payoffSourceUrl">Source: {{main.article.payoffSourceLabel}}</p>
-            
-            <div sd-model-to-html="main.article.payoffContent"></div>
-            <div layout="row" layout-align="center center"> 
-              <md-button class="md-raised f2-button md-no-ink" ng-click="main.nextQuestion()">continue</md-button>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
+      <p ng-if="main.article.payoffSourceLabel && main.article.payoffSourceUrl">Source: <a target="_blank" ng-href="{{main.article.payoffSourceUrl | addHttp}}">{{main.article.payoffSourceLabel}}</a></p>
+      <p ng-if="main.article.payoffSourceLabel && !main.article.payoffSourceUrl">Source: {{main.article.payoffSourceLabel}}</p>
+      
+      <div sd-model-to-html="main.article.payoffContent"></div>
+      <div layout="row" layout-align="center center"> 
+        <md-button class="md-raised f2-button md-no-ink" ng-click="main.nextQuestion()">continue</md-button>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>

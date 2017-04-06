@@ -90,3 +90,19 @@ h3.md-title {
 	right: 10%;
 	background: #46a575; /* rgba(128,64,128,0.75); */
 }
+
+@keyframes slideInArticle {
+	from { transform: translateY(-100%); }
+	to   { transform: translateY(0%); }
+}
+
+.slide-in-article {
+	pointer-events: none;
+	animation-name: slideInArticle;
+	animation-duration: 0.5s;
+	animation-delay: 0s;            
+}
+
+
+
+

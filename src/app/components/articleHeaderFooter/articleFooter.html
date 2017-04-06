@@ -2,14 +2,14 @@
 
     <section flex layout="row" layout-align="space-around center" style="height: 56px;">
 
-      <div class="fake-button" ng-click="main.swipeLeft()" ng-class="{disabled : main.state!='showArticle' || main.inSwipe}"></div>
+      <div class="fake-button" ng-click="main.swipeLeft()" ng-class="{disabled: disableButtons()}"></div>
 
       <div class="scoring-loaf">
         <div class="sl-score">{{gameState.totalScore}}</div>
         <div class="sl-info">round {{gameState.roundNumber+1}}</div>
       </div>
 
-      <div class="news-button" ng-click="main.swipeRight()" ng-class="{disabled: main.state!='showArticle' || main.inSwipe}"></md-button>
+      <div class="news-button" ng-click="main.swipeRight()" ng-class="{disabled: disableButtons()}"></md-button>
 
     </section>
 

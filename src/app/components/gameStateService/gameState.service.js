@@ -14,7 +14,7 @@
 
 			roundInfo: [
 				{
-					articleIds: [128, 129, 125, 123, 122, 121, 117],
+					articleIds: [128, 129, 125],
 					progressPips: []
 				},
 				{
