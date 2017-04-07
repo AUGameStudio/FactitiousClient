@@ -35,10 +35,8 @@ h3.md-title {
 		/* padding: 10px 15px; */
 	}
 
-	.wedge {
-		height: 10px;
-		background: url(../assets/icons/greenWedge.png);
-		background-size: 100% 100%;
+	wedge svg {
+		fill: #219083;
 	}
 
 	.source-area-content {

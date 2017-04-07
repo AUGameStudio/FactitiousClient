@@ -1,0 +1,21 @@
+wedge {
+	display: block;
+	height: 10px;
+	svg {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	&.flip-x {
+		transform: scaleX(-1);
+	}
+	&.flip-y {
+		transform: scaleY(-1);
+	}
+
+	&.flip-x.flip-y {
+		transform: scale(-1,-1);
+	}
+}
+

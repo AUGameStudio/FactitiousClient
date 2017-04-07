@@ -18,11 +18,11 @@
 					progressPips: []
 				},
 				{
-					articleIds: [128, 129, 125, 123, 122, 121, 117, 118, 119, 120],
+					articleIds: [123, 122, 121],
 					progressPips: []
 				},
 				{
-					articleIds: [128, 129, 125, 123, 122, 121, 117, 118, 119, 120],
+					articleIds: [117, 118, 119, 120],
 					progressPips: []
 				}
 			],

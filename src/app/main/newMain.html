@@ -1,10 +1,13 @@
 <div class="noselect" layout="horizontal" layout-fill>
 
-  <md-content class="bigboy sim-iPhone5s" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
+  <md-content class="bigboy" xng-class="{'is-mobile-safari': main.isSafari && main.isIphone}" ng-class="main.simClass">
 
-    <article-header main="main"></article-header>
+    <big-header ng-if="main.state=='showLaunch'"></big-header>
+    <launch-page ng-if="main.state=='showLaunch'" ></launch-page>
 
-    <div class="article-lower-pane">
+    <article-header ng-if="main.state!=='showLaunch'" main="main"></article-header>
+
+    <div ng-if="main.state!=='showLaunch'" class="article-lower-pane">
 
       <article-display ng-if="main.state=='showArticle'" class="article-section" 
         ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight, 'slide-in-article': main.slideInArticle}"
@@ -24,21 +27,11 @@
 
       <article-footer></article-footer>
 
-      <div ng-if="main.showRoundBanner" class="round-banner slide-in-banner">round {{main.roundNumber+1}}</div>
+      <div ng-if="main.showRoundBanner" class="round-banner slide-in-banner">round {{main.roundNumber+1}} of {{main.numberOfRounds}}</div>
 
       <div class="dialog-blocker" ng-if="main.showBurger"></div>
 
-      <div class="burger-pane" ng-class="{enabled: main.showBurger}">
-        <div class="burger-title"><img src="assets/icons/factitiousWordmark.svg"></div>
-          <div layout="column" layout-align="flex-start center"> 
-            <md-button class="md-raised f2-button md-no-ink" ng-click="">save game</md-button>
-            <md-button class="md-raised f2-button md-no-ink" ng-click="main.startOver()">start over</md-button>
-            <md-button class="md-raised f2-button md-no-ink" ng-click="">sign out</md-button>
-            <md-button class="md-raised f2-button md-no-ink" ng-click="main.showInstructions = true">instructions</md-button>
-          </div>
-          <h3>about</h3>
-          <p>Here's a blurb about factitious. Bacon ipsum dolor amet in boudin ribeye in jerky pork loin irure. Tri-tip eiusmod non incididunt tongue leberkas nulla in irure commodo flank. Culpa id doner labore veniam tempor. Irure jowl ex quis, shoulder boudin sint prosciutto et cow dolore reprehenderit.</p>
-      </div>
+      <burger-pane ng-class="{enabled: main.showBurger}"></burger-pane>
 
       <instruct-panel ng-if="main.showInstructions"></instruct-panel>
 
@@ -46,4 +39,13 @@
 
   </md-content>
 
+
 </div>
+
+  <div style="width: 600px;">
+    <div>Approximate form factor...</div>
+    <md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
+      <md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>
+    </md-radio-group>
+  </div>
+  

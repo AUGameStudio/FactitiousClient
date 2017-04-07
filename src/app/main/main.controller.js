@@ -18,6 +18,17 @@
 		$('.bigboy').css({'height': (vh+1)+'px'});
 		*/
 
+		vm.simClasses = [
+			{simClass: 'sim-iPhone5s', label: 'iPhone 5s'},
+			{simClass: 'sim-iPhone6', label: 'iPhone 6'},
+			{simClass: 'sim-iPhone6sP', label: 'iPhone 6s+'},
+			{simClass: 'sim-iPhone6sPChrome', label: 'iPhone 6s+ Chrome'},
+			{simClass: 'sim-galaxyS7', label: 'galaxy S7'},
+			{simClass: 'sim-pixel7', label: 'Pixel 7.1'},
+			{simClass: 'desktop', label: 'Desktop'}
+		];
+		vm.simClass = vm.simClasses[0].simClass;
+
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
 		vm.isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		vm.debugStr = ''+('webkitAudioContext' in $window);
@@ -50,6 +61,7 @@
 		vm.nextRound = nextRound;
 		vm.startOver = startOver;
 		vm.toggleBurger = toggleBurger;
+		vm.quickStartGame = quickStartGame;
 
 		vm.showBurger = false;
 
@@ -76,20 +88,19 @@
 			gameState.totalScore = 0;
 			gameState.roundNumber = 0;
 			gameState.articleNumber = 0;
+			vm.numberOfRounds = gameState.roundInfo.length;
 
 			vm.state = 'prepareArticle';
 			articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
 				.then(function(response) {
 					vm.article = response;
-					vm.state = 'showArticle';
+					vm.state = 'showLaunch';
 				});
 		}
 
-		function prepArticle() {
-			vm.article.bodyLines = [];
-			vm.article.body.split('\n\n').forEach(function(pcontent) {
-				vm.article.bodyLines.push(pcontent.replace('\n', 'BR'));
-			});
+		function quickStartGame() {
+			vm.state = 'showArticle';
+			slideInBanner();
 		}
 
 		function swipeLeft(dragX) {

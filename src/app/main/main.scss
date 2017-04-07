@@ -1,54 +1,3 @@
-.techs {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-  flex: 1 1 auto;
-
-  md-card {
-    width: 90%;
-    max-width: 400px;
-	font-size: 0.9em;
-
-	box-sizing: border-box;
-
-    img.pull-right {
-      float: right;
-      width: 50%;
-      margin-left: 0.5em;
-    }
-
-	overflow: scroll;
-
-	&.article-card {
-		flex: 1 1 auto;
-
-		border-radius: 20px;
-
-		&.disabled {
-			pointer-events: none;
-			overflow: hidden;
-			/* border: solid 1px #888; */
-		}
-
-	}
-
-	&.results-card {
-		flex: 1 1 auto;
-		position: relative;
-		right: 0px;
-
-		&.moving {
-			transition: right 0.5s;
-			right: 100px;
-		}
-
-	}
-
-  }
-}
-
 .bigboy {
 	margin: auto;
 	height: 100vh;
@@ -100,53 +49,6 @@
 		height: 100vh;
 	}
 
-}
-
-.mid-section {
-	/* flex: 1 1 auto; */
-	background: #d8d7d6;
-	padding: 20px 0px;
-	overflow: hidden;
-	position: relative;
-
-	&.xswipe-alert {
-		background-color: #ddd;
-	}
-
-	.swipe-left-flag, .swipe-right-flag {
-		position: absolute;
-		width: 150px;
-		height: 150px;
-		border-radius: 75px;
-		padding: 0px;
-		text-align: center;
-		background: rgba(0,0,0,0.5);
-		color: white;
-		font-size: 2em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		top: 30%;
-		opacity: 0.75;
-	}
-
-	.swipe-left-flag {
-		left: 10%;
-		background: #e84a5f; /* rgba(128,128,64,0.75); */
-	}
-	.swipe-right-flag {
-		right: 10%;
-		background: #46a575; /* rgba(128,64,128,0.75); */
-	}
-
-}
-
-.tilted-left {
-	transform: rotate(-0deg) translate(-20px,0);
-}
-
-.tilted-right {
-	transform: rotate(0deg) translate(20px,0);
 }
 
 
