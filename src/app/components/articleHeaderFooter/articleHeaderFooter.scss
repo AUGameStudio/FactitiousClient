@@ -6,6 +6,7 @@ article-footer {
 	.flex-bar {
 		height: 56px;
 		display: flex;
+		justify-content: center;
 	}
 
 	section {
@@ -14,6 +15,8 @@ article-footer {
 	}
 
 	footer {
+		max-width: 480px;
+		margin: auto;
 		.fake-button, .news-button {
 			height: 46px;
 			width: 46px;

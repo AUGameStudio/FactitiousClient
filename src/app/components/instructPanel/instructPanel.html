@@ -1,0 +1,28 @@
+<md-card class="results-card round-payoff popup-payoff" debounce>
+
+  <div class="instruct-header">
+    <div class="instruct-header-content">how to play</div>
+    <div class="wedge">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+        preserveAspectRatio="none" viewBox="0 0 1000 1000">
+        <polygon points="0,0 1000,1000, 0,1000, 0,0"></polygon>
+      </svg>
+    </div>
+  </div>
+
+  <md-card-content>
+      
+    <div>
+      <div style="text-align: center;">Swipe <span class="news-span">right</span> if you think the article is <span class="news-span">real</span></div>
+      <div style="text-align: center;">Swipe <span class="not-news-span">left</span> if you think the article is <span class="not-news-span">fake</span></div>
+
+      <div class="real-news"><i><b>Real news</b></i> - fact-based reporting from a reliable source, intends to be objectively informing</div>
+      <div class="fake-news"><i><b>Fake news</b></i> - made-up news, satire, ads, or opinion</div>
+
+      <div layout="row" layout-align="center center"> 
+        <md-button class="md-raised f2-button md-no-ink" ng-click="main.showInstructions=false">got it!</md-button>
+      </div>
+    </div>
+  </md-card-content>
+
+</md-card>

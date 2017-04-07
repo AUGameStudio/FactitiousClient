@@ -1,33 +1,33 @@
-    <md-card class="article-card" ng-class="{'disabled': main.shouldSwipe}" debounce>
+<md-card class="article-card" ng-class="{'disabled': main.shouldSwipe}" debounce>
+  <div>
+    
+    <!-- div class="source-area" ng-if="main.article.sourceHint" sd-model-to-html="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
+    </div -->
+
+    <md-card-content>
+      <!-- div>{{ad.w}} x {{ad.h}}</div -->
+      <h3 class="md-title" sd-model-to-html="main.article.headline"></h3>
       <div>
-        
-        <!-- div class="source-area" ng-if="main.article.sourceHint" sd-model-to-html="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
-        </div -->
-
-        <md-card-content>
-          <!-- div>{{ad.w}} x {{ad.h}}</div -->
-          <h3 class="md-title" sd-model-to-html="main.article.headline"></h3>
-          <div>
-            <img class="pull-right" draggable="false" ng-src="{{main.article.photo_url}}"/>
-            <div sd-model-to-html="main.article.body"></div>
-          </div>
-
-          <!-- div sd-model-to-html="ad.main.article.info.source" class="source-area" ng-class="{'expanded': ad.main.articleExpanded}">
-          </div -->
-
-          <div layout="row" layout-align="center center">
-            <md-button class="f2-button" ng-click="main.showHint()" ng-show="!main.articleExpanded">show source hint</md-button>
-          </div>
-        </md-card-content>
-
-        <div class="source-area" ng-if="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
-          <div class="wedge"></div>
-          <div class="source-area-content" sd-model-to-html="main.article.sourceHint"></div>
-        </div>
-
+        <img class="pull-right" draggable="false" ng-src="{{main.article.photo_url}}"/>
+        <div sd-model-to-html="main.article.body"></div>
       </div>
-	</md-card>
 
-  <div ng-if="main.shouldSwipe && main.inSwipeLeft" class="swipe-left-flag"><div>fake</div></div>
-  <div ng-if="main.shouldSwipe && main.inSwipeRight" class="swipe-right-flag"><div>news</div></div>
+      <!-- div sd-model-to-html="ad.main.article.info.source" class="source-area" ng-class="{'expanded': ad.main.articleExpanded}">
+      </div -->
+
+      <div layout="row" layout-align="center center">
+        <md-button class="f2-button" ng-click="main.showHint()" ng-show="!main.articleExpanded">show source hint</md-button>
+      </div>
+    </md-card-content>
+
+    <div class="source-area" ng-if="main.article.sourceHint" ng-class="{'expanded': main.articleExpanded}">
+      <div class="wedge"></div>
+      <div class="source-area-content" sd-model-to-html="main.article.sourceHint"></div>
+    </div>
+
+  </div>
+</md-card>
+
+<div ng-if="main.shouldSwipe && main.inSwipeLeft" class="swipe-left-flag"><div>fake</div></div>
+<div ng-if="main.shouldSwipe && main.inSwipeRight" class="swipe-right-flag"><div>news</div></div>
 

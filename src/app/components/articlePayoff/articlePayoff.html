@@ -13,7 +13,17 @@
   <md-card-content>
       
     <div>
-      <p>Your chose 'Me', meaning you. You should have chosen 'You', meaning me!</p>
+      
+      <div ng-if="main.article.articleType=='news'">
+        <p ng-if="payoffType==='correct'">That's right! That was a <span class="news-span">news</span> article!</p>
+        <p ng-if="payoffType!=='correct'">Sorry! That was actually a <span class="news-span">news</span> article.</p>
+      </div>
+
+      <div ng-if="main.article.articleType=='notNews'">
+        <p ng-if="payoffType==='correct'">That's right! That was a <span class="not-news-span">fake</span> article!</p>
+        <p ng-if="payoffType!=='correct'">Sorry! That was actually a <span class="not-news-span">fake</span> article.</p>
+      </div>
+
 
       <p ng-if="main.article.payoffSourceLabel && main.article.payoffSourceUrl">Source: <a target="_blank" ng-href="{{main.article.payoffSourceUrl | addHttp}}">{{main.article.payoffSourceLabel}}</a></p>
       <p ng-if="main.article.payoffSourceLabel && !main.article.payoffSourceUrl">Source: {{main.article.payoffSourceLabel}}</p>

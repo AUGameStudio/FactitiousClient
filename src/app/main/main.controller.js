@@ -12,10 +12,10 @@
 	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState) {
 		var vm = this;
 
-		// to fix various iPhone / iPad oddities...
+		// to fix various iPhone / iPad oddities, try something like...
 		/*
 		var vh = $('body').outerHeight();
-		$('.bigboy').css({'height': vh+'px'});
+		$('.bigboy').css({'height': (vh+1)+'px'});
 		*/
 
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
@@ -49,6 +49,7 @@
 		vm.nextQuestion = nextQuestion;
 		vm.nextRound = nextRound;
 		vm.startOver = startOver;
+		vm.toggleBurger = toggleBurger;
 
 		vm.showBurger = false;
 
@@ -59,11 +60,7 @@
 		gameState.resetGame();
 
 		$scope.$watch(function() {return gameState.roundNumber;}, function() {
-			vm.showRoundBanner = true;
-			vm.roundNumber = gameState.roundNumber;
-			$timeout(function() {
-				vm.showRoundBanner = false;
-			}, 2000);
+			slideInBanner();
 		});
 
 		$scope.$watch(function() {return vm.article;}, function() {
@@ -185,6 +182,20 @@
 			gameState.resetGame();
 			activate();
 			vm.showBurger = false;
+			slideInBanner();
+		}
+
+		function slideInBanner() {
+			vm.showRoundBanner = true;
+			vm.roundNumber = gameState.roundNumber;
+			$timeout(function() {
+				vm.showRoundBanner = false;
+			}, 2000);
+		}
+
+		function toggleBurger() {
+			vm.showBurger = !vm.showBurger;
+			vm.showInstructions = false;
 		}
 
 	}

@@ -1,6 +1,6 @@
 <div class="noselect" layout="horizontal" layout-fill>
 
-  <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
+  <md-content class="bigboy sim-iPhone5s" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}">
 
     <article-header main="main"></article-header>
 
@@ -24,7 +24,7 @@
 
       <article-footer></article-footer>
 
-      <div ng-if="main.showRoundBanner" class="round-banner">round {{main.roundNumber+1}}</div>
+      <div ng-if="main.showRoundBanner" class="round-banner slide-in-banner">round {{main.roundNumber+1}}</div>
 
       <div class="dialog-blocker" ng-if="main.showBurger"></div>
 
@@ -34,11 +34,13 @@
             <md-button class="md-raised f2-button md-no-ink" ng-click="">save game</md-button>
             <md-button class="md-raised f2-button md-no-ink" ng-click="main.startOver()">start over</md-button>
             <md-button class="md-raised f2-button md-no-ink" ng-click="">sign out</md-button>
-            <md-button class="md-raised f2-button md-no-ink" ng-click="">instructions</md-button>
+            <md-button class="md-raised f2-button md-no-ink" ng-click="main.showInstructions = true">instructions</md-button>
           </div>
           <h3>about</h3>
           <p>Here's a blurb about factitious. Bacon ipsum dolor amet in boudin ribeye in jerky pork loin irure. Tri-tip eiusmod non incididunt tongue leberkas nulla in irure commodo flank. Culpa id doner labore veniam tempor. Irure jowl ex quis, shoulder boudin sint prosciutto et cow dolore reprehenderit.</p>
       </div>
+
+      <instruct-panel ng-if="main.showInstructions"></instruct-panel>
 
     </div>
 
