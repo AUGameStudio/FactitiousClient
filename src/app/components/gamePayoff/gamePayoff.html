@@ -1,0 +1,26 @@
+<div class="article-lower-pane game-payoff-page">
+
+	<md-card class="results-card payoff-card popup-payoff" debounce>
+
+	  <div class="payoff-header">
+	    <div class="payoff-header-content">final score: {{gameState.totalScore}}</div>
+	    <wedge class="flip-x flip-y"></wedge>
+	  </div>
+
+	  <md-card-content>
+	    
+	    <div style="text-align: center; padding: 10px;">
+	    	you correctly identified truthiness <span class="emph">{{percentCorrect}}% of the time</span>
+	    </div>
+
+		<div layout="row" layout-align="center center"> 
+			<md-button class="md-raised f2-button md-no-ink" ng-click="main.startOver()">play again</md-button>
+		</div>
+
+	  </md-card-content>
+
+	</md-card>
+
+      <div ng-if="true" class="round-banner slide-in-banner">you win!!</div>
+
+</div>

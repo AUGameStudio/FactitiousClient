@@ -1,0 +1,33 @@
+.game-payoff-page {
+	justify-content: center;
+	padding: 20px;
+
+	.payoff-card {
+		margin: 20px auto;
+		max-width: 360px;
+
+		.payoff-header-content {
+			color: white;
+			font-weight: bold;
+			font-size: 24px;
+			background: #eb640f;
+			padding: 5px 15px;
+			text-align: center;
+		}
+		wedge {
+			svg {
+				fill: #eb640f;
+			}
+		}
+
+		.emph {
+			font-weight: bold;
+			color: #219083;
+		}
+
+	}
+
+	.round-banner {
+		top: 20%;
+	}
+}

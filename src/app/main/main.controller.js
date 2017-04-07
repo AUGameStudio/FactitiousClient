@@ -175,7 +175,7 @@
 		function nextRound() {
 			gameState.roundNumber += 1;
 			if (gameState.roundNumber>=gameState.roundInfo.length) {
-				startOver();
+				vm.state = "showGamePayoff";
 			} else {
 				gameState.articleNumber = 0;
 				vm.state = 'prepareArticle';
@@ -192,6 +192,7 @@
 		function startOver() {
 			gameState.resetGame();
 			activate();
+			vm.state = 'showLaunch';
 			vm.showBurger = false;
 			slideInBanner();
 		}
