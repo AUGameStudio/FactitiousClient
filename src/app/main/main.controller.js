@@ -9,7 +9,7 @@
 		.directive('debounce', debounce);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState, $stateParams) {
 		var vm = this;
 
 		// to fix various iPhone / iPad oddities, try something like...
@@ -17,6 +17,9 @@
 		var vh = $('body').outerHeight();
 		$('.bigboy').css({'height': (vh+1)+'px'});
 		*/
+		$log.log('stateParams');
+		$log.log($stateParams);
+		vm.isPreview = $stateParams.isPreview;
 
 		vm.simClasses = [
 			{simClass: 'sim-iPhone5s', label: 'iPhone 5s'},
@@ -62,6 +65,7 @@
 		vm.startOver = startOver;
 		vm.toggleBurger = toggleBurger;
 		vm.quickStartGame = quickStartGame;
+		vm.getSimClass = getSimClass;
 
 		vm.showBurger = false;
 
@@ -96,6 +100,14 @@
 					vm.article = response;
 					vm.state = 'showLaunch';
 				});
+		}
+
+		function getSimClass() {
+			if (vm.isPreview) {
+				return vm.simClass;
+			} else {
+				return ((vm.isSafari && vm.isIphone) ? 'is-mobile-safari' : '');
+			}
 		}
 
 		function quickStartGame() {

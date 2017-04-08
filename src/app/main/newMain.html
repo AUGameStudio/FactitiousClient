@@ -1,6 +1,6 @@
 <div class="noselect" layout="horizontal" layout-fill>
 
-  <md-content class="bigboy" ng-class="{'is-mobile-safari': main.isSafari && main.isIphone}" xng-class="main.simClass">
+  <md-content class="bigboy" ng-class="main.getSimClass()">
 
     <big-header ng-if="main.state=='showLaunch' || main.state=='showGamePayoff'"></big-header>
 
@@ -45,7 +45,7 @@
 
 </div>
 
-  <div ng-if="false" style="width: 600px;">
+  <div ng-if="main.isPreview" style="width: 600px;">
     <div>Approximate form factor...</div>
     <md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
       <md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>

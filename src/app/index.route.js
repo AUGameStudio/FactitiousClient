@@ -9,14 +9,24 @@
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
-        url: '/main',
+        url: '/',
         templateUrl: 'app/main/newMain.html',
         controller: 'MainController',
         controllerAs: 'main'
       })
 
+      .state('preview', {
+        url: '/preview',
+        templateUrl: 'app/main/newMain.html',
+        controller: 'MainController',
+        controllerAs: 'main',
+        params: {
+          isPreview: true
+        }
+      })
+
       .state('articleEdit', {
-        url: '/',
+        url: '/editor',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<article-edit-main></article-edit-main>'
       })
