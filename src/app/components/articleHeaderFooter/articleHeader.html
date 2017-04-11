@@ -7,7 +7,10 @@
 
     <round-progress progress-pips="main.progressPips" cur-progress="main.curProgress"></round-progress>
 
-    <section class="chunk1"><i ng-click="main.toggleBurger()" class="material-icons">menu</i></section>
+    <section class="chunk1">
+    	<i ng-if="!main.showBurger" ng-click="main.toggleBurger()" class="material-icons">menu</i>
+    	<i ng-if="main.showBurger" ng-click="main.toggleBurger()" class="material-icons">close</i>
+    </section>
 
   </section>    
 </header>
