@@ -1,7 +1,10 @@
 .bigboy {
 	margin: auto;
+	/*
 	height: 100vh;
 	width: 100vw;
+	*/
+	position:absolute;top:0;right:0;bottom:0;left:0;
 
 	display: flex;
 	flex-direction: column;
@@ -45,10 +48,28 @@
 	}
 
 	&.desktop {
+		/*
 		width: 100%;
 		height: 100vh;
+		*/
 	}
 
+	&.edit-preview {
+		position: initial;
+	}
+
+}
+
+.preview-block {
+	width: 500px;
+	position: absolute;
+	top: 0px;
+	left: 15px;
+	z-index: 2;
+
+	&.desktop {
+		top: 80px;
+	}
 }
 
 
@@ -72,6 +93,7 @@ mute-unmute {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
+	overflow: hidden;
 }
 
 .dialog-blocker {

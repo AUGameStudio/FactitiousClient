@@ -42,13 +42,13 @@
 
   </md-content>
 
+  <div ng-if="main.isPreview" class="preview-block" ng-class="main.getSimClass()">
+      <div>Approximate form factor for preview...</div>
+      <md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
+        <md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>
+      </md-radio-group>
+  </div>
 
 </div>
 
-  <div ng-if="main.isPreview" style="width: 600px;">
-    <div>Approximate form factor...</div>
-    <md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
-      <md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>
-    </md-radio-group>
-  </div>
   

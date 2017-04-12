@@ -16,6 +16,7 @@ burger-pane {
 		right: 0px;
 	}
 
-	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;
 	
 }

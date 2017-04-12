@@ -187,7 +187,8 @@ article-edit-main {
 			margin-left: 0.5em;
 		}
 
-		overflow: scroll;
+		overflow-y: auto;
+		overflow-x: hidden;
 
 		&.article-card {
 			flex: 1 1 auto;
