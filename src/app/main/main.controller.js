@@ -106,7 +106,7 @@
 			if (vm.isPreview) {
 				return vm.simClass;
 			} else {
-				return ((vm.isSafari && vm.isIphone) ? 'is-mobile-safari' : '');
+				return ''; // ((vm.isSafari && vm.isIphone) ? 'is-mobile-safari' : '');
 			}
 		}
 
@@ -338,10 +338,12 @@
 			}
 
 			function trackDown(e) {
+
 				if (scope.main.shouldSwipe || scope.main.state !== 'showArticle') {
 					// debounce...
 					return;
 				}
+
 				audioService.playACSound('silent'); // ARRRGGGGGGHHH! Why is this required for Safari?
 				anchorX = getPageX(e);
 
@@ -350,9 +352,12 @@
 				elm.on('mouseleave', trackUp);
 				elm.on('mouseup', trackUp);
 				elm.on('touchend', trackUp);
+
+				// scope.main.debugStr = "didTrackDownEnd";
 			}
 
 			function trackUp(e) {
+
 				if ((scope.main.inSwipeLeft || scope.main.inSwipeRight) && scope.main.shouldSwipe) {
 					if (scope.main.inSwipeLeft) {
 						scope.main.swipeLeft(dragX);
@@ -396,6 +401,10 @@
 			function getPageX(evt) {
 				if (evt.type.indexOf('mouse')>=0) {
 					return evt.pageX;
+				} else if (evt.changedTouches) {
+					return evt.changedTouches[0].pageX;
+				} else if (evt.originalEvent.changedTouches) {
+					return evt.originalEvent.changedTouches[0].pageX;
 				} else {
 					return event.changedTouches[0].pageX;
 				}
