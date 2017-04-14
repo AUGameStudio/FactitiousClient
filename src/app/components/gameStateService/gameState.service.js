@@ -5,7 +5,7 @@
 		.service('gameState', gameState);
 
 	/** @ngInject */
-	function gameState($log, $http) {
+	function gameState($log, $http, $q) {
 		var service = {
 			state: {
 				roundNumber: 0,
@@ -39,7 +39,7 @@
 		return service;
 
 		function beginNewGame(userPk) {
-			var serviceUrl = '/api/gameplay2/player/'+userPk+'/begin_new_game/';
+			var serviceUrl = '/api/gameplay2/player/'+userPk+'/begin_new_unsaved_game/';
 			return $http.post(serviceUrl)
 				.then(function(response) {
 					var game_record = response.data;
@@ -74,17 +74,22 @@
 		function saveGame() {
 			var serviceUrl = '/api/gameplay2/game_play/'+service.game_record.pk+'/';
 			var gameRecord = service.game_record;
-			gameRecord.total_score = service.state.totalScore;
-			gameRecord.game_state = service.state;
 
-			return $http.post(serviceUrl, gameRecord)
-				.then(function(response) {
-					$log.log('success');
-					$log.log(response);
-				}, function(response) {
-					$log.log('failure');
-					$log.log(response);
-				});
+			if (gameRecord.pk) {
+				gameRecord.total_score = service.state.totalScore;
+				gameRecord.game_state = service.state;
+
+				return $http.post(serviceUrl, gameRecord)
+					.then(function(response) {
+						$log.log('success');
+						$log.log(response);
+					}, function(response) {
+						$log.log('failure');
+						$log.log(response);
+					});
+			} else {
+				return $q.resolve();
+			}
 
 		}
 
@@ -96,6 +101,7 @@
 							service.game_record = game_record;
 							service.state = game_record.game_state;
 							service.game_settings = game_record.game_settings;
+							service.game_record.pk = null;
 						});
 		}
 

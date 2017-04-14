@@ -88,7 +88,7 @@
 
 		function activate() {
 			vm.state = 'prepareArticle';
-			return gameState.restoreGame(37) // beginNewGame(1) // (36)
+			return gameState.beginNewGame(1) // restoreGame(37) // beginNewGame(1) // (36)
 				.then(function() {
 					vm.numberOfRounds = gameState.state.roundInfo.length;
 
