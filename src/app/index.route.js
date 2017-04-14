@@ -31,6 +31,12 @@
         template: '<article-edit-main></article-edit-main>'
       })
 
+      .state('gameSettingsEdit', {
+        url: '/gameSettings',
+        // templateUrl: 'app/main/articleEdit.html'
+        template: '<game-settings-editor></game-settings-editor>'
+      })
+
       ;
 
     $urlRouterProvider.otherwise('/');

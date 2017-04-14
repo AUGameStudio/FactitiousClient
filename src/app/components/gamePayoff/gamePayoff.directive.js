@@ -17,7 +17,7 @@
 			$scope.gameState = gameState;
 
 			var totCorrect = 0, totArticles = 0;
-			gameState.roundInfo.forEach(function(info) {
+			gameState.state.roundInfo.forEach(function(info) {
 				info.progressPips.forEach(function(pip) {
 					totArticles += 1;
 					if (pip==='win') {

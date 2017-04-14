@@ -5,8 +5,8 @@
       <div class="fake-button" ng-click="main.swipeLeft()" ng-class="{disabled: disableButtons()}"></div>
 
       <div class="scoring-loaf">
-        <div class="sl-score">{{gameState.totalScore}}</div>
-        <div class="sl-info">round {{gameState.roundNumber+1}}</div>
+        <div class="sl-score">{{gameState.state.totalScore}}</div>
+        <div class="sl-info">round {{gameState.state.roundNumber+1}}</div>
       </div>
 
       <div class="news-button" ng-click="main.swipeRight()" ng-class="{disabled: disableButtons()}"></md-button>

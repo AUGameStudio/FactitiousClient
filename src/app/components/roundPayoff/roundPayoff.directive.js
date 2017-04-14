@@ -15,7 +15,7 @@
 
 		function controller($scope) {
 			$scope.gameState = gameState;
-			var roundInfo = gameState.roundInfo[gameState.roundNumber];
+			var roundInfo = gameState.state.roundInfo[gameState.state.roundNumber];
 			var numCorrect = 0;
 			roundInfo.progressPips.forEach(function(pip) {
 				if (pip==='win') {

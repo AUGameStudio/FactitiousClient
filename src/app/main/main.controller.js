@@ -73,9 +73,7 @@
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
-		gameState.resetGame();
-
-		$scope.$watch(function() {return gameState.roundNumber;}, function() {
+		$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
 			slideInBanner();
 		});
 
@@ -89,17 +87,23 @@
 		activate();
 
 		function activate() {
-			gameState.totalScore = 0;
-			gameState.roundNumber = 0;
-			gameState.articleNumber = 0;
-			vm.numberOfRounds = gameState.roundInfo.length;
-
 			vm.state = 'prepareArticle';
-			articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
-				.then(function(response) {
-					vm.article = response;
-					vm.state = 'showLaunch';
+			return gameState.restoreGame(37) // beginNewGame(1) // (36)
+				.then(function() {
+					vm.numberOfRounds = gameState.state.roundInfo.length;
+
+					if (gameState.state.articleNumber>=gameState.state.roundInfo[gameState.state.roundNumber].articleIds.length) {
+						gameState.state.roundNumber += 1;
+						gameState.state.articleNumber = 0;
+					}
+
+					return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
+						.then(function(response) {
+							vm.article = response;
+							vm.state = 'showLaunch';
+						});
 				});
+
 		}
 
 		function getSimClass() {
@@ -155,10 +159,10 @@
 		}
 
 		function scoreSwipe(swipeDir) {
-			var roundInfo = gameState.roundInfo[gameState.roundNumber];
-			roundInfo.progressPips[gameState.articleNumber] = (swipeDir===vm.article.articleType ? 'win' : 'lose');
-			if (roundInfo.progressPips[gameState.articleNumber]==='win') {
-				gameState.totalScore += 5;
+			var roundInfo = gameState.state.roundInfo[gameState.state.roundNumber];
+			roundInfo.progressPips[gameState.state.articleNumber] = (swipeDir===vm.article.articleType ? 'win' : 'lose');
+			if (roundInfo.progressPips[gameState.state.articleNumber]==='win') {
+				gameState.state.totalScore += 5;
 				vm.mood = 'assets/icons/ic_mood_black_24px.svg';
 				vm.payoffType = 'correct';
 			} else {
@@ -168,11 +172,11 @@
 		}
 
 		function nextQuestion() {
-			var roundInfo = gameState.roundInfo[gameState.roundNumber];
-			if (gameState.articleNumber<roundInfo.articleIds.length-1) {
-				gameState.articleNumber += 1;
+			var roundInfo = gameState.state.roundInfo[gameState.state.roundNumber];
+			gameState.state.articleNumber += 1;
+			if (gameState.state.articleNumber<roundInfo.articleIds.length) {
 				vm.state = 'prepareArticle';
-				articleService.getArticle(roundInfo.articleIds[gameState.articleNumber])
+				articleService.getArticle(roundInfo.articleIds[gameState.state.articleNumber])
 					.then(function(response) {
 						vm.article = response;
 						vm.state = 'showArticle';
@@ -180,18 +184,19 @@
 						vm.articleExpanded = false;
 					});
 			} else {
+				gameState.saveGame();
 				vm.state = 'showRoundResult';
 			}
 		}
 
 		function nextRound() {
-			gameState.roundNumber += 1;
-			if (gameState.roundNumber>=gameState.roundInfo.length) {
+			gameState.state.roundNumber += 1;
+			if (gameState.state.roundNumber>=gameState.state.roundInfo.length) {
 				vm.state = "showGamePayoff";
 			} else {
-				gameState.articleNumber = 0;
+				gameState.state.articleNumber = 0;
 				vm.state = 'prepareArticle';
-				articleService.getArticle(gameState.roundInfo[gameState.roundNumber].articleIds[gameState.articleNumber])
+				articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
 					.then(function(response) {
 						vm.article = response;
 						vm.state = 'showArticle';
@@ -202,16 +207,17 @@
 		}
 
 		function startOver() {
-			gameState.resetGame();
-			activate();
-			vm.state = 'showLaunch';
-			vm.showBurger = false;
-			slideInBanner();
+			activate()
+				.then(function() {
+					vm.state = 'showLaunch';
+					vm.showBurger = false;
+					slideInBanner();
+				});
 		}
 
 		function slideInBanner() {
 			vm.showRoundBanner = true;
-			vm.roundNumber = gameState.roundNumber;
+			vm.roundNumber = gameState.state.roundNumber;
 			$timeout(function() {
 				vm.showRoundBanner = false;
 			}, 2000);

@@ -18,7 +18,7 @@
 			template: [
 				'<div class="progress-holder">',
 					'<div ng-repeat="pip in vm.progressPips track by $index" class="progress-pip"',
-					' ng-class="{\'correct\': pip===\'win\', \'incorrect\': pip===\'lose\', \'current\': gameState.articleNumber==$index}"></div>',
+					' ng-class="{\'correct\': pip===\'win\', \'incorrect\': pip===\'lose\', \'current\': gameState.state.articleNumber==$index}"></div>',
 				'</div>'
 				].join('')
 		};
@@ -27,9 +27,11 @@
 			var vm = this;
 			$scope.gameState = gameState;
 
-			$scope.$watch(function() {return gameState.roundNumber;}, function() {
-				vm.progressPips = gameState.roundInfo[gameState.roundNumber].progressPips;
-			})
+			$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
+				if (gameState.state.roundNumber<gameState.state.roundInfo.length) {
+					vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber].progressPips;
+				}
+			});
 		}
 	}
 })();
