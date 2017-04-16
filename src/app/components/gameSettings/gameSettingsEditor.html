@@ -1,8 +1,41 @@
 <div>
-	<div class="gse-container" layout="row" layout-align="space-between stretch">
-
-		<h1>Factitious2 Game Settings</h1>
-
+	<div class="admin-header">
+		<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> Game Settings</h1>
+		<div class="admin-nav">
+			<a xui-sref="">statistics</a>
+			<a ui-sref="gameSettingsEdit" class="disabled">game settings</a>
+			<a ui-sref="articleEdit">article editor</a>
+		</div>
 	</div>
 
+	<div class="settings-content">
+		<div layout="row">
+			<div class="ae-button" ng-click="saveSettings()" ng-class="{disabled: !settingsHaveChanged}">Save Changes...</div>
+			<div class="ae-button" ng-click="revertSettings()" ng-class="{disabled: !settingsHaveChanged}">Revert</div>
+		</div>
+		<div>Last modified: {{gameSettings.modified_date | utcStrToLocalDate}}</div>
+		<div>Total number of articles {{gameSettings.maximum_articles_played}}</div>
+		<div>Maximum possible score {{gameSettings.maximum_score}}</div>
+		<br/>
+		<div ng-repeat="roundInfo in gameSettings.roundInfo">
+			<h2>Round {{$index+1}}</h2>
+			<div class="round-info">
+				<div class="basic-info">
+					<div>Correct answer reward:</div>
+					<div style="padding-left: 10px;">
+						<div><label>before hint:</label><input type="number" ng-model="roundInfo.reward"></div>
+						<div><label>after hint:</label><input type="number" ng-model="roundInfo.reward_with_hint"></div>
+					</div>
+				</div>
+				<div class="article-names">
+					<article-id-list model="roundInfo.articleIds"></article-id-list>
+					<div><i>{{roundInfo.articleIds.length}} articles in this round:</i></div>
+					<div class="articles" ng-repeat="apk in roundInfo.articleIds">
+						<div ng-if="articleDict[apk]">{{articleDict[apk].article_id}}: {{articleDict[apk].headline}}</div>
+						<div ng-if="!articleDict[apk]" class="article-error">{{apk}}: Not found</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

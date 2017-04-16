@@ -1,3 +1,108 @@
 game-settings-editor {
-	
+	display: block;
+	font-size: 0.9em;
+
+	h1, h2 {
+		margin: 5px 0px;
+	}
+
+	h1 img {
+		position: relative;
+		top: 9px;
+		display: inline;
+		height: 42px;
+		text-align: bottom;
+	}
+
+	h1 {
+		margin-top: 0px;
+	}
+
+	h2 {
+		margin-top: 10px;
+		border-top: 1px solid #DDD;
+	}
+
+	.settings-content {
+		padding: 10px 20px;
+	}
+
+	.round-info {
+		margin-left: 20px;
+		display: flex;
+	}
+
+	.basic-info {
+		margin-right: 40px;
+		label {
+			display: inline-block;
+			width: 90px;
+		}
+		input[type=number] {
+			width: 50px;
+			text-align: right;
+		}
+	}
+
+	.article-error {
+		color: red;
+		font-style: italic;
+	}
+
+	.articles {
+		margin-left: 20px;
+	}
+
+	.ae-button {
+		cursor: pointer;
+		margin-right: 3px;
+		padding: 3px 5px;
+		border-radius: 5px;
+		color: white;
+		background: slategray;
+
+		&:hover {
+			background: lightgray;
+		}
+
+		&.disabled {
+			pointer-events: none;
+			background: lightgray;
+			color: slategray;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+}
+
+article-id-list {
+	input {
+		width: 400px;
+	}
+}
+
+.admin-nav {
+	a {
+		padding: 0px 10px;
+		text-decoration: none;
+		color: #444;
+		font-size: 14px;
+		&:visited {
+			color: #333;
+		}
+
+		&.disabled {
+			pointer-events: none;
+			color: #999;
+		}
+	}
+}
+
+.admin-header {
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+	padding-bottom: 5px;
+	margin-bottom: 10px;
 }

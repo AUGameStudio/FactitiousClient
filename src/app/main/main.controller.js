@@ -9,14 +9,9 @@
 		.directive('debounce', debounce);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState, $stateParams) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState, $stateParams, dataTracking) {
 		var vm = this;
 
-		// to fix various iPhone / iPad oddities, try something like...
-		/*
-		var vh = $('body').outerHeight();
-		$('.bigboy').css({'height': (vh+1)+'px'});
-		*/
 		$log.log('stateParams');
 		$log.log($stateParams);
 		vm.isPreview = $stateParams.isPreview;
@@ -32,6 +27,7 @@
 		];
 		vm.simClass = vm.simClasses[0].simClass;
 
+		// for various debugging purposes...
 		vm.isIphone = /(iPhone)/i.test(navigator.userAgent);
 		vm.isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		vm.debugStr = ''+('webkitAudioContext' in $window);
@@ -50,10 +46,6 @@
 
 		vm.curProgress = 0;
 		vm.maxProgress = 10;
-		vm.progressPips = [];
-		for (var i=0; i<vm.maxProgress; i++) {
-			vm.progressPips.push('');
-		}
 
 		vm.inSwipe = false;
 
@@ -69,7 +61,7 @@
 
 		vm.showBurger = false;
 
-		vm.state = 'showArticle';
+		vm.state = 'showLaunch';
 
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
@@ -84,9 +76,8 @@
 			}, 750);
 		})
 
-		activate();
-
-		function activate() {
+		function startGame() {
+			$log.log('starting new game');
 			vm.state = 'prepareArticle';
 			return gameState.beginNewGame(1) // restoreGame(37) // beginNewGame(1) // (36)
 				.then(function() {
@@ -100,23 +91,24 @@
 					return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
 						.then(function(response) {
 							vm.article = response;
-							vm.state = 'showLaunch';
+							vm.state = 'showArticle';
+							slideInBanner();
+							$log.log('show first article');
+							dataTracking.startArticle(vm.article.pk);
 						});
 				});
-
 		}
 
 		function getSimClass() {
 			if (vm.isPreview) {
 				return vm.simClass;
 			} else {
-				return ''; // ((vm.isSafari && vm.isIphone) ? 'is-mobile-safari' : '');
+				return '';
 			}
 		}
 
 		function quickStartGame() {
-			vm.state = 'showArticle';
-			slideInBanner();
+			startGame();
 		}
 
 		function swipeLeft(dragX) {
@@ -163,12 +155,11 @@
 			roundInfo.progressPips[gameState.state.articleNumber] = (swipeDir===vm.article.articleType ? 'win' : 'lose');
 			if (roundInfo.progressPips[gameState.state.articleNumber]==='win') {
 				gameState.state.totalScore += 5;
-				vm.mood = 'assets/icons/ic_mood_black_24px.svg';
 				vm.payoffType = 'correct';
 			} else {
-				vm.mood = 'assets/icons/ic_mood_bad_black_24px.svg';
 				vm.payoffType = 'incorrect';
 			}
+			dataTracking.endArticle(vm.article.pk, vm.payoffType==='correct', vm.articleExpanded);
 		}
 
 		function nextQuestion() {
@@ -180,8 +171,8 @@
 					.then(function(response) {
 						vm.article = response;
 						vm.state = 'showArticle';
-						vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 						vm.articleExpanded = false;
+						dataTracking.startArticle(vm.article.pk);
 					});
 			} else {
 				gameState.saveGame();
@@ -200,19 +191,15 @@
 					.then(function(response) {
 						vm.article = response;
 						vm.state = 'showArticle';
-						vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 						vm.articleExpanded = false;
+						dataTracking.startArticle(vm.article.pk);
 					});
 			}
 		}
 
 		function startOver() {
-			activate()
-				.then(function() {
-					vm.state = 'showLaunch';
-					vm.showBurger = false;
-					slideInBanner();
-				});
+			vm.state = 'showLaunch';
+			vm.showBurger = false;
 		}
 
 		function slideInBanner() {

@@ -26,7 +26,7 @@
 						articleIds: [117, 118, 119, 120],
 						progressPips: []
 					}
-				],
+				]
 			},
 
 			game_record: {},

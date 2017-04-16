@@ -2,45 +2,55 @@
 	<div class="ae-container" layout="row" layout-align="space-between stretch">
 
 		<div class="edit-section">
-			<h1>Factitious2 Article Edit</h1>
-
-			<select ng-model="main.selectedArticleId"
-				ng-options="option.article_id as option.label for option in main.articleList"></select>
-
-			<div layout="row" layout-align="space between">
-				<div class="ae-ctl-row">
-					<div class="ae-button" ng-click="main.saveArticle()" ng-class="{disabled: !main.articleHasChanged}">Save Changes...</div>
-					<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">Revert</div>
-				</div>
-				<div class="ae-ctl-row">
-					<div class="ae-button" ng-click="main.addArticle()" ng-class="{disabled: main.articleHasChanged}">New...</div>
+			<div class="admin-header">
+				<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> Article Editor</h1>
+				<div class="admin-nav">
+					<a xui-sref="">statistics</a>
+					<a ui-sref="gameSettingsEdit">game settings</a>
+					<a ui-sref="articleEdit" class="disabled">article editor</a>
 				</div>
 			</div>
 
-			<hr></hr>
 
-		    <div class="ae-select-image ae-ctl-row">
-		    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
-		    	<label for="input-file">Set Image...</label>
-		    </div>
+			<div class="edit-section-content">
+				<select ng-model="main.selectedArticleId"
+					ng-options="option.article_id as option.label for option in main.articleList"></select>
 
-			<md-radio-group ng-model="main.article.articleType" layout="row">
-				<md-radio-button ng-value="'notNews'">not news</md-radio-button>
-				<md-radio-button ng-value="'news'">news</md-radio-button>
-			</md-radio-group>
-			
-			<div class="obj-label">Headline</div>
-			<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
-			<div class="obj-label">Body</div>
-			<textarea ng-change="main.onChange()" class="body-edit" ng-model="main.article.body"></textarea>
-			<div class="obj-label">"show source" Content</div>
-			<textarea class="source-edit" ng-model="main.article.sourceHint"></textarea>
-			<div class="obj-label">Payoff "Source: " Link Label</div>
-			<textarea class="source-label-edit" ng-model="main.article.payoffSourceLabel"></textarea>
-			<div class="obj-label">Payoff "Source: " Link URL</div>
-			<textarea xclass="source-edit" ng-model="main.article.payoffSourceUrl"></textarea>
-			<div class="obj-label">Payoff Content</div>
-			<textarea class="payoff-edit" ng-model="main.article.payoffContent"></textarea>
+				<div layout="row" layout-align="space between">
+					<div class="ae-ctl-row">
+						<div class="ae-button" ng-click="main.saveArticle()" ng-class="{disabled: !main.articleHasChanged}">Save Changes...</div>
+						<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">Revert</div>
+					</div>
+					<div class="ae-ctl-row">
+						<div class="ae-button" ng-click="main.addArticle()" ng-class="{disabled: main.articleHasChanged}">New...</div>
+					</div>
+				</div>
+
+				<hr></hr>
+
+			    <div class="ae-select-image ae-ctl-row">
+			    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
+			    	<label for="input-file">Set Image...</label>
+			    </div>
+
+				<md-radio-group ng-model="main.article.articleType" layout="row">
+					<md-radio-button ng-value="'notNews'">not news</md-radio-button>
+					<md-radio-button ng-value="'news'">news</md-radio-button>
+				</md-radio-group>
+				
+				<div class="obj-label">Headline</div>
+				<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
+				<div class="obj-label">Body</div>
+				<textarea ng-change="main.onChange()" class="body-edit" ng-model="main.article.body"></textarea>
+				<div class="obj-label">"show source" Content</div>
+				<textarea class="source-edit" ng-model="main.article.sourceHint"></textarea>
+				<div class="obj-label">Payoff "Source: " Link Label</div>
+				<textarea class="source-label-edit" ng-model="main.article.payoffSourceLabel"></textarea>
+				<div class="obj-label">Payoff "Source: " Link URL</div>
+				<textarea xclass="source-edit" ng-model="main.article.payoffSourceUrl"></textarea>
+				<div class="obj-label">Payoff Content</div>
+				<textarea class="payoff-edit" ng-model="main.article.payoffContent"></textarea>
+			</div>
 		</div>
 
 		<div class="preview-panes" layout="column">

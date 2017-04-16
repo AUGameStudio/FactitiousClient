@@ -29,7 +29,8 @@
 			],
 
 			getSettings: getSettings,
-			postSettings: postSettings
+			postSettings: postSettings,
+			updateSettingsCalculations: updateSettingsCalculations
 
 		};
 
@@ -43,7 +44,6 @@
 				service.maximum_articles_played += round.articleIds.length;
 				service.maximum_score += round.articleIds.length * round.reward;
 			});
-
 		}
 
 		function getSettings() {
@@ -51,6 +51,9 @@
 				.then(function(response) {
 					$log.log('success');
 					$log.log(response);
+					var settings = response.data;
+					angular.extend(service, settings);
+
 				});
 		}
 
@@ -60,6 +63,8 @@
 				.then(function(response) {
 					$log.log('success');
 					$log.log(response);
+					var settings = response.data;
+					angular.extend(service, settings);
 				});
 		}
 

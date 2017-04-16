@@ -2,10 +2,24 @@ article-edit-main {
 	display: block;
 	background: white;
 
-	padding: 10px 20px;
+	/* padding: 10px 20px; */
 
 	h1 {
 		margin: 5px 0px;
+		margin-top: 0px;
+		img {
+			position: relative;
+			top: 9px;
+			display: inline;
+			height: 42px;
+			text-align: bottom;
+		}
+	}
+
+	xh1 {
+		box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+		padding-bottom: 5px;
+		margin-bottom: 10px;
 	}
 
 	.ae-container {
@@ -18,6 +32,10 @@ article-edit-main {
 		margin-right: 20px;
 
 		font-size: 0.9em;
+
+		.edit-section-content {
+			padding: 10px 20px;
+		}
 
 		select {
 			max-width: 300px;
@@ -76,7 +94,7 @@ article-edit-main {
 			margin-left: 10px;
 
 			&.body-edit {
-				height: 160px;
+				height: 140px;
 			}
 
 			&.source-edit {
@@ -88,11 +106,15 @@ article-edit-main {
 			}
 
 			&.payoff-edit {
-				height: 100px;
+				height: 80px;
 			}
 
 		}
 
+	}
+
+	.preview-panes {
+		padding: 10px 10px;
 	}
 
 	.preview-section {
