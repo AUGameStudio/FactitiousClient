@@ -88,6 +88,8 @@
 						gameState.state.articleNumber = 0;
 					}
 
+					vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber];
+
 					return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
 						.then(function(response) {
 							vm.article = response;
@@ -187,6 +189,9 @@
 			} else {
 				gameState.state.articleNumber = 0;
 				vm.state = 'prepareArticle';
+
+				vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber];
+
 				articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
 					.then(function(response) {
 						vm.article = response;

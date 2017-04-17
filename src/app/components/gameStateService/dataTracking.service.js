@@ -20,7 +20,7 @@
 		}
 
 		function endArticle(articlePk, correct, hadHint) {
-			var dt = (moment().diff(startTime)/1000);
+			var dt = Math.round(moment().diff(startTime)/1000);
 			gameState.game_record.total_time_seconds += dt;
 			gameState.game_record.total_articles_played += 1;
 			if (correct) {
@@ -28,6 +28,22 @@
 			}
 			$log.log('track article '+articlePk+' '+dt+' '+correct+' '+hadHint);
 			$log.log('game_record t '+gameState.game_record.total_time_seconds+' p '+gameState.game_record.total_articles_played+' c '+gameState.game_record.total_articles_correct);
+
+			var serviceUrl = '/api/gameplay2/track_article/';
+			var data = {
+				article_pk: articlePk,
+				player_pk: 1,
+				total_time_seconds: dt,
+				was_correct: correct,
+				showed_hint: hadHint || false
+			};
+
+			return $http.post(serviceUrl, data)
+				.then(function(response) {
+					$log.log('success');
+					$log.log(response);
+				});
 		}
 	}
+
 })();
