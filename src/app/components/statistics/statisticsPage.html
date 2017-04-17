@@ -1,0 +1,45 @@
+<div>
+	<div class="admin-header">
+		<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> statistics</h1>
+		<div class="admin-nav">
+			<a ui-sref="statisticsPage" class="disabled">statistics</a>
+			<a ui-sref="gameSettingsEdit">game settings</a>
+			<a ui-sref="articleEdit">article editor</a>
+		</div>
+	</div>
+
+	<div class="stats-content">
+		<h2>filters</h2>
+		<div><input type="checkbox" id="cgo" ng-model="currentGameOnly"><label for="cgo">Show articles from current game settings only</label></div>
+		<div layout="row" layout-align="start center">
+			<input type="checkbox" id="fbd" ng-model="filterByDate"><div>&nbsp;Filter by date from&nbsp;</div>
+			<input type="date" ng-model="startDate">
+			<div>&nbsp;to&nbsp;</div>
+			<input type="date" ng-model="endDate">
+			<div class="admin-button" ng-class="{disabled: !filterByDate}">apply date filter</div>
+		</div>
+		<h2>game play</h2>
+		<div>{{startDate}}</div>
+		<h2>article play</h2>
+		<table>
+			<thead>
+				<tr>
+					<th class="id-col">id</th><th class="hdline-col">headline</th>
+					<th># plays</th>
+					<th># correct</th>
+					<th># hints</th>
+					<th>avg. time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="a in articleStats | filter: articleFilter">
+					<td class="id-col">{{a.article_id}}</td><td class="hdline-col">{{a.headline}}</td>
+					<td>{{a.num_plays}}</td>
+					<td>{{a.num_correct}}</td>
+					<td>{{a.num_hints}}</td>
+					<td>{{a.avg_time | number:1}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

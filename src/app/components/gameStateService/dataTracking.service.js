@@ -10,7 +10,9 @@
 		var service = {
 
 			startArticle: startArticle,
-			endArticle: endArticle
+			endArticle: endArticle,
+
+			getArticleStatistics: getArticleStatistics
 		};
 
 		return service;
@@ -43,6 +45,16 @@
 					$log.log('success');
 					$log.log(response);
 				});
+		}
+
+		function getArticleStatistics() {
+			var serviceUrl = '/api/gameplay2/get_article_stats/';
+
+			return $http.get(serviceUrl)
+				.then(function(response) {
+					return response.data;
+				});
+
 		}
 	}
 

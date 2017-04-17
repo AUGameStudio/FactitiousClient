@@ -53,7 +53,6 @@
 					$log.log(response);
 					var settings = response.data;
 					angular.extend(service, settings);
-
 				});
 		}
 

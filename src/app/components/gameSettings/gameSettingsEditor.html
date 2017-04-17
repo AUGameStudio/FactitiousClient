@@ -1,8 +1,8 @@
 <div>
 	<div class="admin-header">
-		<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> Game Settings</h1>
+		<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> game settings</h1>
 		<div class="admin-nav">
-			<a xui-sref="">statistics</a>
+			<a ui-sref="statisticsPage">statistics</a>
 			<a ui-sref="gameSettingsEdit" class="disabled">game settings</a>
 			<a ui-sref="articleEdit">article editor</a>
 		</div>
@@ -10,15 +10,15 @@
 
 	<div class="settings-content">
 		<div layout="row">
-			<div class="ae-button" ng-click="saveSettings()" ng-class="{disabled: !settingsHaveChanged}">Save Changes...</div>
-			<div class="ae-button" ng-click="revertSettings()" ng-class="{disabled: !settingsHaveChanged}">Revert</div>
+			<div class="ae-button" ng-click="saveSettings()" ng-class="{disabled: !settingsHaveChanged}">save changes...</div>
+			<div class="ae-button" ng-click="revertSettings()" ng-class="{disabled: !settingsHaveChanged}">revert</div>
 		</div>
 		<div>Last modified: {{gameSettings.modified_date | utcStrToLocalDate}}</div>
 		<div>Total number of articles {{gameSettings.maximum_articles_played}}</div>
 		<div>Maximum possible score {{gameSettings.maximum_score}}</div>
 		<br/>
 		<div ng-repeat="roundInfo in gameSettings.roundInfo">
-			<h2>Round {{$index+1}}</h2>
+			<h2>round {{$index+1}}</h2>
 			<div class="round-info">
 				<div class="basic-info">
 					<div>Correct answer reward:</div>

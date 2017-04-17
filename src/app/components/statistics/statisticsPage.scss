@@ -1,0 +1,62 @@
+statistics-page {
+	width: 100%;
+	display: block;
+	font-size: 0.9em;
+
+	.stats-content {
+		padding: 10px 20px;
+	}
+
+	h2 {
+		margin: 5px 0px;
+		margin-top: 10px;
+		border-top: 1px solid #DDD;
+	}
+
+	input[type=date] {
+		margin: 0px 10px;
+	}
+
+	table {
+		margin: 10px 0px;
+		border-collapse: collapse;
+		box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+
+		td, th {
+			text-align: right;
+			width: 80px;
+			padding: 0px 5px;
+		}
+
+		th {
+			color: white;
+		}
+
+		.id-col {
+			text-align: left;
+			width: 60px;
+		}
+		.hdline-col {
+			text-align: left;
+			width: 400px;
+		}
+
+		thead {
+			display: block;
+			tr {
+				background: #444;
+			}
+		}
+
+		tbody {
+			display: block;
+			max-height: 500px;
+			overflow: scroll;
+
+			tr:nth-child(odd) {
+				background: #eee;
+			}
+		}
+	}
+
+}

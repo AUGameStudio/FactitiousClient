@@ -37,6 +37,12 @@
         template: '<game-settings-editor></game-settings-editor>'
       })
 
+      .state('statisticsPage', {
+        url: '/statistics',
+        // templateUrl: 'app/main/articleEdit.html'
+        template: '<statistics-page></statistics-page>'
+      })
+
       ;
 
     $urlRouterProvider.otherwise('/');
