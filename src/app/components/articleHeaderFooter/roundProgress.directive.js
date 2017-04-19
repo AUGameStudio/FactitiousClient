@@ -27,7 +27,7 @@
 			var vm = this;
 			$scope.gameState = gameState;
 
-			$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
+			$scope.$watch(function() {return gameState.state.roundInfo[gameState.state.roundNumber];}, function() {
 				if (gameState.state.roundNumber<gameState.state.roundInfo.length) {
 					vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber].progressPips;
 				}
