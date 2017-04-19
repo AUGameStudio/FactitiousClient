@@ -39,7 +39,7 @@
 		return service;
 
 		function beginNewGame(userPk) {
-			var serviceUrl = '/api/gameplay2/player/'+userPk+'/begin_new_unsaved_game/';
+			var serviceUrl = '/api/gameplay2/player/'+userPk+'/begin_new_game/';
 			return $http.post(serviceUrl)
 				.then(function(response) {
 					var game_record = response.data;
@@ -66,6 +66,8 @@
 						state.roundInfo.push(round);
 					});
 
+					service.saveGame();
+
 					$log.log(angular.toJson(state));
 
 				});
@@ -74,6 +76,8 @@
 		function saveGame() {
 			var serviceUrl = '/api/gameplay2/game_play/'+service.game_record.pk+'/';
 			var gameRecord = service.game_record;
+			$log.log("saveGame: "+gameRecord.pk);
+			$log.log(gameRecord);
 
 			if (gameRecord.pk) {
 				gameRecord.total_score = service.state.totalScore;
@@ -101,7 +105,6 @@
 							service.game_record = game_record;
 							service.state = game_record.game_state;
 							service.game_settings = game_record.game_settings;
-							service.game_record.pk = null;
 						});
 		}
 

@@ -10,34 +10,70 @@
 
 	<div class="stats-content">
 		<h2>filters</h2>
-		<div><input type="checkbox" id="cgo" ng-model="currentGameOnly"><label for="cgo">Show articles from current game settings only</label></div>
 		<div layout="row" layout-align="start center">
-			<input type="checkbox" id="fbd" ng-model="filterByDate"><div>&nbsp;Filter by date from&nbsp;</div>
+			<!-- input type="checkbox" id="fbd" ng-model="filterByDate"-->
+			<div>&nbsp;Filter by date from&nbsp;</div>
 			<input type="date" ng-model="startDate">
 			<div>&nbsp;to&nbsp;</div>
 			<input type="date" ng-model="endDate">
-			<div class="admin-button" ng-class="{disabled: !filterByDate}">apply date filter</div>
+			<div class="admin-button" ng-click="refreshStatistics()">apply date filter</div>
 		</div>
+
 		<h2>game play</h2>
-		<div>{{startDate}}</div>
+		<table>
+			<thead>
+				<tr class="g1-row">
+					<th colspan="3"</th>
+					<th colspan="2">avg. score</th>
+					<th colspan="2">avg. correct</th>
+					<th colspan="2">avg. played</th>
+				</tr>
+				<tr>
+					<th class="outcome-col">outcome</th>
+					<th># plays</th>
+					<th>avg. time</th>
+					<th>#</th>
+					<th>% max</th>
+					<th>#</th>
+					<th>%</th>
+					<th>#</th>
+					<th>%</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="g in gamePlayStats">
+					<td class="outcome-col">{{g.outcome_status}}</td>
+					<td>{{g.num_plays}}</td>
+					<td>{{g.avg_time | number:1}}</td>
+					<td>{{g.avg_score | number:1}}</td>
+					<td>{{g.avg_pct_score*100 | number:0}}%</td>
+					<td>{{g.avg_correct | number:1}}</td>
+					<td>{{g.avg_pct_correct*100 | number:0}}%</td>
+					<td>{{g.avg_completed | number:1}}</td>
+					<td>{{g.avg_pct_completed*100 | number:0}}%</td>
+				</tr>
+			</tbody>
+		</table>
+
 		<h2>article play</h2>
+		<div><input type="checkbox" id="cgo" ng-model="currentGameOnly"><label for="cgo">Show articles from current game settings only</label></div>
 		<table>
 			<thead>
 				<tr>
 					<th class="id-col">id</th><th class="hdline-col">headline</th>
 					<th># plays</th>
+					<th>avg. time</th>
 					<th># correct</th>
 					<th># hints</th>
-					<th>avg. time</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="a in articleStats | filter: articleFilter">
 					<td class="id-col">{{a.article_id}}</td><td class="hdline-col">{{a.headline}}</td>
 					<td>{{a.num_plays}}</td>
+					<td>{{a.avg_time | number:1}}</td>
 					<td>{{a.num_correct}}</td>
 					<td>{{a.num_hints}}</td>
-					<td>{{a.avg_time | number:1}}</td>
 				</tr>
 			</tbody>
 		</table>

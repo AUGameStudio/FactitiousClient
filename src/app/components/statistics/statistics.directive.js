@@ -15,6 +15,9 @@
 		function controller($scope) {
 			var allGameArticles = [];
 			$scope.currentGameOnly = true;
+			$scope.filterByDate = true;
+
+			$scope.refreshStatistics = refreshStatistics;
 
 			gameSettings.getSettings()
 				.then(function() {
@@ -27,25 +30,39 @@
 					$scope.startDate = new Date(gameSettings.modified_date);
 					$scope.endDate = new Date();
 
-					dataTracking.getArticleStatistics()
-						.then(function(stats) {
-							$scope.articleStats = stats;
-							$log.log(stats[0]);
-							stats.forEach(function(stat) {
-								if (stat.headline.length>30) {
-									stat.headline = stat.headline.substr(0,40)+'...';
-								}
-							});
-						});
+					refreshStatistics();
+
 				});
 
 			$scope.articleFilter = function(item) {
 				return !$scope.currentGameOnly || allGameArticles.indexOf(item.pk)>=0;
 			}
 
-			$scope.$watch(function() {return $scope.startDate;}, function() {
-				$log.log($scope.startDate.toISOString());
-			})
+			function refreshStatistics() {
+				var sd, ed;
+				if ($scope.filterByDate) {
+					sd = $scope.startDate;
+					ed = $scope.endDate;
+				}
+
+				dataTracking.getArticleStatistics(sd, ed)
+					.then(function(stats) {
+						$scope.articleStats = stats;
+						$log.log(stats[0]);
+						stats.forEach(function(stat) {
+							if (stat.headline.length>30) {
+								stat.headline = stat.headline.substr(0,40)+'...';
+							}
+						});
+					});
+
+				dataTracking.getGamePlayStatistics(sd, ed)
+					.then(function(stats) {
+						$scope.gamePlayStats = stats;
+						$log.log(stats);
+					});
+			}
+
 		}
 	}
 })();

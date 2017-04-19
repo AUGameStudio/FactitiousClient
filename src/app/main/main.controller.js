@@ -9,7 +9,8 @@
 		.directive('debounce', debounce);
 
 	/** @ngInject */
-	function MainController($scope, $log, swiperService, audioService, $window, $timeout, articleService, gameState, $stateParams, dataTracking) {
+	function MainController($scope, $log, swiperService, audioService, $window, $timeout, 
+									articleService, gameState, $stateParams, dataTracking, playerService) {
 		var vm = this;
 
 		$log.log('stateParams');
@@ -66,7 +67,7 @@
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
 		$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
-			slideInBanner();
+			// slideInBanner();
 		});
 
 		$scope.$watch(function() {return vm.article;}, function() {
@@ -79,25 +80,40 @@
 		function startGame() {
 			$log.log('starting new game');
 			vm.state = 'prepareArticle';
-			return gameState.beginNewGame(1) // restoreGame(37) // beginNewGame(1) // (36)
+
+			var allowResume = false;
+
+			return playerService.refreshPlayerInfo()
 				.then(function() {
-					vm.numberOfRounds = gameState.state.roundInfo.length;
-
-					if (gameState.state.articleNumber>=gameState.state.roundInfo[gameState.state.roundNumber].articleIds.length) {
-						gameState.state.roundNumber += 1;
-						gameState.state.articleNumber = 0;
+					var gameLauncher;
+					if (allowResume && playerService.playerInfo.current_game && !playerService.playerInfo.current_game.is_completed && !playerService.playerInfo.current_game.was_cancelled) {
+						$log.log('restore game');
+						gameLauncher = gameState.restoreGame(playerService.playerInfo.current_game.pk) // restoreGame(37) // beginNewGame(1) // (36)
+					} else {
+						$log.log('create new game');
+						gameLauncher = gameState.beginNewGame(playerService.playerInfo.pk) // restoreGame(37) // beginNewGame(1) // (36)
 					}
+					gameLauncher.then(function() {
+						vm.numberOfRounds = gameState.state.roundInfo.length;
 
-					vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber];
+						if (gameState.state.articleNumber>=gameState.state.roundInfo[gameState.state.roundNumber].articleIds.length) {
+							gameState.state.roundNumber += 1;
+							gameState.state.articleNumber = 0;
+						}
 
-					return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
-						.then(function(response) {
-							vm.article = response;
-							vm.state = 'showArticle';
-							slideInBanner();
-							$log.log('show first article');
-							dataTracking.startArticle(vm.article.pk);
-						});
+
+						vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber].progressPips;
+						$log.log($scope.main.progressPips);
+
+						return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
+							.then(function(response) {
+								vm.article = response;
+								vm.state = 'showArticle';
+								slideInBanner();
+								$log.log('show first article');
+								dataTracking.startArticle(vm.article.pk);
+							});
+					});
 				});
 		}
 
@@ -185,7 +201,10 @@
 		function nextRound() {
 			gameState.state.roundNumber += 1;
 			if (gameState.state.roundNumber>=gameState.state.roundInfo.length) {
+				gameState.game_record.is_completed = true;
+				gameState.saveGame();
 				vm.state = "showGamePayoff";
+				slideInBanner();
 			} else {
 				gameState.state.articleNumber = 0;
 				vm.state = 'prepareArticle';
@@ -198,11 +217,16 @@
 						vm.state = 'showArticle';
 						vm.articleExpanded = false;
 						dataTracking.startArticle(vm.article.pk);
+						slideInBanner();
 					});
 			}
 		}
 
 		function startOver() {
+			if (!gameState.game_record.is_completed) {
+				gameState.game_record.was_cancelled = true;
+				gameState.saveGame();
+			}
 			vm.state = 'showLaunch';
 			vm.showBurger = false;
 		}

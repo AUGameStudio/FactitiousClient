@@ -12,7 +12,8 @@
 			startArticle: startArticle,
 			endArticle: endArticle,
 
-			getArticleStatistics: getArticleStatistics
+			getArticleStatistics: getArticleStatistics,
+			getGamePlayStatistics: getGamePlayStatistics
 		};
 
 		return service;
@@ -47,14 +48,66 @@
 				});
 		}
 
-		function getArticleStatistics() {
+		function getArticleStatistics(startDate, endDate) {
 			var serviceUrl = '/api/gameplay2/get_article_stats/';
+			var options;
+			if (startDate) {
+				options = {
+					params: {start_date: startDate}
+				};
+				if (endDate) {
+					options.params.end_date = endDate;
+				}
+			}
 
-			return $http.get(serviceUrl)
+			return $http.get(serviceUrl, options)
 				.then(function(response) {
 					return response.data;
 				});
 
+		}
+
+		function getGamePlayStatistics(startDate, endDate) {
+			var serviceUrl = '/api/gameplay2/get_game_play_stats/';
+
+			var options;
+			if (startDate) {
+				options = {
+					params: {start_date: startDate}
+				};
+				if (endDate) {
+					options.params.end_date = endDate;
+				}
+			}
+
+			return $http.get(serviceUrl, options)
+				.then(function(response) {
+					var rawStats = response.data;
+					$log.log(rawStats);
+					var parsedDict = {};
+					rawStats.forEach(function(row) {
+						var parseKey;
+						if (row.is_completed && row.was_cancelled) {
+							parseKey = 'spurious';
+						} else if (row.is_completed && !row.was_cancelled) {
+							parseKey = 'completed';
+						} else if (!row.is_completed && row.was_cancelled) {
+							parseKey = 'cancelled';
+						} else {
+							parseKey = 'inPlay';
+						}
+						$log.log(parseKey);
+						row.outcome_status = parseKey;
+						parsedDict[parseKey] = row;
+					});
+					var res = [];
+					['completed', 'cancelled', 'inPlay', 'spurious'].forEach(function(key) {
+						if (parsedDict[key]) {
+							res.push(parsedDict[key]);
+						}
+					});
+					return res;
+				});
 		}
 	}
 

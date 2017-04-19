@@ -32,6 +32,10 @@ statistics-page {
 			color: white;
 		}
 
+		.outcome-col {
+			text-align: left;
+		}
+
 		.id-col {
 			text-align: left;
 			width: 60px;
@@ -45,6 +49,11 @@ statistics-page {
 			display: block;
 			tr {
 				background: #444;
+			}
+
+			.g1-row th {
+				text-align: center;
+				padding-left: 60px;
 			}
 		}
 
