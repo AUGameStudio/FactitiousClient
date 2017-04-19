@@ -13,10 +13,10 @@
 		<div layout="row" layout-align="start center">
 			<!-- input type="checkbox" id="fbd" ng-model="filterByDate"-->
 			<div>&nbsp;Filter by date from&nbsp;</div>
-			<input type="date" ng-model="startDate">
+			<input type="date" ng-change="needsUpdate = true" ng-model="startDate">
 			<div>&nbsp;to&nbsp;</div>
-			<input type="date" ng-model="endDate">
-			<div class="admin-button" ng-click="refreshStatistics()">apply date filter</div>
+			<input type="date" ng-change="needsUpdate = true" ng-model="endDate">
+			<div class="admin-button" ng-class="{disabled: !needsUpdate}" ng-click="refreshStatistics()">apply date filter</div>
 		</div>
 
 		<h2>game play</h2>

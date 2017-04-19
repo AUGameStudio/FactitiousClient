@@ -84,26 +84,12 @@
 				.then(function(response) {
 					var rawStats = response.data;
 					$log.log(rawStats);
-					var parsedDict = {};
-					rawStats.forEach(function(row) {
-						var parseKey;
-						if (row.is_completed && row.was_cancelled) {
-							parseKey = 'spurious';
-						} else if (row.is_completed && !row.was_cancelled) {
-							parseKey = 'completed';
-						} else if (!row.is_completed && row.was_cancelled) {
-							parseKey = 'cancelled';
-						} else {
-							parseKey = 'inPlay';
-						}
-						$log.log(parseKey);
-						row.outcome_status = parseKey;
-						parsedDict[parseKey] = row;
-					});
 					var res = [];
-					['completed', 'cancelled', 'inPlay', 'spurious'].forEach(function(key) {
-						if (parsedDict[key]) {
-							res.push(parsedDict[key]);
+					['completed', 'cancelled', 'inPlay', 'abandoned'].forEach(function(key) {
+						if (rawStats[key]) {
+							$log.log(key);
+							rawStats[key].outcome_status = key;
+							res.push(rawStats[key]);
 						}
 					});
 					return res;

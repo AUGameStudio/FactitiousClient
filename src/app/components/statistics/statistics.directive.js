@@ -17,6 +17,8 @@
 			$scope.currentGameOnly = true;
 			$scope.filterByDate = true;
 
+			$scope.needsUpdate = false;
+
 			$scope.refreshStatistics = refreshStatistics;
 
 			gameSettings.getSettings()
@@ -61,6 +63,8 @@
 						$scope.gamePlayStats = stats;
 						$log.log(stats);
 					});
+
+				$scope.needsUpdate = false;
 			}
 
 		}
