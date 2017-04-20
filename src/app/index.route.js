@@ -25,20 +25,26 @@
         }
       })
 
+      .state('manageHome', {
+        url: '/manage',
+        // templateUrl: 'app/main/articleEdit.html'
+        template: '<manage-home></manage-home>'
+      })
+
       .state('articleEdit', {
-        url: '/editor',
+        // url: '/editor',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<article-edit-main></article-edit-main>'
       })
 
       .state('gameSettingsEdit', {
-        url: '/gameSettings',
+        // url: '/gameSettings',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<game-settings-editor></game-settings-editor>'
       })
 
       .state('statisticsPage', {
-        url: '/statistics',
+        // url: '/statistics',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<statistics-page></statistics-page>'
       })
