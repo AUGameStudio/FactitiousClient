@@ -11,7 +11,8 @@
 
 	overflow: hidden;
 
-	background: url(../assets/images/bg/bg-rep.png);
+	/* background: url(../assets/images/bg/bg-rep.png); */
+	background: url(../assets/images/bg/fact-bg.png);
 
 	&.is-mobile-safari {
 		height: calc(100vh - 68px);
@@ -142,6 +143,8 @@ mute-unmute {
 	top: 40%;
 	left: -25%;
 	box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+
+	font-family: 'Work Sans';
 }
 
 @keyframes slideInBanner {

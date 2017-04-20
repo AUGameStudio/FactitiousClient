@@ -5,6 +5,9 @@ article-display {
 
 .article-panel {
 	border-radius: 20px;	
+
+	font-size: 13px;
+	font-family: 'Gentium Basic';
 }
 
 h3.md-title {
@@ -12,9 +15,11 @@ h3.md-title {
 	p:first-child {
 		margin-top: 0px;
 	}
-	font-weight: bold;
+	font-weight: 600;
 	font-size: 24px;
 	color: #105d54;
+
+	font-family: 'Work Sans';
 }
 
 .source-area {
@@ -25,7 +30,6 @@ h3.md-title {
 	box-sizing: border-box;
 	color: white;
 	padding: 0px;
-	font-size: 0.9em;
 
 	&.expanded {
 		transition: max-height 0.5s;
@@ -57,10 +61,35 @@ h3.md-title {
 	color: white;
 	background: #219083;
 	text-transform: lowercase;
-	font-size: 1.2em;
+	font-size: 17px;
+
+	font-family: 'Work Sans';
+	font-weight: bold;
+
+	height: 30px;
+	width: 145px;
+	border-radius: 15px;
+	margin: 3px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 3px 6px rgba(0,0,0,0.25);
+	cursor: pointer;
+
+	&.ss-button {
+		height: 25px;
+		border-radius: 13px;
+		font-size: 15px;
+		width: 150px;
+	}
+
+	&:active {
+		outline: none;
+	}
 
 	&:hover {
-		color: darkgray;
+		background: #105d54;
 	}
 }
 
@@ -82,11 +111,11 @@ h3.md-title {
 }
 .swipe-left-flag {
 	left: 10%;
-	background: #e84a5f; /* rgba(128,128,64,0.75); */
+	background: #eb640f; /* rgba(128,128,64,0.75); */
 }
 .swipe-right-flag {
 	right: 10%;
-	background: #46a575; /* rgba(128,64,128,0.75); */
+	background: #46bc8a; /* rgba(128,64,128,0.75); */
 }
 
 @keyframes slideInArticle {

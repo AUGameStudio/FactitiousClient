@@ -49,9 +49,10 @@ round-progress {
 		height: 18px;
 		border-radius: 9px;
 		margin: 0px 2px;
+		border-color: #219083;
 
 		&.current.correct {
-			border-color: #40bcae;
+			border-color: #219083;
 		}
 	}
 

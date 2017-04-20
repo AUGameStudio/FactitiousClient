@@ -172,7 +172,11 @@
 			var roundInfo = gameState.state.roundInfo[gameState.state.roundNumber];
 			roundInfo.progressPips[gameState.state.articleNumber] = (swipeDir===vm.article.articleType ? 'win' : 'lose');
 			if (roundInfo.progressPips[gameState.state.articleNumber]==='win') {
-				gameState.state.totalScore += 5;
+				if (vm.articleExpanded) {
+					gameState.state.totalScore += gameState.game_settings.roundInfo[gameState.state.roundNumber].reward_with_hint;
+				} else {
+					gameState.state.totalScore += gameState.game_settings.roundInfo[gameState.state.roundNumber].reward;
+				}
 				vm.payoffType = 'correct';
 			} else {
 				vm.payoffType = 'incorrect';
