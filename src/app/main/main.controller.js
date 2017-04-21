@@ -67,6 +67,7 @@
 		vm.saveGame = saveGame;
 
 		setupForLaunch();
+		// vm.state = 'showResult';
 
 		$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
 			// slideInBanner();
