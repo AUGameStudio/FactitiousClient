@@ -91,6 +91,11 @@ h3.md-title {
 	&:hover {
 		background: #105d54;
 	}
+
+	&.disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
 }
 
 .swipe-left-flag, .swipe-right-flag {

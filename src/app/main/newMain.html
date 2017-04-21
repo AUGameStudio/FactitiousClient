@@ -4,13 +4,19 @@
 
     <big-header ng-if="main.state=='showLaunch' || main.state=='showGamePayoff'"></big-header>
 
-    <launch-page ng-if="main.state=='showLaunch'" ></launch-page>
+    <launch-page ng-if="main.state=='showLaunch'"></launch-page>
     <game-payoff ng-if="main.state=='showGamePayoff'" ></game-payoff>
 
 
+    <!-- can also be the startup header -->
     <article-header ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff'" main="main"></article-header>
 
-    <div ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff'" class="article-lower-pane">
+    <!-- startup screens -->
+    <startup-sequence ng-if="main.state==='startupSequence'" main="main" class="article-lower-pane"><div>Startup</div></startup-sequence>
+
+    <!-- actual gameplay -->
+
+    <div ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff' && main.state!=='startupSequence'" class="article-lower-pane">
 
       <article-display ng-if="main.state=='showArticle'" class="article-section" 
         ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight, 'slide-in-article': main.slideInArticle}"

@@ -115,6 +115,14 @@ article-header {
 		height: 56px;
 		color: white;
 
+		&.startup-bar {
+			justify-content: center;
+
+			.startup-banner {
+				width: 190px;
+			}
+		}
+
 	}
 
 }

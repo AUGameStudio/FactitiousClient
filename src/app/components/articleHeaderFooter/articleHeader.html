@@ -1,5 +1,6 @@
 <header>
-  <section class="flex-bar">
+
+  <section ng-if="main.state!=='startupSequence'" class="flex-bar">
 
     <div class="chunk1">
       <mute-unmute></mute-unmute>
@@ -13,4 +14,11 @@
     </section>
 
   </section>    
+  
+  <section ng-if="main.state==='startupSequence'" class="flex-bar startup-bar">
+
+    <div class="startup-banner"><img src="assets/icons/factitiousWordmark.svg"></div>
+
+  </section>
+
 </header>

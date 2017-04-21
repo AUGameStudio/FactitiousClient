@@ -1,0 +1,130 @@
+<div ng-if="state=='signIn'" class="flex-fix-holder">
+  <md-card class="results-card startup-sequence-card popup-payoff" debounce>
+
+    <div class="startup-sequence-header">
+      <div class="startup-sequence-header-content slim">please enter your email address to sign in and start playing:</div>
+      <wedge class="flip-x flip-y"></wedge>
+    </div>
+
+    <md-card-content>
+
+      <input type="text" ng-model="userInfo.username" class="login-name"/>
+        
+    </md-card-content>
+
+    <div class="gray-section">
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="tryLogin()" ng-class="{disabled: !usernameValid()}">go!</div>
+        </div>
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="cancelLogin()">cancel</div>
+        </div>
+    </div>
+
+  </md-card>
+</div>
+
+<div ng-if="state=='welcomeBack'" class="flex-fix-holder">
+  <md-card class="results-card startup-sequence-card popup-payoff" debounce>
+
+    <div class="startup-sequence-header">
+      <div class="startup-sequence-header-content">welcome back!</div>
+      <wedge class="flip-x flip-y"></wedge>
+    </div>
+
+    <md-card-content>
+
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="main.nextRound()">resume game</div>
+        </div>
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="main.nextRound()">new game</div>
+        </div>
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="main.nextRound()">sign out</div>
+        </div>
+
+    </md-card-content>
+
+
+  </md-card>
+</div>
+
+<div ng-if="state=='userNotFound'" class="flex-fix-holder">
+  <md-card class="results-card startup-sequence-card popup-payoff" debounce>
+
+    <div class="startup-sequence-header">
+      <div class="startup-sequence-header-content slim">user '{{userInfo.username}}' not found</div>
+      <wedge class="flip-x flip-y"></wedge>
+    </div>
+
+    <md-card-content>
+      <p>We couldn't find a user with that name. If you're coming here for the first time, click 'create' to create a new profile and begin playing the game.</p>
+      <p>If you made a mistake typing in the name, click 'cancel' and try again.</p>
+    </md-card-content>
+
+    <div class="gray-section">
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="getUserInfo()">create</div>
+        </div>
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="cancelCreate()">cancel</div>
+        </div>
+    </div>
+
+  </md-card>
+</div>
+
+<div ng-if="state=='getInfo'" class="flex-fix-holder">
+  <md-card class="results-card startup-sequence-card popup-payoff" style="background: #eceded;" debounce>
+
+    <div class="startup-sequence-header">
+      <div class="startup-sequence-header-content slim">tell us about yourself:</div>
+      <wedge class="flip-x flip-y"></wedge>
+    </div>
+
+    <div class="gray-section">
+      <div><label>age</label><input class="age-input" type="number" ng-model="userInfo.age"></div>
+    </div>
+
+    <div class="white-section">
+      <div layout="row">
+        <label>gender</label>
+        <div layout="row" layout-align="space-between" class="f2-rb-group">
+          <f2-radio-block model="userInfo.gender" value="F">female</f2-radio-block>
+          <f2-radio-block model="userInfo.gender" value="M">male</f2-radio-block>
+          <f2-radio-block model="userInfo.gender" value="O">nonbinary</f2-radio-block>
+        </div>
+      </div>
+    </div>
+
+    <div class="gray-section">
+        <label>education</label>
+        <div layout="row" layout-align="space-between" class="f2-rb-group">
+          <f2-radio-block model="userInfo.education" value="HS">high school</f2-radio-block>
+          <f2-radio-block model="userInfo.education" value="BS/BA">college</f2-radio-block>
+          <f2-radio-block model="userInfo.education" value="MS/MA">masters</f2-radio-block>
+          <f2-radio-block model="userInfo.education" value="PhD">doctorate</f2-radio-block>
+        </div>
+    </div>
+
+    <div class="white-section">
+        <label>news media savvy</label>
+        <div layout="row" layout-align="space-between" class="f2-rb-group nm-savvy">
+          <f2-radio-block model="userInfo.newsMediaSavvy" value="1">not<br/>savvy</f2-radio-block>
+          <f2-radio-block model="userInfo.newsMediaSavvy" value="2"></f2-radio-block>
+          <f2-radio-block model="userInfo.newsMediaSavvy" value="3">about<br/>average</f2-radio-block>
+          <f2-radio-block model="userInfo.newsMediaSavvy" value="4"></f2-radio-block>
+          <f2-radio-block model="userInfo.newsMediaSavvy" value="5">super<br/>savvy</f2-radio-block>
+        </div>
+    </div>
+
+    <div class="gray-section">
+        <div layout="row" layout-align="center center"> 
+          <div class="f2-button" ng-click="main.nextRound()" ng-class="{disabled: !infoValid()}">save</div>
+          <div class="f2-button" ng-click="cancelGetInfo()">cancel</div>
+        </div>
+    </div>
+
+  </md-card>
+</div>

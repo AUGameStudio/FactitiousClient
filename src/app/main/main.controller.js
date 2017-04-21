@@ -64,6 +64,8 @@
 
 		vm.state = 'showLaunch';
 
+		vm.state = 'startupSequence';
+
 		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
 
 		$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
