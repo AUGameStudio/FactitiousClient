@@ -73,6 +73,28 @@ article-footer {
 	}
 }
 
+@keyframes header-slide {
+	from { transform: translateY(-100%); }
+	to   { transform: translateY(0); }
+}
+
+.header-slide {
+	animation-name: header-slide;
+	animation-duration: 0.5s;
+	animation-delay: 0s;            
+}
+
+@keyframes footer-slide {
+	from { transform: translateY(100%); }
+	to   { transform: translateY(0); }
+}
+
+.footer-slide {
+	animation-name: footer-slide;
+	animation-duration: 0.5s;
+	animation-delay: 0s;            
+}
+
 article-header {
 	display: block;
 	flex: 0 0 auto;

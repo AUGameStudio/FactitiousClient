@@ -1,12 +1,11 @@
 burger-pane {
-	background: white;
+	background: #eceded;
 	position: absolute;
 	top: 0px;
 	right: -80%;
 	width: 75%;
 	height: 100%;
 	box-sizing: border-box;
-	padding: 15px;
 	transition: right 0.5s;
 	max-width: 400px;
 
@@ -18,5 +17,23 @@ burger-pane {
 
 	overflow-y: auto;
 	overflow-x: hidden;
+
+	.burger-title, .action-items {
+		background: white;
+		padding: 10px 15px;
+	}
+
+	.action-items {
+		padding-top: 0px;
+	}
 	
+	.gray-section {
+		background: #eceded;
+		padding: 10px 15px;
+
+		p {
+			font-size: 14px;
+		}
+	}
+
 }

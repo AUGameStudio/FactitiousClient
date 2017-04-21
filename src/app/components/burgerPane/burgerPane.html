@@ -1,12 +1,15 @@
 <div class="burger-title"><img src="assets/icons/factitiousWordmark.svg"></div>
 
-<div layout="column" layout-align="flex-start center"> 
+<div class="action-items" layout="column" layout-align="flex-start center"> 
   <div class="f2-button" ng-click="main.showInstructions = true">instructions</div>
   <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.saveGame()">save game</div>
   <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.signOut()">sign out</div>
   <div class="f2-button" ng-click="main.startOver()">start over</div>
 </div>
 
-<h3>about</h3>
+<div class="gray-section">
+	<h3>about</h3>
 
-<p>Here's a blurb about factitious. Bacon ipsum dolor amet in boudin ribeye in jerky pork loin irure. Tri-tip eiusmod non incididunt tongue leberkas nulla in irure commodo flank. Culpa id doner labore veniam tempor. Irure jowl ex quis, shoulder boudin sint prosciutto et cow dolore reprehenderit.</p>
+	<p>Here's a blurb about factitious. Bacon ipsum dolor amet in boudin ribeye in jerky pork loin irure. Tri-tip eiusmod non incididunt tongue leberkas nulla in irure commodo flank. Culpa id doner labore veniam tempor. Irure jowl ex quis, shoulder boudin sint prosciutto et cow dolore reprehenderit.</p>
+
+</div>
