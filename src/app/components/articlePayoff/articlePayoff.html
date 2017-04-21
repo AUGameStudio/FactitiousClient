@@ -1,6 +1,7 @@
-<md-card class="results-card popup-payoff" debounce>
+<div class="payoff-holder" ng-class="{'popup-payoff-incorrect': payoffType==='incorrect'}">
+  <md-card class="results-card popup-payoff" style="width: 100%;" debounce>
 
-  <div class="payoff-header">
+  <div class="payoff-header" ng-class="{'popup-payoff-correct': payoffType==='correct'}">
     <div class="payoff-header-content">{{ payoffType==='correct' ? 'correct!' : 'incorrect!' }}</div>
     <wedge class="flip-x flip-y"></wedge>
     <!-- div class="wedge">
@@ -36,3 +37,4 @@
     </div>
   </md-card-content>
 </md-card>
+</div>

@@ -34,10 +34,51 @@
 	to   { transform: scale(1.0); }
 }
 
+.payoff-holder {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+}
 .popup-payoff {
-	pointer-events: none;
+	pointer-events: none;			// to handle stupid weird iOS highlighting problem
 	animation-name: popupPayoff;
 	animation-duration: 0.25s;
 	animation-delay: 0s;            
 }
 
+@keyframes popupPayoffShake {
+	0% { transform: translateX(0px); }
+	25% { transform: translateX(-10px); }
+	50% { transform: translateX(0px); }
+	75%   { transform: translateX(10px); }
+	100% { transform: translateX(0px); }
+}
+
+.popup-payoff-incorrect {
+	animation-name: popupPayoffShake;
+	animation-duration: 0.125s;
+	animation-delay: 0.25s;            
+	animation-iteration-count: 4;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes popupPayoffNod {
+	0% { transform: rotate(0deg); }
+	25% { transform: rotate(-5deg); }
+	50% { transform: rotate(0deg); }
+	75%   { transform: rotate(5deg); }
+	100% { transform: rotate(0deg); }
+}
+
+@keyframes popupPayoffPulse {
+	0% { transform: scale(1.0); }
+	30% { transform: scale(1.2); }
+	100% { transform: scale(1.0); }
+}
+
+.popup-payoff-correct {
+	animation-name: popupPayoffPulse;
+	animation-duration: 0.5s;
+	animation-delay: 0.25s;
+	animation-timing-function: ease-in-out;
+}
