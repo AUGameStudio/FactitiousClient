@@ -50,6 +50,8 @@
 
 		vm.inSwipe = false;
 
+		vm.showBurger = false;
+
 		vm.swipeLeft = swipeLeft;
 		vm.swipeRight = swipeRight;
 		vm.showHint = showHint;
@@ -59,14 +61,12 @@
 		vm.toggleBurger = toggleBurger;
 		vm.quickStartGame = quickStartGame;
 		vm.getSimClass = getSimClass;
+		vm.setupForLaunch = setupForLaunch;
+		vm.signOut = signOut;
+		vm.resumeGame = resumeGame;
+		vm.saveGame = saveGame;
 
-		vm.showBurger = false;
-
-		vm.state = 'showLaunch';
-
-		vm.state = 'startupSequence';
-
-		vm.mood = 'assets/icons/ic_sentiment_neutral_black_24px.svg';
+		setupForLaunch();
 
 		$scope.$watch(function() {return gameState.state.roundNumber;}, function() {
 			// slideInBanner();
@@ -77,23 +77,39 @@
 			$timeout(function() {
 				vm.slideInArticle = false;
 			}, 750);
-		})
+		});
 
-		function startGame() {
+		function setupForLaunch() {
+			vm.showBurger = false;
+			vm.state = 'showLaunch';
+			vm.checkingForUser = true;
+			playerService.refreshPlayerInfo()
+				.then(function() {
+					vm.checkingForUser = false;
+					vm.userIsAnonymous = playerService.isAnonymous;
+					vm.userCanResume = playerService.canResume();
+				});
+		}
+
+		function signOut() {
+			playerService.signOut();
+			vm.userIsAnonymous = playerService.isAnonymous;
+			setupForLaunch();
+		}
+
+		function startGame(allowResume) {
 			$log.log('starting new game');
 			vm.state = 'prepareArticle';
-
-			var allowResume = false;
 
 			return playerService.refreshPlayerInfo()
 				.then(function() {
 					var gameLauncher;
-					if (allowResume && playerService.playerInfo.current_game && !playerService.playerInfo.current_game.is_completed && !playerService.playerInfo.current_game.was_cancelled) {
+					if (allowResume && playerService.canResume()) {
 						$log.log('restore game');
-						gameLauncher = gameState.restoreGame(playerService.playerInfo.current_game.pk) // restoreGame(37) // beginNewGame(1) // (36)
+						gameLauncher = gameState.restoreGame(playerService.playerInfo.current_game.pk);
 					} else {
 						$log.log('create new game');
-						gameLauncher = gameState.beginNewGame(playerService.playerInfo.pk) // restoreGame(37) // beginNewGame(1) // (36)
+						gameLauncher = gameState.beginNewGame(playerService.playerInfo.pk);
 					}
 					gameLauncher.then(function() {
 						vm.numberOfRounds = gameState.state.roundInfo.length;
@@ -102,7 +118,6 @@
 							gameState.state.roundNumber += 1;
 							gameState.state.articleNumber = 0;
 						}
-
 
 						vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber].progressPips;
 						$log.log($scope.main.progressPips);
@@ -127,8 +142,16 @@
 			}
 		}
 
+		function resumeGame() {
+			startGame(true);
+		}
+
 		function quickStartGame() {
-			startGame();
+			startGame(false);
+		}
+
+		function saveGame() {
+			gameState.saveGame();
 		}
 
 		function swipeLeft(dragX) {
@@ -233,8 +256,8 @@
 				gameState.game_record.was_cancelled = true;
 				gameState.saveGame();
 			}
-			vm.state = 'showLaunch';
 			vm.showBurger = false;
+			setupForLaunch();
 		}
 
 		function slideInBanner() {

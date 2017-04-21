@@ -111,17 +111,17 @@
     <div class="white-section">
         <label>news media savvy</label>
         <div layout="row" layout-align="space-between" class="f2-rb-group nm-savvy">
-          <f2-radio-block model="userInfo.newsMediaSavvy" value="1">not<br/>savvy</f2-radio-block>
-          <f2-radio-block model="userInfo.newsMediaSavvy" value="2"></f2-radio-block>
-          <f2-radio-block model="userInfo.newsMediaSavvy" value="3">about<br/>average</f2-radio-block>
-          <f2-radio-block model="userInfo.newsMediaSavvy" value="4"></f2-radio-block>
-          <f2-radio-block model="userInfo.newsMediaSavvy" value="5">super<br/>savvy</f2-radio-block>
+          <f2-radio-block model="userInfo.news_media_savvy" value="1">not<br/>savvy</f2-radio-block>
+          <f2-radio-block model="userInfo.news_media_savvy" value="2"></f2-radio-block>
+          <f2-radio-block model="userInfo.news_media_savvy" value="3">about<br/>average</f2-radio-block>
+          <f2-radio-block model="userInfo.news_media_savvy" value="4"></f2-radio-block>
+          <f2-radio-block model="userInfo.news_media_savvy" value="5">super<br/>savvy</f2-radio-block>
         </div>
     </div>
 
     <div class="gray-section">
         <div layout="row" layout-align="center center"> 
-          <div class="f2-button" ng-click="main.nextRound()" ng-class="{disabled: !infoValid()}">save</div>
+          <div class="f2-button" ng-click="createUser()" ng-class="{disabled: !infoValid()}">save</div>
           <div class="f2-button" ng-click="cancelGetInfo()">cancel</div>
         </div>
     </div>

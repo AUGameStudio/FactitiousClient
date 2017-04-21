@@ -6,7 +6,7 @@
 		.directive('f2RadioBlock', f2RadioBlock);
 
 	/** @ngInject */
-	function startupSequence($log) {
+	function startupSequence($log, playerService) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -21,7 +21,7 @@
 				age: 16,
 				gender: '',
 				education: '',
-				newsMediaSavvy: '',
+				news_media_savvy: '',
 				username: ''
 			};
 
@@ -29,11 +29,18 @@
 
 			$scope.tryLogin = function() {
 				$log.log('try logging in as '+$scope.userInfo.username);
-				$scope.state = 'userNotFound';
+				playerService.trySignIn($scope.userInfo.username)
+					.then(function(exists) {
+						if (exists) {
+							$scope.main.startOver();
+						} else {
+							$scope.state = 'userNotFound';
+						}
+					});
 			}
 
 			$scope.cancelLogin = function() {
-				$scope.main.state = 'showLaunch';
+				$scope.main.setupForLaunch();
 			}
 
 			$scope.cancelCreate = function() {
@@ -53,7 +60,15 @@
 			}
 
 			$scope.infoValid = function() {
-				return $scope.userInfo.gender && $scope.userInfo.education && $scope.userInfo.newsMediaSavvy;
+				return $scope.userInfo.gender && $scope.userInfo.education && $scope.userInfo.news_media_savvy;
+			}
+
+			$scope.createUser = function() {
+				$scope.userInfo.news_media_savvy = 1*$scope.userInfo.news_media_savvy; // coerce to int
+				playerService.createNewPlayer($scope.userInfo)
+					.then(function() {
+						$scope.main.startOver();
+					});
 			}
 
 

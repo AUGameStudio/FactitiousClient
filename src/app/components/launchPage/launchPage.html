@@ -1,6 +1,6 @@
-<div class="article-lower-pane launch-page">
+<div ng-show="!main.checkingForUser" class="article-lower-pane launch-page">
 
-	<md-card class="results-card welcome-card popup-payoff" debounce>
+	<md-card ng-if="main.userIsAnonymous" class="results-card welcome-card popup-payoff" debounce>
 
 	  <div class="welcome-header">
 	    <div class="welcome-header-content">can you tell real news from fake news?</div>
@@ -18,12 +18,35 @@
 
 	</md-card>
 
-	<div layout="row" layout-align="center center"> 
+	<div ng-if="main.userIsAnonymous" layout="row" layout-align="center center"> 
 		<div class="f2-button" ng-click="main.quickStartGame()">quick start</div>
 	</div>
 
-	<div layout="row" layout-align="center center" style="padding-top:5px;"> 
+	<div ng-if="main.userIsAnonymous" layout="row" layout-align="center center" style="padding-top:5px;"> 
 		<div class="f2-button" ng-disabled="true" ng-click="main.state='startupSequence'">full start</div>
 	</div>
+
+	<md-card ng-if="!main.userIsAnonymous" class="results-card welcome-card popup-payoff" debounce>
+
+	  <div class="welcome-header">
+	    <div class="welcome-header-content">welcome back!</div>
+	    <wedge class="flip-x flip-y"></wedge>
+	  </div>
+
+	  <md-card-content>
+		<div layout="row" layout-align="center center"> 
+			<div class="f2-button" ng-class="{disabled: !main.userCanResume}" ng-click="main.resumeGame()">resume game</div>
+		</div>
+
+		<div layout="row" layout-align="center center"> 
+			<div class="f2-button" ng-click="main.quickStartGame()">new game</div>
+		</div>
+
+		<div layout="row" layout-align="center center"> 
+			<div class="f2-button" ng-click="main.signOut()">sign out</div>
+		</div>
+	  </md-card-content>
+
+	</md-card>
 
 </div>

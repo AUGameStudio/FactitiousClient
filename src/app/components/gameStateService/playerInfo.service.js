@@ -17,11 +17,20 @@
 			refreshPlayerInfo: refreshPlayerInfo,
 			signOut: signOut,
 			trySignIn: trySignIn,
-			createNewPlayer: createNewPlayer
+			createNewPlayer: createNewPlayer,
+
+			canResume: canResume
 
 		};
 
 		return service;
+
+		function canResume() {
+			return !service.isAnonymous 
+						&& service.playerInfo.current_game 
+						&& !service.playerInfo.current_game.is_completed && !service.playerInfo.current_game.was_cancelled
+						&& !(service.playerInfo.current_game.game_state.roundNumber==0 && service.playerInfo.current_game.game_state.articleNumber==0);
+		}
 
 		function refreshPlayerInfo() {
 
@@ -70,6 +79,7 @@
 		}
 
 		function trySignIn(username) {
+			username = username.toLowerCase();
 			$log.log('try to get playerInfo for: '+username);
 			return $http.get(serviceUrl, {params:{username: username}})
 					.then(function(response) {
@@ -86,6 +96,7 @@
 		}
 
 		function createNewPlayer(playerInfo) {
+			playerInfo.username = playerInfo.username.toLowerCase();
 			$log.log('try to create: '+playerInfo.username);
 			return $http.post(serviceUrl, playerInfo)
 				.then(function(response) {

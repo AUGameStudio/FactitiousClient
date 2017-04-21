@@ -2,8 +2,8 @@
 
 <div layout="column" layout-align="flex-start center"> 
   <div class="f2-button" ng-click="main.showInstructions = true">instructions</div>
-  <div class="f2-button" ng-disabled="true" ng-click="">save game</div>
-  <div class="f2-button" ng-disabled="true" ng-click="">sign out</div>
+  <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.saveGame()">save game</div>
+  <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.signOut()">sign out</div>
   <div class="f2-button" ng-click="main.startOver()">start over</div>
 </div>
 

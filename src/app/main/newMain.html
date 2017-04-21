@@ -4,7 +4,7 @@
 
     <big-header ng-if="main.state=='showLaunch' || main.state=='showGamePayoff'"></big-header>
 
-    <launch-page ng-if="main.state=='showLaunch'"></launch-page>
+    <launch-page ng-if="main.state=='showLaunch' && !main.checkingForUser"></launch-page>
     <game-payoff ng-if="main.state=='showGamePayoff'" ></game-payoff>
 
 
