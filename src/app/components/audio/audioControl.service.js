@@ -25,7 +25,9 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 		var soundBuffers = {};
 
 		loadSound('silent', 'silent.mp3');
-		loadSound('whoosh', 'whoosh.mp3');
+		loadSound('whooshIncorrect', 'whooshIncorrect.mp3');
+		loadSound('whooshCorrect', 'whooshCorrect.mp3');
+		loadSound('gameOver', 'gameResults_kaChing.mp3');
 
 		var service = {
 
