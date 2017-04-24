@@ -33,7 +33,7 @@
 			var twitterMessage = {
 				text: "I got "+$scope.percentCorrect+"% correct playing the Factitious Game at "+gameUrl+" !",
 				original_referer: gameUrl,
-				ref_src: "twsrc^tfw",
+				ref_src: "twsrc^tfw"
 			};
 
 
