@@ -1,7 +1,7 @@
 <div class="burger-title"><img src="assets/icons/factitiousWordmark.svg"></div>
 
 <div class="action-items" layout="column" layout-align="flex-start center"> 
-  <div class="f2-button" ng-click="main.showInstructions = true">instructions</div>
+  <div class="f2-button" ng-click="main.showInstruct(true)">instructions</div>
   <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.saveGame()">save game</div>
   <div class="f2-button" ng-if="!main.userIsAnonymous" ng-click="main.signOut()">sign out</div>
   <div class="f2-button" ng-click="main.startOver()">start over</div>

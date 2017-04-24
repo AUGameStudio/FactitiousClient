@@ -32,19 +32,18 @@
       })
 
       .state('articleEdit', {
-        // url: '/editor',
-        // templateUrl: 'app/main/articleEdit.html'
+        url: '/editor',
         template: '<article-edit-main></article-edit-main>'
       })
 
       .state('gameSettingsEdit', {
-        // url: '/gameSettings',
+        url: '/gameSettings',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<game-settings-editor></game-settings-editor>'
       })
 
       .state('statisticsPage', {
-        // url: '/statistics',
+        url: '/statistics',
         // templateUrl: 'app/main/articleEdit.html'
         template: '<statistics-page></statistics-page>'
       })

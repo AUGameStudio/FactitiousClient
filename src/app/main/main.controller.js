@@ -65,6 +65,7 @@
 		vm.signOut = signOut;
 		vm.resumeGame = resumeGame;
 		vm.saveGame = saveGame;
+		vm.showInstruct = showInstruct;
 
 		setupForLaunch();
 		// vm.state = 'showResult';
@@ -96,12 +97,14 @@
 			playerService.signOut();
 			vm.userIsAnonymous = playerService.isAnonymous;
 			setupForLaunch();
+			audioService.playACSound('btn');				
 		}
 
 		function startGame(allowResume) {
 			$log.log('starting new game');
 			vm.state = 'prepareArticle';
 
+			audioService.playACSound('btnWipe');
 			return playerService.refreshPlayerInfo()
 				.then(function() {
 					var gameLauncher;
@@ -152,7 +155,13 @@
 		}
 
 		function saveGame() {
+			audioService.playACSound('btn');
 			gameState.saveGame();
+		}
+
+		function showInstruct(val) {
+			vm.showInstructions = val;
+			audioService.playACSound('btn');
 		}
 
 		function swipeLeft(dragX) {
@@ -197,6 +206,7 @@
 
 		function showHint() {
 			vm.articleExpanded = true;
+			audioService.playACSound('btn');
 			$timeout(function() {
 				$('.article-card').scrollTop($('.article-card').scrollTop()+50);
 			}, 250);
@@ -230,9 +240,11 @@
 						vm.articleExpanded = false;
 						dataTracking.startArticle(vm.article.pk);
 					});
+				audioService.playACSound('btnWipe');
 			} else {
 				gameState.saveGame();
 				vm.state = 'showRoundResult';
+				audioService.playACSound('btn');
 			}
 		}
 
@@ -258,6 +270,7 @@
 						dataTracking.startArticle(vm.article.pk);
 						slideInBanner();
 					});
+				audioService.playACSound('btnWipe');
 			}
 		}
 
@@ -268,6 +281,7 @@
 			}
 			vm.showBurger = false;
 			setupForLaunch();
+			audioService.playACSound('btn');
 		}
 
 		function slideInBanner() {
@@ -281,6 +295,7 @@
 		function toggleBurger() {
 			vm.showBurger = !vm.showBurger;
 			vm.showInstructions = false;
+			audioService.playACSound('btn');
 		}
 
 	}

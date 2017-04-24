@@ -9,7 +9,15 @@
 		return {
 			restrict: 'E',
 			templateUrl: 'app/components/launchPage/launchPage.html',
-			replace: true
+			replace: true,
+			controller: controller
 		};
+
+		function controller($scope, audioService) {
+			$scope.fullStart = function() {
+				audioService.playACSound('btn');
+				$scope.main.state = 'startupSequence';
+			}
+		}
 	}
 })();

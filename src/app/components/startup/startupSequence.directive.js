@@ -6,7 +6,7 @@
 		.directive('f2RadioBlock', f2RadioBlock);
 
 	/** @ngInject */
-	function startupSequence($log, playerService) {
+	function startupSequence($log, playerService, audioService) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -28,11 +28,12 @@
 			$scope.state = "signIn";
 
 			$scope.tryLogin = function() {
+				audioService.playACSound('btn');				
 				$log.log('try logging in as '+$scope.userInfo.username);
 				playerService.trySignIn($scope.userInfo.username)
 					.then(function(exists) {
 						if (exists) {
-							$scope.main.startOver();
+							$scope.main.setupForLaunch();
 						} else {
 							$scope.state = 'userNotFound';
 						}
@@ -40,18 +41,22 @@
 			}
 
 			$scope.cancelLogin = function() {
+				audioService.playACSound('btn');				
 				$scope.main.setupForLaunch();
 			}
 
 			$scope.cancelCreate = function() {
+				audioService.playACSound('btn');				
 				$scope.state = 'signIn';
 			}
 
 			$scope.getUserInfo = function() {
+				audioService.playACSound('btn');				
 				$scope.state = 'getInfo';
 			}
 
 			$scope.cancelGetInfo = function() {
+				audioService.playACSound('btn');				
 				$scope.state = 'signIn';
 			}
 

@@ -24,6 +24,7 @@
 			});
 
 			$scope.percentCorrect = Math.round(100*numCorrect/roundInfo.progressPips.length);
+
 		}
 	}
 	

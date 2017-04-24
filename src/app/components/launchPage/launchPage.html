@@ -23,7 +23,7 @@
 	</div>
 
 	<div ng-if="main.userIsAnonymous" layout="row" layout-align="center center" style="padding-top:5px;"> 
-		<div class="f2-button" ng-disabled="true" ng-click="main.state='startupSequence'">full start</div>
+		<div class="f2-button" ng-disabled="true" ng-click="fullStart()">full start</div>
 	</div>
 
 	<md-card ng-if="!main.userIsAnonymous" class="results-card welcome-card popup-payoff" debounce>

@@ -42,6 +42,25 @@
 	}
 }
 
+.f2-button.twitter-button {
+	width: 40px;
+	img {
+		height: 17px;
+		pointer-events: none;
+	}
+	text-decoration: none;
+	background: #0ba2d5;
+}
+
+.f2-button.facebook-button {
+	width: 40px;
+	img {
+		width: 22px;
+	}
+	text-decoration: none;
+	background: #3c5a99;
+}
+
 confetti-item {
 	display: block;
 	position: absolute;

@@ -84,7 +84,7 @@ h3.md-title {
 		width: 150px;
 	}
 
-	&:active {
+	&:active, &:focus {
 		outline: none;
 	}
 

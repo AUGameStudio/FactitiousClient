@@ -162,12 +162,6 @@ mute-unmute {
 	animation-delay: 0s;            
 }
 
-.payoff-banner {
-	background: url(../assets/images/bg/green_duotone.svg);
-	transform: rotate(-10deg) translateX(0%);
-	top: -40%;
-}
-
 @keyframes slideDownBanner {
 	0% { top: -40%; }
 	25%   { top:40%; }
@@ -181,6 +175,12 @@ mute-unmute {
 	animation-name: slideDownBanner;
 	animation-duration: 2s;
 	animation-delay: 0s;            
+}
+
+.payoff-banner {
+	background: url(../assets/images/bg/green_duotone.svg);
+	transform: rotate(-10deg) translateX(0%);
+	top: -40%;
 }
 
 .not-news-span {

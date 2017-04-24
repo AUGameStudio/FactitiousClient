@@ -28,6 +28,8 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 		loadSound('whooshIncorrect', 'whooshIncorrect.mp3');
 		loadSound('whooshCorrect', 'whooshCorrect.mp3');
 		loadSound('gameOver', 'gameResults_kaChing.mp3');
+		loadSound('btnWipe', 'bluppThenWipe2.mp3')
+		loadSound('btn', 'bluppNoWipe.mp3')
 
 		var service = {
 
