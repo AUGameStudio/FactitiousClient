@@ -1,6 +1,7 @@
 .game-payoff-page {
 	justify-content: center;
 	padding: 20px;
+	overflow: visible;
 
 	.payoff-card {
 		margin: 20px auto;
@@ -40,3 +41,84 @@
 		}
 	}
 }
+
+confetti-item {
+	display: block;
+	position: absolute;
+	top: 70px;
+	left: 150px;
+	img {
+		width: 40px;
+	}
+}
+
+confetti-holder {
+	display: block;
+	position: absolute;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	pointer-events: none;
+}
+
+@keyframes confetti-item-rotate {
+	0% { transform: rotate(0deg); }
+	100%   { transform: rotate(360deg); }
+}
+
+@keyframes confetti-item-counter-rotate {
+	0% { transform: rotate(360deg); }
+	100%   { transform: rotate(0deg); }
+}
+
+.confetti-item-rotate {
+	animation-name: confetti-item-rotate;
+	animation-duration: 0.5s;
+	animation-delay: 0s;         
+	animation-iteration-count:infinite;
+	animation-timing-function: linear;
+
+	&.rotate-fast {
+		animation-duration: 0.4s;
+	}
+	&.rotate-slow {
+		animation-duration: 0.75s;
+	}
+	&.rotate-slowest {
+		animation-duration: 1.0s;
+	}
+
+	&.counter-rotate {
+		animation-name: confetti-item-counter-rotate;
+	}
+}
+
+@keyframes confetti-fall {
+	0% { transform: translate(0%); }
+	100%   { transform: translateY(175%); }
+}
+
+.confetti-fall-1, .confetti-fall-2, .confetti-fall-3 {
+	transform: translateY(-20%);
+	animation-name: confetti-fall;
+	animation-duration: 2.5s;
+	animation-delay: 0s;
+	animation-timing-function: ease-in;
+
+}
+
+.confetti-fall-2 {
+	animation-name: confetti-fall;
+	animation-duration: 3s;
+	animation-delay: 0s;
+	animation-timing-function: ease-in;
+}
+
+.confetti-fall-3 {
+	animation-name: confetti-fall;
+	animation-duration: 4s;
+	animation-delay: 0s;
+	animation-timing-function: ease-in;
+}
+
+

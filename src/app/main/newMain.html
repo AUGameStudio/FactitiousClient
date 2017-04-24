@@ -2,21 +2,21 @@
 
   <md-content class="bigboy" ng-class="main.getSimClass()">
 
-    <big-header ng-if="main.state=='showLaunch' || main.state=='showGamePayoff'"></big-header>
+    <big-header ng-cloak ng-if="main.state=='showLaunch' || main.state=='showGamePayoff'"></big-header>
 
-    <launch-page ng-if="main.state=='showLaunch' && !main.checkingForUser"></launch-page>
-    <game-payoff ng-if="main.state=='showGamePayoff'" ></game-payoff>
+    <launch-page ng-cloak ng-if="main.state=='showLaunch' && !main.checkingForUser"></launch-page>
+    <game-payoff ng-cloak ng-if="main.state=='showGamePayoff'" ></game-payoff>
 
 
     <!-- can also be the startup header -->
-    <article-header ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff'" main="main"></article-header>
+    <article-header ng-cloak ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff'" main="main"></article-header>
 
     <!-- startup screens -->
-    <startup-sequence ng-if="main.state==='startupSequence'" main="main" class="article-lower-pane"><div>Startup</div></startup-sequence>
+    <startup-sequence ng-cloak ng-if="main.state==='startupSequence'" main="main" class="article-lower-pane"><div>Startup</div></startup-sequence>
 
     <!-- actual gameplay -->
 
-    <div ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff' && main.state!=='startupSequence'" class="article-lower-pane">
+    <div ng-cloak ng-if="main.state!=='showLaunch' && main.state!=='showGamePayoff' && main.state!=='startupSequence'" class="article-lower-pane">
 
       <article-display ng-if="main.state=='showArticle'" class="article-section" 
         ng-class="{'swipe-alert': main.inSwipeLeft || main.inSwipeRight, 'slide-in-article': main.slideInArticle}"
@@ -36,7 +36,7 @@
 
       <article-footer></article-footer>
 
-      <div ng-if="main.showRoundBanner" class="round-banner slide-in-banner">round {{main.roundNumber+1}} of {{main.numberOfRounds}}</div>
+      <div ng-if="main.showRoundBanner" class="round-banner slide-down-banner">round {{main.roundNumber+1}} of {{main.numberOfRounds}}</div>
 
       <div class="dialog-blocker" ng-if="main.showBurger"></div>
 

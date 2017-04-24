@@ -21,6 +21,18 @@
 
 	</md-card>
 
-      <div ng-if="true" class="round-banner end-banner slide-in-banner">you win!!</div>
+	<confetti-holder class="confetti-fall-1">
+		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
+	</confetti-holder>
+
+	<confetti-holder class="confetti-fall-2">
+		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
+	</confetti-holder>
+
+	<confetti-holder class="confetti-fall-3">
+		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
+	</confetti-holder>
+
+  	<div ng-if="true" class="payoff-banner end-banner slide-down-banner">YOU WIN!!</div>
 
 </div>

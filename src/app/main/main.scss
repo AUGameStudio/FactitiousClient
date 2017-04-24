@@ -86,7 +86,9 @@ mute-unmute {
 		font-size: xx-large;
 	}
 	padding-right: 10px;
-	cursor: pointer;
+	i {
+		cursor: pointer;
+	}
 }
 
 .article-lower-pane {
@@ -129,7 +131,7 @@ mute-unmute {
 
 }
 
-.round-banner {
+.round-banner, .payoff-banner {
 	position: absolute;
 	background: url(../assets/images/bg/duotone.svg);
 	text-align: center;
@@ -160,6 +162,26 @@ mute-unmute {
 	animation-delay: 0s;            
 }
 
+.payoff-banner {
+	background: url(../assets/images/bg/green_duotone.svg);
+	transform: rotate(-10deg) translateX(0%);
+	top: -40%;
+}
+
+@keyframes slideDownBanner {
+	0% { top: -40%; }
+	25%   { top:40%; }
+	75%   { top: 40%; }
+	100%   { top: 100%; }
+}
+
+.slide-down-banner {
+	transform: rotate(-10deg) translateX(0%);
+	top: -40%;
+	animation-name: slideDownBanner;
+	animation-duration: 2s;
+	animation-delay: 0s;            
+}
 
 .not-news-span {
 	background: #eb640f;

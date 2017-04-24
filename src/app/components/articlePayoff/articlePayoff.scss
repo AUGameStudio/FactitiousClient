@@ -34,10 +34,20 @@
 	to   { transform: scale(1.0); }
 }
 
+.article-section .payoff-holder md-card {
+	width: 100%;
+	overflow: visible;
+}
+
 .payoff-holder {
 	width: 90%;
 	display: flex;
 	justify-content: center;
+
+	md-card-content {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
 }
 .popup-payoff {
 	pointer-events: none;			// to handle stupid weird iOS highlighting problem

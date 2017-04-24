@@ -160,7 +160,11 @@
 			vm.shouldSwipe = true;
 			vm.inSwipeLeft = true;
 			vm.inSwipe = true;
-			audioService.playACSound('whoosh');
+			if (vm.article.articleType==='notNews') {
+				audioService.playACSound('whooshCorrect');
+			} else {
+				audioService.playACSound('whooshIncorrect');
+			}
 			swiperService.swipeCard($scope, $('.article-card'), 'left', dragX)
 				.then(function() {
 					$log.log('Main swiped left!')
@@ -176,7 +180,11 @@
 			vm.shouldSwipe = true;
 			vm.inSwipeRight = true;
 			vm.inSwipe = true;
-			audioService.playACSound('whoosh');
+			if (vm.article.articleType==='news') {
+				audioService.playACSound('whooshCorrect');
+			} else {
+				audioService.playACSound('whooshIncorrect');
+			}
 			swiperService.swipeCard($scope, $('.article-card'), 'right', dragX)
 				.then(function() {
 					$log.log('Main swiped right!')
@@ -235,6 +243,7 @@
 				gameState.saveGame();
 				vm.state = "showGamePayoff";
 				slideInBanner();
+				audioService.playACSound('gameOver');
 			} else {
 				gameState.state.articleNumber = 0;
 				vm.state = 'prepareArticle';
