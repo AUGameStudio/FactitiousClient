@@ -10,10 +10,14 @@
 	  <md-card-content>
 	    
 	    <div style="text-align: center; padding: 10px;">
-	    	you correctly identified truthiness <span class="emph">{{percentCorrect}}% of the time</span>
+	    	You correctly identified real news <span class="emph">{{percentCorrect}}% of the time</span>
 	    </div>
 
-		<div layout="row" layout-align="center center"> 
+	    <div ng-if="percentCorrect<50" style="text-align: center; padding: 10px;">
+	    	Maybe you'd like to try again?
+	    </div>
+
+		<div layout="row" layout-align="center center" style="padding-top: 10px;"> 
 			<div class="f2-button" ng-click="main.startOver()">play again</div>
 			<div class="f2-button twitter-button">
 				<a target="_blank" href="{{twitterApiURI}}">
@@ -31,18 +35,19 @@
 
 	</md-card>
 
-	<confetti-holder class="confetti-fall-1">
+	<confetti-holder ng-if="percentCorrect>=50" class="confetti-fall-1">
 		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
 	</confetti-holder>
 
-	<confetti-holder class="confetti-fall-2">
+	<confetti-holder ng-if="percentCorrect>=50" class="confetti-fall-2">
 		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
 	</confetti-holder>
 
-	<confetti-holder class="confetti-fall-3">
+	<confetti-holder ng-if="percentCorrect>=50" class="confetti-fall-3">
 		<confetti-item ng-repeat="i in [1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20]"></confetti-item>
 	</confetti-holder>
 
-  	<div ng-if="true" class="payoff-banner end-banner slide-down-banner">YOU WIN!!</div>
+  	<div ng-if="percentCorrect>=50" class="payoff-banner end-banner slide-down-banner">YOU WIN!!</div>
+  	<div ng-if="percentCorrect<50" class="payoff-banner end-banner slide-down-banner">GAME OVER!!</div>
 
 </div>
