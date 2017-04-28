@@ -277,10 +277,15 @@
 		function startOver() {
 			if (!gameState.game_record.is_completed) {
 				gameState.game_record.was_cancelled = true;
-				gameState.saveGame();
+				gameState.saveGame()
+					.then(function() {
+						vm.showBurger = false;
+						setupForLaunch();
+					});
+			} else {
+				vm.showBurger = false;
+						setupForLaunch();
 			}
-			vm.showBurger = false;
-			setupForLaunch();
 			audioService.playACSound('btn');
 		}
 
