@@ -50,7 +50,6 @@
 				dataTracking.getArticleStatistics(sd, ed)
 					.then(function(stats) {
 						$scope.articleStats = stats;
-						$log.log(stats[0]);
 						stats.forEach(function(stat) {
 							if (stat.headline.length>30) {
 								stat.headline = stat.headline.substr(0,40)+'...';
@@ -61,7 +60,6 @@
 				dataTracking.getGamePlayStatistics(sd, ed)
 					.then(function(stats) {
 						$scope.gamePlayStats = stats;
-						$log.log(stats);
 					});
 
 				$scope.needsUpdate = false;

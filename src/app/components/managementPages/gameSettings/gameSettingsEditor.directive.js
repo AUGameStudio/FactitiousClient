@@ -32,7 +32,6 @@
 					$scope.gameSettings = gameSettings;
 					cleanSettings = angular.copy(gameSettings);
 					$scope.$watch(function() {return angular.toJson(gameSettings);}, function() {
-						$log.log('triggered');
 						gameSettings.updateSettingsCalculations();
 						$scope.settingsHaveChanged = !angular.equals(cleanSettings, $scope.gameSettings);
 					});
@@ -41,7 +40,6 @@
 			function revertSettings() {
 				gameSettings.getSettings()
 					.then(function() {
-						$log.log('success');
 						cleanSettings = angular.copy(gameSettings);
 						$scope.settingsHaveChanged = false;
 					});
@@ -50,7 +48,6 @@
 			function saveSettings() {
 				gameSettings.postSettings()
 					.then(function() {
-						$log.log('success');
 						cleanSettings = angular.copy(gameSettings);
 						$scope.settingsHaveChanged = false;
 					});

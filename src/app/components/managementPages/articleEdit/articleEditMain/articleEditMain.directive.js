@@ -56,7 +56,7 @@
 				});
 
 			$scope.$watch(function() {return vm.selectedArticleId; }, function() {
-				$log.log('select article: '+ vm.selectedArticleId);
+				// $log.log('select article: '+ vm.selectedArticleId);
 				if (vm.selectedArticleId) {
 					fetchArticleInfo(vm.selectedArticleId)
 						.then(function() {
@@ -73,7 +73,7 @@
 			});
 
 			function onChange() {
-				$log.log('changed');
+				// $log.log('changed');
 			}
 
 			function showHint() {
@@ -99,8 +99,8 @@
 			}
 
 			function selectImage(fileObject) {
-				$log.log('articleEditMain: Select Image');
-				$log.log(fileObject);
+				// $log.log('articleEditMain: Select Image');
+				// $log.log(fileObject);
 
 				vm.article.photo_url = URL.createObjectURL(fileObject);
 				vm.article.photoFileObject = fileObject;
@@ -132,7 +132,7 @@
 						vm.uploading = false;
 					},
 					function(result) {
-						$log.log('failure');
+						$log.log('save article failure!!');
 						vm.uploading = false;
 					});
 			}

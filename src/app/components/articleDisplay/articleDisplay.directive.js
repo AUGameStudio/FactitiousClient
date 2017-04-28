@@ -25,11 +25,10 @@
 		}
 
 		function link(scope, elm, attrs, ctlr) {
+			/* for debugging some layout issues... */
 			$timeout(function() {
 				var w = elm.outerWidth();
 				var h = elm.outerHeight();
-
-				$log.log(w+' x '+(h+128));
 
 				ctlr.w = w;
 				ctlr.h = h+128;

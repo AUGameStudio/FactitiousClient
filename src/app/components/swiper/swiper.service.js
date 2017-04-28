@@ -13,7 +13,7 @@
 		return service;
 
 		function swipeCard(scope, elm, direction, dragX) {
-			$log.log('swipeCard');
+			$log.log('swipeCard start');
 			dragX = dragX || 0;
 			var deferred = $q.defer();
 			var sgn = (direction==='left' ? -1 : 1);
@@ -27,7 +27,7 @@
 					elm.css('transform', 'translateX('+(dragX+sgn*now*600)+'px)')
 				},
 				complete: function() {
-					$log.log('ended')
+					$log.log('swipeCard ended')
 					$timeout(function() {
 						elm.css('transform', '');
 					}, 100);

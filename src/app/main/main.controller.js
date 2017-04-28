@@ -1,20 +1,14 @@
 (function() {
 	'use strict';
 
-	angular
-		.module('fact2')
-		.controller('MainController', MainController)
-		.directive('scrolly', scrolly)
-		.directive('trackSwipe', trackSwipe)
-		.directive('debounce', debounce);
+	angular.module('fact2')
+		.controller('MainController', MainController);
 
 	/** @ngInject */
 	function MainController($scope, $log, swiperService, audioService, $window, $timeout, 
 									articleService, gameState, $stateParams, dataTracking, playerService) {
 		var vm = this;
 
-		$log.log('stateParams');
-		$log.log($stateParams);
 		vm.isPreview = $stateParams.isPreview;
 
 		vm.simClasses = [
@@ -33,6 +27,7 @@
 		vm.isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		vm.debugStr = ''+('webkitAudioContext' in $window);
 
+		// this is stand-in stuff; the articleService now maintains the actual values here
 		vm.article = {
 			headline: 'This is the headline. This will always be the headline.',
 			info: {
@@ -124,7 +119,6 @@
 						}
 
 						vm.progressPips = gameState.state.roundInfo[gameState.state.roundNumber].progressPips;
-						$log.log($scope.main.progressPips);
 
 						return articleService.getArticle(gameState.state.roundInfo[gameState.state.roundNumber].articleIds[gameState.state.articleNumber])
 							.then(function(response) {
@@ -305,208 +299,4 @@
 
 	}
 
-	/** @ngInject */
-	function scrolly($log, $timeout) {
-		return {
-			restrict: 'A',
-			link: link
-		};
-
-		function link(scope, elm) {
-			var mode = "atBottom";
-			var couldExpand = false;
-			var refractoryTime = 100;
-			var refractoryTimer;
-
-			if (mode=="atTop") {
-				$timeout(function() {$(elm).scrollTop(1);}, 100);
-				scope.$watch(function() {return scope.main.article.expanded;}, function() {
-					if (!scope.main.article.expanded) {
-						$(elm).scrollTop(1);
-					}
-				});
-				elm.on('scroll', function(e) {
-					if (elm.scrollTop()<=0 && !scope.main.inSwipeLeft && !scope.main.inSwipeRight) {
-						scope.main.article.expanded = true;
-						scope.$apply();
-					}
-				});
-			} else {
-
-				elm.on('mousewheel', trackScrollStartEnd);
-				elm.on('touchmove', trackScrollStartEnd);
-
-				var srcHeight = elm.find('.source-area').innerHeight();
-				var scrollMax = elm[0].scrollHeight-elm.innerHeight();
-
-				elm.on('scroll', function(e) {
-					// $log.log(e);
-					/*
-					var srcHeight = elm.find('.source-area').innerHeight();
-					var scrollMax = elm[0].scrollHeight-elm.innerHeight();
-					if (!scope.main.article.expanded) {
-						if (couldExpand) {
-							if (elm.scrollTop()>=scrollMax) {
-								scope.main.article.expanded = true;
-								scope.$apply();
-							} else {
-								couldExpand = false;
-							}
-						}
-					}
-					*/
-					$log.log(elm.scrollTop(), scrollMax);
-				});
-			}
-
-			function trackScrollStartEnd(e) {
-				if (scope.main.article.expanded) return;
-				if (!refractoryTimer) {
-					// startingScroll...
-					$log.log('start scroll: '+e.type);
-					if (atScrollBottom() && couldExpand) {
-						$log.log('expand it!');
-						scope.main.article.expanded = true;
-						scope.$apply();
-						$timeout(function() {
-							$(elm.scrollTop(elm.scrollTop()+50));
-						}, 250);
-						return;
-					}
-				} else {
-					$timeout.cancel(refractoryTimer);
-				}
-				refractoryTimer = $timeout(onScrollEnd, refractoryTime);
-			}
-
-			function onScrollEnd() {
-				$log.log('at scroll end');
-				couldExpand = atScrollBottom();
-				refractoryTimer = null;
-			}
-
-			function atScrollBottom() {
-				var scrollMax = elm[0].scrollHeight-elm.innerHeight();
-				return elm.scrollTop()>= scrollMax;
-			}
-
-		}
-	}
-
-	/** @ngInject */
-	function trackSwipe($log, $timeout, $window, swiperService, audioService) {
-
-		return {
-			restrict: 'A',
-			link: link
-		};
-
-		function link(scope, elm) {
-			var anchorX, dragX;
-
-			var triggerThreshold = 20;
-			var swipeThreshold = 100;
-			var shouldSwipe = false;
-
-			var canTouch = 'ontouchstart' in $window;
-
-			scope.main.debugStr +=' canTouch '+canTouch;
-
-			if (!canTouch) {
-				elm.on('mousedown', trackDown);
-			} else {
-				elm.on('touchstart', trackDown);
-			}
-
-			function trackDown(e) {
-
-				if (scope.main.shouldSwipe || scope.main.state !== 'showArticle') {
-					// debounce...
-					return;
-				}
-
-				audioService.playACSound('silent'); // ARRRGGGGGGHHH! Why is this required for Safari?
-				anchorX = getPageX(e);
-
-				elm.on('mousemove', trackMove);
-				elm.on('touchmove', trackMove);
-				elm.on('mouseleave', trackUp);
-				elm.on('mouseup', trackUp);
-				elm.on('touchend', trackUp);
-
-				// scope.main.debugStr = "didTrackDownEnd";
-			}
-
-			function trackUp(e) {
-
-				if ((scope.main.inSwipeLeft || scope.main.inSwipeRight) && scope.main.shouldSwipe) {
-					if (scope.main.inSwipeLeft) {
-						scope.main.swipeLeft(dragX);
-					} else {
-						scope.main.swipeRight(dragX);
-					}
-				} else {
-					elm.find('.article-card').css('transform', '');
-					scope.main.inSwipeLeft = scope.main.inSwipeRight = false;
-					scope.main.shouldSwipe = shouldSwipe = false;
-				}
-				releaseListeners();
-				scope.$apply();
-				$log.log('got touchend '+e.type);
-			}
-
-			function trackMove(e) {
-				var dx = getPageX(e) - anchorX;
-				scope.main.inSwipeLeft = (dx < -triggerThreshold);
-				scope.main.inSwipeRight = (dx > triggerThreshold);
-				shouldSwipe = Math.abs(dx)>swipeThreshold;
-				scope.main.shouldSwipe = shouldSwipe;
-				if (scope.main.inSwipeLeft || scope.main.inSwipeRight) {
-					var sgn = (scope.main.inSwipeLeft ? -1 : 1);
-					dragX = 0.5*(dx - sgn*triggerThreshold);
-					elm.find('.article-card').css('transform', 'translateX('+dragX+'px)');
-				} else {
-					elm.find('.article-card').css('transform', 'translateX(0px)');
-				}
-				scope.$apply();
-			}
-
-			function releaseListeners() {
-				elm.off('mousemove', trackMove);
-				elm.off('touchmove', trackMove);
-				elm.off('mouseleave', trackUp);
-				elm.off('mouseup', trackUp);
-				elm.off('touchend', trackUp);
-			}
-
-			function getPageX(evt) {
-				if (evt.type.indexOf('mouse')>=0) {
-					return evt.pageX;
-				} else if (evt.changedTouches) {
-					return evt.changedTouches[0].pageX;
-				} else if (evt.originalEvent.changedTouches) {
-					return evt.originalEvent.changedTouches[0].pageX;
-				} else {
-					return event.changedTouches[0].pageX;
-				}
-			}
-
-		}
-	}
-
-	/** @ngInject */
-	function debounce($log, $timeout) {
-		return {
-			restrict: 'A',
-			link: link
-		};
-
-		function link(scope, elm) {
-			elm.css({'pointer-events': 'none'});
-
-			$timeout(function() {
-				elm.css({'pointer-events': 'initial'});
-			}, 200);
-		}
-	}
 })();

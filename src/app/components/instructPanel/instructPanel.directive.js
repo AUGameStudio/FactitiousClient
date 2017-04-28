@@ -13,7 +13,6 @@
 		};
 
 		function controller($scope) {
-			$log.log('Hello!');
 		}
 	}
 })();

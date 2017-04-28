@@ -16,7 +16,7 @@ https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/
 	function audioService($log, $window, $cookies, $interval, $http) {
 		var soundEffect;
 
-		$log.log('getting... "'+$cookies.get('muted')+'" '+($cookies.get('muted')==='true'));
+		$log.log('getting audio settings... "'+$cookies.get('muted')+'" '+($cookies.get('muted')==='true'));
 
 		var audioContext = new ($window.AudioContext || $window.webkitAudioContext)();
 

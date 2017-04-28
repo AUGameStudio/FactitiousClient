@@ -49,8 +49,8 @@
 		function getSettings() {
 			return $http.get(serviceUrl)
 				.then(function(response) {
-					$log.log('success');
-					$log.log(response);
+					// $log.log('success');
+					// $log.log(response);
 					var settings = response.data;
 					angular.extend(service, settings);
 				});
@@ -60,8 +60,8 @@
 			updateSettingsCalculations();
 			return $http.post(serviceUrl, service)
 				.then(function(response) {
-					$log.log('success');
-					$log.log(response);
+					// $log.log('success');
+					// $log.log(response);
 					var settings = response.data;
 					angular.extend(service, settings);
 				});

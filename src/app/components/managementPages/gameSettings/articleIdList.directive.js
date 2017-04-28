@@ -27,14 +27,14 @@
 			vm.onBlur = onBlur;
 
 			function onChange() {
-				$log.log('changed: '+vm.listAsString);
+				// $log.log('changed: '+vm.listAsString);
 				var provisional = vm.listAsString.split(/\D+/).map(function(item) {return 1*item.trim()}).filter(function(item) {return item>0});
-				$log.log(provisional);
+				// $log.log(provisional);
 				vm.model = provisional;
 			}
 
 			function onBlur() {
-				$log.log('blur');
+				// $log.log('blur');
 				vm.listAsString = vm.model.join(', ');
 			}
 		}

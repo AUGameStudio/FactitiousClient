@@ -18,6 +18,7 @@
 			<div>&nbsp;to&nbsp;</div>
 			<input type="date" ng-change="needsUpdate = true" ng-model="endDate">
 			<div class="admin-button" ng-class="{disabled: !needsUpdate}" ng-click="refreshStatistics()">apply date filter</div>
+			<div class="admin-button" ng-click="refreshStatistics()">refresh</div>
 		</div>
 
 		<h2>game play</h2>

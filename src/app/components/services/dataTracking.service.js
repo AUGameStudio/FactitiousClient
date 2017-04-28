@@ -29,8 +29,8 @@
 			if (correct) {
 				gameState.game_record.total_articles_correct += 1;
 			}
-			$log.log('track article '+articlePk+' '+dt+' '+correct+' '+hadHint);
-			$log.log('game_record t '+gameState.game_record.total_time_seconds+' p '+gameState.game_record.total_articles_played+' c '+gameState.game_record.total_articles_correct);
+			// $log.log('track article '+articlePk+' '+dt+' '+correct+' '+hadHint);
+			// $log.log('game_record t '+gameState.game_record.total_time_seconds+' p '+gameState.game_record.total_articles_played+' c '+gameState.game_record.total_articles_correct);
 
 			var serviceUrl = '/api/gameplay2/track_article/';
 			var data = {
@@ -43,8 +43,6 @@
 
 			return $http.post(serviceUrl, data)
 				.then(function(response) {
-					$log.log('success');
-					$log.log(response);
 				});
 		}
 
@@ -83,11 +81,9 @@
 			return $http.get(serviceUrl, options)
 				.then(function(response) {
 					var rawStats = response.data;
-					$log.log(rawStats);
 					var res = [];
 					['completed', 'cancelled', 'inPlay', 'abandoned'].forEach(function(key) {
 						if (rawStats[key]) {
-							$log.log(key);
 							rawStats[key].outcome_status = key;
 							res.push(rawStats[key]);
 						}

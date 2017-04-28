@@ -34,52 +34,6 @@
 			var top = -15 - Math.random()*70;
 			elm.css({'top': top+'%'});
 
-			/*
-			return;
-
-			var imElm = elm.find('img');
-
-			var animTimer = $interval(animateIt, intervalRate);
-			var stillAlive = true;
-
-			scope.$on('$destroy', killAnimation);
-
-			var rotVal = Math.random()*360;
-			var rotSpeed = (intervalRate/1000)*(300+Math.random()*120);
-			imElm.css({'transform': 'rotate('+rotVal+'deg)'});
-
-			var fallSpeed = (intervalRate/1000)*(350+Math.random()*75);
-
-			var numFalls = 0;
-
-			// animateIt();
-
-			function animateIt() {
-				rotVal += rotSpeed;
-				top += fallSpeed;
-				if (top>parentElm.outerHeight()) {
-					if (++numFalls>0) {
-						killAnimation();
-						return;
-						// requestAnimationFrame(animateIt);
-					}
-					top = -70;
-					scope.confID = Math.floor(Math.random()*7)+1;
-				}
-				elm.css({
-					// 'transform': 'translateY('+top+'px)'
-				 });
-				imElm.css({'transform': 'translateY('+top+'px) rotate('+rotVal+'deg)'});
-				// elm.css({'top': top+'px'});
-			}
-
-			function killAnimation() {
-				$log.log('kill');
-				stillAlive = false;
-				$interval.cancel(animTimer);
-			}
-			*/
-
 		}
 	}
 

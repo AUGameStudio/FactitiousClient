@@ -43,7 +43,7 @@
 			return $http.post(serviceUrl)
 				.then(function(response) {
 					var game_record = response.data;
-					$log.log('success');
+					$log.log('success beginning new game');
 					$log.log(game_record);
 					service.game_record = game_record;
 					service.state = game_record.game_state;
@@ -68,8 +68,6 @@
 
 					service.saveGame();
 
-					$log.log(angular.toJson(state));
-
 				});
 		}
 
@@ -85,10 +83,8 @@
 
 				return $http.post(serviceUrl, gameRecord)
 					.then(function(response) {
-						$log.log('success');
-						$log.log(response);
 					}, function(response) {
-						$log.log('failure');
+						$log.log('saveGame failure');
 						$log.log(response);
 					});
 			} else {
@@ -108,6 +104,7 @@
 						});
 		}
 
+		/* for development use only... */
 		function resetGame() {
 			var decentArticles = [124, 123, 122, 121, 117, 118, 119, 120, 106, 107, 108, 109, 110, 111, 112, 113, 114, 
 									115, 116, 95, 96, 97, 98, 99, 100, 101, 103, 104, 105, 94, 88, 79, 83, 75, 76, 
@@ -147,7 +144,5 @@
 
 		return array;
 	}
-
-
 
 })();

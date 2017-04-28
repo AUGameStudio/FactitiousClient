@@ -72,12 +72,10 @@
 
 			return $http(request)
 					.then(function(response) {
-						$log.log('success');
-						$log.log(response);
 						return response.data;
 					},
 					function(response) {
-						$log.log('failed');
+						$log.log('post article failed!!');
 						$log.log(response);
 					});
 
@@ -140,7 +138,9 @@
 				});
 		}
 
-		/* dealing with old version... */
+		/* ***************************************************************** */
+		/* dealing with old version data format... not needed for final code */
+		/* ***************************************************************** */
 
 		function stripEolNonsense(article) {
 			var textBodyKeys = ['headline', 'body', 'sourceHint', 'payoffSourceLabel', 'payoffContent'];
