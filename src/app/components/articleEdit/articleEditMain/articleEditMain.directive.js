@@ -117,6 +117,7 @@
 			}
 
 			function saveArticle() {
+				vm.uploading = true;
 				return articleService.putArticle(vm.article)
 					.then(function(article) {
 						$log.log('success saving');
@@ -128,9 +129,11 @@
 							.then(function() {
 								vm.selectedArticleId = vm.article.article_id;
 							});
+						vm.uploading = false;
 					},
 					function(result) {
 						$log.log('failure');
+						vm.uploading = false;
 					});
 			}
 

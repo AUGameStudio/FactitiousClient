@@ -45,7 +45,7 @@
 
 		function putArticle(article) {
 			var keys = ["body", "sourceHint", "articleType", "headline", 
-							"payoffContent", "payoffSourceUrl", "payoffSourceLabel"];
+							"payoffContent", "payoffSourceUrl", "payoffSourceLabel", "notes"];
 
 			var formData = new FormData();
 			keys.forEach(function(key) {

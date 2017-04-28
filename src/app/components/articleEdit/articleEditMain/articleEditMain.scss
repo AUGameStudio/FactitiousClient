@@ -1,6 +1,7 @@
 article-edit-main {
 	display: block;
 	background: white;
+	position: relative;
 
 	/* padding: 10px 20px; */
 
@@ -92,7 +93,7 @@ article-edit-main {
 			}
 
 			&.source-edit {
-				height: 60px;
+				height: 40px;
 			}
 
 			&.source-label-edit {
@@ -100,7 +101,7 @@ article-edit-main {
 			}
 
 			&.payoff-edit {
-				height: 80px;
+				height: 50px;
 			}
 
 		}
@@ -176,6 +177,35 @@ article-edit-main {
 			height: 620px;
 		}
 
+	}
+
+	.ae-loading {
+		width: 100%;
+		height: 100vh;
+		background: rgba(0,0,0,0.05);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+
+		z-index: 1000;
+
+		div {
+			font-size: 30px;
+			font-weight: bold;
+			color: black;
+		}
+
+		img {
+			width: 200px;
+		}
 	}
 }
 
