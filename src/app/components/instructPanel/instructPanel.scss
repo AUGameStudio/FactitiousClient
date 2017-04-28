@@ -39,17 +39,31 @@ instruct-panel {
 	}
 
 	.real-news {
-		background: #46bc8a;
+		background: #6F9803;
 		color: white;
 		padding: 5px;
 		margin: 10px 0px;
 	}
 
 	.fake-news {
-		background: #eb640f;
+		background: #E20A3C;
 		color: white;
 		padding: 5px;
 		margin: 10px 0px;
 	}
 
+}
+
+real-news-icon, fake-news-icon {
+	display: inline-block;
+	background: url(../assets/icons/checked-symbol.svg);
+	width: 20px;
+	height: 20px;
+	margin-top: 3px;
+	position: relative;
+	top: 4px;
+}
+
+fake-news-icon {
+	background: url(../assets/icons/xButton.svg);
 }

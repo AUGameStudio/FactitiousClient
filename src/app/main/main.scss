@@ -184,17 +184,28 @@ mute-unmute {
 }
 
 .not-news-span {
-	background: #eb640f;
+	background: #E20A3C;
 	border-radius: 5px;
 	font-weight: bold;
 	color: white;
 	padding: 0px 5px;
+
+	&.instruct {
+		color: #E20A3C;
+		background: white;
+		padding: 0px 0px;
+	}
 }
 
 .news-span {
-	background: #46bc8a;
+	background: #6F9803;
 	border-radius: 5px;
 	font-weight: bold;
 	color: white;
 	padding: 0px 5px;
+	&.instruct {
+		color: #6F9803;
+		background: white;
+		padding: 0px 0px;
+	}
 }

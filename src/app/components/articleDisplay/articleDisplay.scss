@@ -116,11 +116,13 @@ h3.md-title {
 }
 .swipe-left-flag {
 	left: 10%;
-	background: #eb640f; /* rgba(128,128,64,0.75); */
+	/* background: #eb640f; rgba(128,128,64,0.75); */
+	background: #E20A3C;
 }
 .swipe-right-flag {
 	right: 10%;
-	background: #46bc8a; /* rgba(128,64,128,0.75); */
+	/* background: #46bc8a; rgba(128,64,128,0.75); */
+	background: #6F9803;
 }
 
 @keyframes slideInArticle {
