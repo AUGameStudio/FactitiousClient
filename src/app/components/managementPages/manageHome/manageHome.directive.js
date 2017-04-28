@@ -8,7 +8,7 @@
 	function manageHome($log) {
 		return {
 			restrict: 'E',
-			templateUrl: 'app/components/manageHome/manageHome.html'
+			templateUrl: 'app/components/managementPages/manageHome/manageHome.html'
 		};
 	}
 })();

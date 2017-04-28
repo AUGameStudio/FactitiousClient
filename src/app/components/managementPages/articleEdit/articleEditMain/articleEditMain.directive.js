@@ -12,7 +12,7 @@
 			controller: controller,
 			controllerAs: 'main',
 			bindToController: true,
-			templateUrl: 'app/components/articleEdit/articleEditMain/articleEditMain.html'
+			templateUrl: 'app/components/managementPages/articleEdit/articleEditMain/articleEditMain.html'
 		};
 
 		function controller($scope) {

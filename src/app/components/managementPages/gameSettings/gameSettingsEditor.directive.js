@@ -10,7 +10,7 @@
 		return {
 			restrict: 'E',
 			controller: controller,
-			templateUrl: 'app/components/gameSettings/gameSettingsEditor.html'
+			templateUrl: 'app/components/managementPages/gameSettings/gameSettingsEditor.html'
 		};
 
 		function controller($scope) {

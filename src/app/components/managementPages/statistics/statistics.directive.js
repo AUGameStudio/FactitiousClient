@@ -9,7 +9,7 @@
 		return {
 			restrict: 'E',
 			controller: controller,
-			templateUrl: 'app/components/statistics/statisticsPage.html'
+			templateUrl: 'app/components/managementPages/statistics/statisticsPage.html'
 		};
 
 		function controller($scope) {
