@@ -31,6 +31,12 @@
         template: '<manage-home></manage-home>'
       })
 
+      .state('manageLogin', {
+        url: '/login',
+        // templateUrl: 'app/main/articleEdit.html'
+        template: '<login-page></login-page>'
+      })
+
       .state('articleEdit', {
         url: '/editor',
         template: '<article-edit-main></article-edit-main>'

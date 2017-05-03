@@ -1,0 +1,23 @@
+<div>
+	<div class="admin-header">
+		<h1><img src="assets/icons/factitiousWordmarkAdmin.svg"/> log in</h1>
+		<div class="admin-nav">
+			<a ui-sref="manageHome" class="disabled">home</a>
+			<a ui-sref="statisticsPage" class="disabled">statistics</a>
+			<a ui-sref="gameSettingsEdit" class="disabled">game settings</a>
+			<a ui-sref="articleEdit" class="disabled">article editor</a>
+			<a ui-sref="manageLogin" class="disabled">sign out</a>
+		</div>
+	</div>
+	<div class="login-content">
+		<h2>Please log in to access the management features</h2>
+		<div>username:</div>
+		<input type="text" ng-model="username"/>
+		<div>password:</div>
+		<input type="password" ng-model="password"/>
+		<div class="admin-button" ng-click="tryToLogin()" ng-class="{'disabled': !(username && password)}">log in</div>
+		<div ng-if="hadLoginError" class="login-error">That is not a valid username/password. Please try again.</div>
+	</div>
+
+</div>
+

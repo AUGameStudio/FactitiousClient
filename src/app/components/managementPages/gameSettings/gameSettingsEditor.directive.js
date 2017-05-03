@@ -6,7 +6,7 @@
 		.filter('utcStrToLocalDate', utcStrToLocalDate);
 
 	/** @ngInject */
-	function gameSettingsEditor($log, gameSettings, articleService) {
+	function gameSettingsEditor($log, gameSettings, articleService, $state, authorizationService) {
 		return {
 			restrict: 'E',
 			controller: controller,
@@ -14,6 +14,13 @@
 		};
 
 		function controller($scope) {
+
+			if (!authorizationService.verifyAuthorized()) {
+				$state.go('manageLogin');
+				return;
+			}
+
+
 			var cleanSettings;
 			$scope.articleDict = {}
 

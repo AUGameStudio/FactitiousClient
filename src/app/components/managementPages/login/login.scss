@@ -1,0 +1,23 @@
+login-page {
+	display: block;
+	font-size: 0.9em;
+
+	.login-content {
+		padding: 0px 15px;
+
+		>div {
+			margin: 5px 0px;
+		}
+
+		.admin-button {
+			width: 100px;
+			text-align: center;
+			margin: 10px 0px;
+		}
+
+		.login-error {
+			color: red;
+			font-weight: bold;
+		}
+	}
+}

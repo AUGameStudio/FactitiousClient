@@ -101,6 +101,10 @@ article-id-list {
 			pointer-events: none;
 			color: #999;
 		}
+
+		&:last-child {
+			float: right;
+		}
 	}
 }
 

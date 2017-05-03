@@ -6,6 +6,7 @@
 			<a ui-sref="statisticsPage" class="disabled">statistics</a>
 			<a ui-sref="gameSettingsEdit">game settings</a>
 			<a ui-sref="articleEdit">article editor</a>
+			<a ui-sref="manageLogin">sign out</a>
 		</div>
 	</div>
 
@@ -95,15 +96,15 @@
 		<div class="download-section">
 			<div class="download-row">
 				<div class="admin-button" ng-click="downloadCsv('game_plays_csv')">Game Plays</div>
-				<div>Download a CSV of all game plays in the current date range</div>
+				<div>Download a tab-delimited CSV of all game plays in the current date range</div>
 			</div>
 			<div class="download-row">
 				<div class="admin-button" ng-click="downloadCsv('article_plays_csv')">Article Plays</div>
-				<div>Download a CSV of all article plays in the current date range</div>
+				<div>Download a tab-delimited CSV of all article plays in the current date range</div>
 			</div>
 			<div class="download-row">
 				<div class="admin-button" ng-click="downloadCsv('player_infos_csv')">Active Players</div>
-				<div>Download a CSV of all player infos for non-anonymous players active in the current date range</div>
+				<div>Download a tab-delimited CSV of all player infos for non-anonymous players active in the current date range</div>
 			</div>
 			<div class="download-row">
 				<div class="admin-button" ng-click="downloadDatabase()">Entire Database</div>

@@ -5,7 +5,7 @@
 		.directive('statisticsPage', statisticsPage);
 
 	/** @ngInject */
-	function statisticsPage($log, dataTracking, gameSettings, $document, $window, filesaver) {
+	function statisticsPage($log, dataTracking, gameSettings, $document, $window, filesaver, $state, authorizationService) {
 		return {
 			restrict: 'E',
 			controller: controller,
@@ -13,6 +13,11 @@
 		};
 
 		function controller($scope) {
+			if (!authorizationService.verifyAuthorized()) {
+				$state.go('manageLogin');
+				return;
+			}
+
 			var allGameArticles = [];
 			$scope.currentGameOnly = true;
 			$scope.filterByDate = true;
@@ -20,7 +25,6 @@
 			$scope.needsUpdate = false;
 
 			$scope.refreshStatistics = refreshStatistics;
-			$scope.selectElementContents = selectElementContents;
 			$scope.saveGamesCsv = saveGamesCsv;
 			$scope.saveArticlesCsv = saveArticlesCsv;
 			$scope.downloadCsv = downloadCsv;
@@ -85,31 +89,6 @@
 					}
 				});
 				saveCSV(csvRows.join('\n'), 'articlePlayAgg.csv');
-			}
-
-			function selectElementContents(elId) {
-				var body = document.body, range, sel;
-				$log.log($document.createRange);
-				$log.log($window.getSelection);
-				var el = $('#'+elId)[0];
-				if (document.createRange && window.getSelection) {
-					$log.log('try it');
-					range = document.createRange();
-					sel = window.getSelection();
-					sel.removeAllRanges();
-					try {
-						range.selectNodeContents(el);
-						sel.addRange(range);
-					} catch (e) {
-						range.selectNode(el);
-						sel.addRange(range);
-					}
-				} else if (body.createTextRange) {
-					range = body.createTextRange();
-					range.moveToElementText(el);
-					range.select();
-				}
-				document.execCommand("Copy");
 			}
 
 			function refreshStatistics() {

@@ -6,7 +6,7 @@
 		.directive('textarea', cleanEol);
 
 	/** @ngInject */
-	function articleEditMain($log, articleService) {
+	function articleEditMain($log, articleService, $state, authorizationService) {
 		return {
 			restrict: 'E',
 			controller: controller,
@@ -16,6 +16,11 @@
 		};
 
 		function controller($scope) {
+			if (!authorizationService.verifyAuthorized()) {
+				$state.go('manageLogin');
+				return;
+			}
+
 			var vm = this;
 
 			var cleanArticle;
