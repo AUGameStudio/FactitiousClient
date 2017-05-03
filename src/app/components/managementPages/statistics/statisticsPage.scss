@@ -7,12 +7,6 @@ statistics-page {
 		padding: 10px 20px;
 	}
 
-	h2 {
-		margin: 5px 0px;
-		margin-top: 10px;
-		border-top: 1px solid #DDD;
-	}
-
 	input[type=date] {
 		margin: 0px 10px;
 	}
@@ -65,6 +59,37 @@ statistics-page {
 			tr:nth-child(odd) {
 				background: #eee;
 			}
+		}
+	}
+
+	.stat-header {
+		display: flex;
+		align-items: center;
+		margin: 15px 0px 5px 0px;
+		padding: 10px 0px 5px 0px;
+		border-top: 1px solid #DDD;
+		h2 {
+			padding: 0;
+			margin: 0;
+		}
+		.admin-button {
+			margin: 0px 10px;
+		}
+
+		&.first-stat {
+			margin-top: 0px;
+		}
+	}
+
+	.download-section {
+		.admin-button {
+			width: 250px;
+			text-align: center;
+			margin: 5px 10px;
+		}
+		.download-row {
+			display: flex;
+			align-items: center;
 		}
 	}
 

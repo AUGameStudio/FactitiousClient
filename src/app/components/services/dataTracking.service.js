@@ -5,7 +5,7 @@
 		.service('dataTracking', dataTracking);
 
 	/** @ngInject */
-	function dataTracking($log, $http, gameState) {
+	function dataTracking($log, $http, gameState, playerService) {
 		var startTime = moment();
 		var service = {
 
@@ -35,7 +35,7 @@
 			var serviceUrl = '/api/gameplay2/track_article/';
 			var data = {
 				article_pk: articlePk,
-				player_pk: 1,
+				player_pk: playerService.playerInfo.pk,
 				total_time_seconds: dt,
 				was_correct: correct,
 				showed_hint: hadHint || false
