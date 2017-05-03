@@ -23,8 +23,8 @@
 			return;
 		}
 		var
-			  doc = view.document
-			  // only get URL when necessary in case Blob.js hasn't overridden it yet
+			doc = view.document
+			// only get URL when necessary in case Blob.js hasn't overridden it yet
 			, get_URL = function() {
 				return view.URL || view.webkitURL || view;
 			}
@@ -49,7 +49,7 @@
 			, arbitrary_revoke_timeout = 500 // in ms
 			, revoke = function(file) {
 				var revoker = function() {
-					if (typeof file === "string") { // file is an object URL
+					if (angular.isString(file)) { // file is an object URL
 						get_URL().revokeObjectURL(file);
 					} else { // file is a File
 						file.remove();
@@ -66,7 +66,7 @@
 				var i = event_types.length;
 				while (i--) {
 					var listener = filesaver["on" + event_types[i]];
-					if (typeof listener === "function") {
+					if (angular.isFunction(listener)) {
 						try {
 							listener.call(filesaver, event || filesaver);
 						} catch (ex) {
@@ -88,7 +88,7 @@
 				}
 				// First try a.download, then web filesystem, then object URLs
 				var
-					  filesaver = this
+					filesaver = this
 					, type = blob.type
 					, blob_changed = false
 					, object_url
@@ -243,7 +243,7 @@
 
 		return saveAs;
 	}(
-		   typeof self !== "undefined" && self
+			typeof self !== "undefined" && self
 		|| typeof window !== "undefined" && window
 		|| this.content
 	));
