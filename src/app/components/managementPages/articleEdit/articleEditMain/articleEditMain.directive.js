@@ -136,9 +136,12 @@
 							});
 						vm.uploading = false;
 					},
-					function(result) {
+					function(response) {
 						$log.log('save article failure!!');
 						vm.uploading = false;
+						if (response.status===401) {
+							$state.go('manageLogin');
+						}
 					});
 			}
 

@@ -5,7 +5,7 @@
 		.service('articleService', articleService);
 
 	/** @ngInject */
-	function articleService($log, $http, $q) {
+	function articleService($log, $http, $q, authorizationService) {
 		var serviceUrl = "/api/article/";
 
 		var deprecatedDBase = false;
@@ -65,18 +65,15 @@
 				url: serviceUrl+'postarticle/',
 				data: formData,
 				headers: {
-					'Content-Type': undefined,
-					'Authorization': 'Token eda1f570f59ec076dc3e48ec05e5ca7e13117dca'
+					'Content-Type': undefined
 				}
 			};
+
+			authorizationService.setAuthHeader(request.headers);
 
 			return $http(request)
 					.then(function(response) {
 						return response.data;
-					},
-					function(response) {
-						$log.log('post article failed!!');
-						$log.log(response);
 					});
 
 		}
