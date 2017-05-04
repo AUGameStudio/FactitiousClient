@@ -5,7 +5,7 @@
 		.service('gameSettings', gameSettings);
 
 	/** @ngInject */
-	function gameSettings($log, $http) {
+	function gameSettings($log, $http, authorizationService) {
 		var serviceUrl = "/api/gameplay2/game_settings/";
 
 		var service = {
@@ -41,8 +41,14 @@
 			service.maximum_articles_played = 0;
 			service.maximum_score = 0;
 			service.roundInfo.forEach(function(round) {
-				service.maximum_articles_played += round.articleIds.length;
-				service.maximum_score += round.articleIds.length * round.reward;
+				if (angular.isUndefined(round.shouldRandomize)) {
+					round.shouldRandomize = false;
+				}
+				if (!round.shouldRandomize || angular.isUndefined(round.roundLength)) {
+					round.roundLength = round.articleIds.length;
+				}
+				service.maximum_articles_played += round.roundLength; // round.articleIds.length;
+				service.maximum_score += round.roundLength*round.reward; // round.articleIds.length * round.reward;
 			});
 		}
 
@@ -53,12 +59,26 @@
 					// $log.log(response);
 					var settings = response.data;
 					angular.extend(service, settings);
+					updateSettingsCalculations();
 				});
 		}
 
 		function postSettings() {
+
+			var request = {
+				method: 'POST',
+				url: serviceUrl,
+				headers: {
+					'Content-type': 'application/json'
+				},
+				data: service
+			};
+
+			authorizationService.setAuthHeader(request.headers);
+
 			updateSettingsCalculations();
-			return $http.post(serviceUrl, service)
+			// return $http.post(serviceUrl, service, {headers: headers})
+			return $http(request)
 				.then(function(response) {
 					// $log.log('success');
 					// $log.log(response);

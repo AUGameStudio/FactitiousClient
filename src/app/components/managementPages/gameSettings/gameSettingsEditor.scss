@@ -53,6 +53,14 @@ game-settings-editor {
 		margin-left: 20px;
 	}
 
+	.article-names {
+		input[type=number] {
+			margin-left: 5px;
+			width: 40px;
+			text-align: right;
+		}
+	}
+
 	.ae-button {
 		cursor: pointer;
 		margin-right: 3px;

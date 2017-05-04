@@ -57,6 +57,13 @@
 					.then(function() {
 						cleanSettings = angular.copy(gameSettings);
 						$scope.settingsHaveChanged = false;
+					},
+					function(response, status) {
+						$log.log('There was an error');
+						$log.log(response);
+						if (response.status===401) {
+							$state.go('manageLogin');
+						}
 					});
 			}
 

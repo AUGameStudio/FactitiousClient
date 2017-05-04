@@ -57,12 +57,27 @@
 					state.roundInfo = [];
 
 					service.game_settings.roundInfo.forEach(function(info) {
-						var round = {}
+						// make sure there are no backward compatibility issues...
+						if (angular.isUndefined(info.shouldRandomize)) {
+							info.shouldRandomize = false;
+						}
+						if (!info.shouldRandomize || angular.isUndefined(info.roundLength)) {
+							info.roundLength = info.articleIds.length;
+						}
+						
+						var round = {};
+
+						var articleIds = angular.copy(info.articleIds);
+						if (info.shouldRandomize) {
+							shuffle(articleIds);
+							articleIds = articleIds.slice(0,info.roundLength);
+						}
+
 						round.progressPips = [];
-						for (var i=0; i<info.articleIds.length; i++) {
+						for (var i=0; i<articleIds.length; i++) {
 							round.progressPips.push('');
 						}
-						round.articleIds = info.articleIds;
+						round.articleIds = articleIds;
 						state.roundInfo.push(round);
 					});
 

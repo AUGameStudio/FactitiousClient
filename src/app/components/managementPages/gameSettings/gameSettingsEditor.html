@@ -31,7 +31,9 @@
 				</div>
 				<div class="article-names">
 					<article-id-list model="roundInfo.articleIds"></article-id-list>
-					<div><i>{{roundInfo.articleIds.length}} articles in this round:</i></div>
+					<div><input type="checkbox" ng-model="roundInfo.shouldRandomize"/><label>randomize articles</label></div>
+					<div ng-if="roundInfo.shouldRandomize"><input type="number" min="1" ng-attr-max="{{roundInfo.articleIds.length}}" ng-model="roundInfo.roundLength"/><label> articles per round, selected randomly from these {{roundInfo.articleIds.length}} articles:</label></div>
+					<div ng-if="!roundInfo.shouldRandomize"><i>{{roundInfo.articleIds.length}} articles in this round, in this order:</i></div>
 					<div class="articles" ng-repeat="apk in roundInfo.articleIds">
 						<div ng-if="articleDict[apk]">{{articleDict[apk].article_id}}: {{articleDict[apk].headline}}</div>
 						<div ng-if="!articleDict[apk]" class="article-error">{{apk}}: Not found</div>
