@@ -21,7 +21,7 @@
 				<div layout="row" layout-align="space between">
 					<div class="ae-ctl-row">
 						<div class="ae-button" ng-click="main.saveArticle()" ng-class="{disabled: !main.articleHasChanged}">save changes</div>
-						<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: !main.articleHasChanged}">revert</div>
+						<div class="ae-button" ng-click="main.revertArticle()" ng-class="{disabled: main.isNewArticle || !main.articleHasChanged}">revert</div>
 					</div>
 					<div class="ae-ctl-row">
 						<div class="ae-button" ng-click="main.addArticle()" ng-class="{disabled: main.articleHasChanged}">new</div>
@@ -32,10 +32,15 @@
 
 				<div layout="row" layout-align="space-between center">
 
-				    <div class="ae-select-image ae-ctl-row">
-				    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
-				    	<label for="input-file">set image...</label>
-				    </div>
+				    <popup-doc>
+						<div class="ae-select-image ae-ctl-row">
+					    	<input class="input-file" name="input-file" id="input-file" type="file" accept="image/*" load-image-file="main.selectImage(fileObject)"/>
+							<label for="input-file">set image...</label>
+						</div>
+						<div class="popup-content">
+							Choose a file from your computer to upload. Be sure you have rights to the image or select <a target="_blank" href="https://ccsearch.creativecommons.org/">Creative Commons</a> or <a target="_blank" href="https://www.google.com/imghp?as_st=y&tbm=isch&hl=en&as_q=&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=sur:fm">“free for reuse”</a> images.   (Instructions for how to screenshot an image from a website on <a target="_blank" href="https://support.apple.com/en-us/HT201361">a Mac</a> or on <a target="_blank" href="http://www.digitaltrends.com/computing/how-to-take-a-screenshot-on-pc/">a PC</a>)
+						</div>
+					</popup-doc>
 
 					<md-radio-group ng-model="main.article.articleType" layout="row">
 						<md-radio-button ng-value="'notNews'">not news</md-radio-button>
@@ -43,19 +48,40 @@
 					</md-radio-group>
 				</div>
 				
-				<div class="obj-label">Headline</div>
+				<popup-doc>
+					<div class="obj-label">Headline</div>
+					<div class="popup-content">Copy and paste the headline from the original site.</div>
+				</popup-doc>
 				<textarea class="headline-edit" ng-model="main.article.headline"></textarea>
-				<div class="obj-label">Body</div>
+				<popup-doc>
+					<div class="obj-label">Body</div>
+					<div class="popup-content">Copy and paste the story’s body. Try to keep the content to about  two boxes’ worth of copy. The copy will scroll down.</div>
+				</popup-doc>
 				<textarea ng-change="main.onChange()" class="body-edit" ng-model="main.article.body"></textarea>
-				<div class="obj-label">"show source" Content</div>
+				<popup-doc>
+					<div class="obj-label">"show source" Content</div>
+					<div class="popup-content">Add the source of the article.  To italicize the name of the site or paper, add an underscore before and after the name. (_The Post_).You will be able to see in the editing window to the right if the format is correct.</div>
+				</popup-doc>
 				<textarea class="source-edit" ng-model="main.article.sourceHint"></textarea>
-				<div class="obj-label">Payoff "Source: " Link Label</div>
+				<popup-doc>
+					<div class="obj-label">Payoff "Source: " Link Label</div>
+					<div class="popup-content">The “payoff” is the answer. Repeat the name of the source so readers can click on a link to it.</div>
+				</popup-doc>
 				<textarea class="source-label-edit" ng-model="main.article.payoffSourceLabel"></textarea>
-				<div class="obj-label">Payoff "Source: " Link URL</div>
+				<popup-doc>
+					<div class="obj-label">Payoff "Source: " Link URL</div>
+					<div class="popup-content">The “payoff” is the answer. Add the URL of the original article for the link.</div>
+				</popup-doc>
 				<textarea xclass="source-edit" ng-model="main.article.payoffSourceUrl"></textarea>
-				<div class="obj-label">Payoff Content</div>
+				<popup-doc>
+					<div class="obj-label">Payoff Content</div>
+					<div class="popup-content">The “payoff” is the answer. Add the explanation of how you can tell this a real or fake article. To italicize the name of the site or paper, add an underscore before and after the name. (_The Post_). You will be able to see in the editing window to the right if the format is correct.  Here are some <a target="_blank" href="http://jolt.augamelab.com/fakenews.html">tips</a> for fake news detection.</div>
+				</popup-doc>
 				<textarea class="payoff-edit" ng-model="main.article.payoffContent"></textarea>
-				<div class="obj-label">Notes</div>
+				<popup-doc>
+					<div class="obj-label">Notes</div>
+					<div class="popup-content">Add photo URL here, story archive URL, or other notes.  Fake news articles often disappear, so we archive the webpage through <a target="_blank" href="http://www.archive.is/">archive.is</a>. Simply enter the URL on the archive.is page and it will save it and give you a permanent URL.</div>
+				</popup-doc>
 				<textarea class="payoff-edit" ng-model="main.article.notes"></textarea>
 			</div>
 		</div>
@@ -82,7 +108,10 @@
 				</div>
 			</div>
 			<div style="width: 600px;">
-				<div>Approximate form factor...</div>
+				<popup-doc>
+					<div>Approximate form factor...</div>
+					<div class="popup-content">The Approximate form factor will show you how the content will look with different style phones. </div>
+				</popup-doc>
 				<md-radio-group ng-model="main.simClass" layout="row" layout-wrap>
 					<md-radio-button ng-repeat="option in main.simClasses" ng-value="option.simClass">{{option.label}}</md-radio-button>
 				</md-radio-group>

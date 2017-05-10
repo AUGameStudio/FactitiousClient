@@ -1,0 +1,28 @@
+popup-doc {
+	display: block;
+	position: relative;
+	cursor: help;
+
+	.popup-content {
+		position: absolute;
+		bottom: 100%;
+		left: 5px;
+		width: 350px;
+		background: #f8f8f8;
+		padding: 10px;
+		box-shadow: 3px 3px 5px rgba(0,0,0,0.25);
+		cursor: auto;
+		border: 1px solid #ddd;
+		font-size: 14px;
+
+		/* display: none; */
+		transform: scale(0);
+		transition: 0.25s ease-in-out;
+		transform-origin: bottom left;
+	}
+
+	&.show-popup .popup-content {
+		/* display: block; */
+		transform: scale(1);
+	}
+}

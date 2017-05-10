@@ -100,6 +100,7 @@
 				return articleService.getArticle(id)
 					.then(function(article) {
 						vm.article = article;
+						vm.isNewArticle = false;
 					})
 			}
 
@@ -151,6 +152,7 @@
 						vm.article = article;
 						vm.selectedArticleId = undefined;
 						cleanArticle = angular.copy(vm.article);
+						vm.isNewArticle = true;
 					});
 			}
 		}
