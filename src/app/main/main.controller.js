@@ -294,6 +294,9 @@
 		function toggleBurger() {
 			vm.showBurger = !vm.showBurger;
 			vm.showInstructions = false;
+			if (vm.showBurger) {
+				$('burger-pane .gray-section').scrollTop(0);
+			}
 			audioService.playACSound('btn');
 		}
 
