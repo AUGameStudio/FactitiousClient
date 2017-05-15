@@ -9,7 +9,7 @@
 	/** @ngInject */
 	function authorizationService($log, $http, $cookies) {
 		var authToken;
-		var cookieTTL = 4.0/24.0;	// 4 hours
+		var cookieTtlHours = 4.0;	// 4 hours
 
 		var service =  {
 			authorize: authorize,
@@ -28,9 +28,7 @@
 			authToken = $cookies.get(authCookie);
 			service.isAuthorized = angular.isDefined(authToken) && authToken!=='';
 			if (service.isAuthorized) {
-				var expireTime = new Date();
-				expireTime.setDate(expireTime.getDate()+cookieTTL);
-				// $log.log('expires '+expireTime);	
+				var expireTime = moment().add(cookieTtlHours, 'hours').toDate();
 				$cookies.put(authCookie, authToken, {expires: expireTime});
 			}
 			return service.isAuthorized;
@@ -45,9 +43,12 @@
 				.then(function(response) {
 					authToken = response.data.token;
 					service.isAuthorized = true;
+					/*
 					var expireTime = new Date();
-					expireTime.setDate(expireTime.getDate()+cookieTTL);
-					$log.log('expires '+expireTime);	
+					$log.log(expireTime.setDate(expireTime.getDate()+cookieTTL));
+					*/
+
+					var expireTime = moment().add(cookieTtlHours, 'hours').toDate();
 					$cookies.put(authCookie, authToken, {expires: expireTime});
 					return true;
 				},
