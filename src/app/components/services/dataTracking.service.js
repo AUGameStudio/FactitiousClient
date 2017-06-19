@@ -23,7 +23,9 @@
 		}
 
 		function endArticle(articlePk, correct, hadHint) {
-			var dt = Math.round(moment().diff(startTime)/1000);
+			// force a maximum time of 300 seconds = 5 minutes
+			var dt = Math.min(300, Math.round(moment().diff(startTime)/1000));
+			
 			gameState.game_record.total_time_seconds += dt;
 			gameState.game_record.total_articles_played += 1;
 			if (correct) {
