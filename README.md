@@ -20,4 +20,4 @@ After the build is done, copy the files within the `dist/` to the html root (`/u
 
 # For Local testing #
 
-The `gulp/server.js` file is setup to proxy to the local django app on port 8000; so before running `gulp serve`, make sure that you've already launched `python manage.py runserver` as directed in the README.md file in the `fact2server` repository.
+The `gulp/server.js` file is setup to proxy to the local django app on port 8000; so before running `gulp serve`, make sure that you've already activated an environment in another terminal and launched `python manage.py runserver` as directed in the README.md file in the `fact2server` repository.
