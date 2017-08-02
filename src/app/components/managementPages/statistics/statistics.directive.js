@@ -93,10 +93,13 @@
 
 			function refreshStatistics() {
 				var sd, ed;
+
 				if ($scope.filterByDate) {
 					sd = $scope.startDate;
 					ed = $scope.endDate;
 				}
+
+				$scope.calculatingGames = $scope.calculatingArticles = true;
 
 				dataTracking.getArticleStatistics(sd, ed)
 					.then(function(stats) {
@@ -106,12 +109,19 @@
 								stat.headline = stat.headline.substr(0,40)+'...';
 							}
 						});
+					})
+					.finally(function() {
+						$scope.calculatingArticles = false;
 					});
 
 				dataTracking.getGamePlayStatistics(sd, ed)
 					.then(function(stats) {
 						$scope.gamePlayStats = stats;
+					})
+					.finally(function() {
+						$scope.calculatingGames = false;
 					});
+
 
 				$scope.needsUpdate = false;
 			}

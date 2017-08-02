@@ -93,4 +93,11 @@ statistics-page {
 		}
 	}
 
+	.ae-loading div {
+		text-align: center;
+		color: #FF0;
+		background: rgba(0,0,0,0.5);
+		padding: 10px;
+		border-radius: 15px;
+	}
 }

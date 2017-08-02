@@ -75,8 +75,8 @@
 					<th class="id-col">id</th><th class="hdline-col">headline</th>
 					<th># plays</th>
 					<th>avg. time</th>
-					<th># correct</th>
-					<th># hints</th>
+					<th>% correct</th>
+					<th>% hints</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -84,8 +84,8 @@
 					<td class="id-col">{{a.article_id}}</td><td class="hdline-col">{{a.headline}}</td>
 					<td>{{a.num_plays}}</td>
 					<td>{{a.avg_time | number:1}}</td>
-					<td>{{a.num_correct}}</td>
-					<td>{{a.num_hints}}</td>
+					<td>{{100*a.num_correct/a.num_plays | number:1}}</td>
+					<td>{{100*a.num_hints/a.num_plays | number:1}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -112,4 +112,10 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div ng-if="calculatingGames || calculatingArticles" class="ae-loading">
+		<div>Caclulating Aggregates...<br/>This may take up to 1 minute<br/>Please be patient and don't reload!</div>
+		<img src="assets/images/loading.gif"/>
+	</div>	
 </div>
