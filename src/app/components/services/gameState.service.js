@@ -47,6 +47,8 @@
 					$log.log(game_record);
 					service.game_record = game_record;
 					service.state = game_record.game_state;
+
+					removeEmptyRounds(game_record.game_settings);
 					service.game_settings = game_record.game_settings;
 
 					var state = service.state;
@@ -56,6 +58,8 @@
 
 					state.roundInfo = [];
 
+					// filter out potential empty rounds...
+
 					service.game_settings.roundInfo.forEach(function(info) {
 						// make sure there are no backward compatibility issues...
 						if (angular.isUndefined(info.shouldRandomize)) {
@@ -64,6 +68,8 @@
 						if (!info.shouldRandomize || angular.isUndefined(info.roundLength)) {
 							info.roundLength = info.articleIds.length;
 						}
+
+						$log.log('round pre ',info.roundLength, info.articleIds.length);
 						
 						var round = {};
 
@@ -79,7 +85,10 @@
 						}
 						round.articleIds = articleIds;
 						state.roundInfo.push(round);
+						$log.log('round',round);
 					});
+
+					$log.log('service.state.roundInfo ',state.roundInfo);
 
 					service.saveGame();
 
@@ -115,8 +124,19 @@
 							var game_record = response.data;
 							service.game_record = game_record;
 							service.state = game_record.game_state;
+							removeEmptyRounds(game_record.game_settings);
 							service.game_settings = game_record.game_settings;
 						});
+		}
+
+		/* to handle possible single round usage... */
+		function removeEmptyRounds(game_settings) {
+			$log.log('gs ',game_settings);
+			$log.log('num rounds pre: '+game_settings.roundInfo.length);
+			game_settings.roundInfo = game_settings.roundInfo.filter(function(roundInfo) {
+				return roundInfo.articleIds.length>0;
+			});
+			$log.log('num rounds post: '+game_settings.roundInfo.length);
 		}
 
 		/* for development use only... */

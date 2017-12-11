@@ -111,6 +111,7 @@
 						gameLauncher = gameState.beginNewGame(playerService.playerInfo.pk);
 					}
 					gameLauncher.then(function() {
+
 						vm.numberOfRounds = gameState.state.roundInfo.length;
 
 						if (gameState.state.articleNumber>=gameState.state.roundInfo[gameState.state.roundNumber].articleIds.length) {
