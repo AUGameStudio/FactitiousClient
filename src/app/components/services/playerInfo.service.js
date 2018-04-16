@@ -34,6 +34,25 @@
 
 		function refreshPlayerInfo() {
 
+			function createAnonPlayer() {
+				var anonName = 'anon'+(Math.random()+'').replace('.', '');
+				service.playerInfo = {
+					username: anonName,
+					is_anonymous: true
+				};
+
+				$log.log('try to create: '+anonName);
+				return $http.post(serviceUrl, service.playerInfo)
+					.then(function(response) {
+						$log.log('success creating anon-user:'+anonName);
+						service.playerInfo = response.data;
+						service.isAnonymous = true;
+						service.isSignedIn = true;
+						$cookies.put('anonUsername', anonName);
+						return true;
+					});
+			}
+
 			var fact2Username = $cookies.get('fact2Username');
 
 			if (fact2Username) {
@@ -41,6 +60,7 @@
 			} else {
 				var anonName = $cookies.get('anonUsername');
 				if (!anonName) {
+					/*
 					anonName = 'anon'+(Math.random()+'').replace('.', '');
 					service.playerInfo = {
 						username: anonName,
@@ -57,6 +77,8 @@
 							$cookies.put('anonUsername', anonName);
 							return true;
 						});
+					*/
+					return createAnonPlayer();
 				} else {
 					$log.log('try to get playerInfo for: '+anonName);
 					return $http.get(serviceUrl, {params:{username: anonName}})
@@ -66,6 +88,10 @@
 							service.isAnonymous = true;
 							service.isSignedIn = true;
 							return true;
+						},
+						function(response) {
+							$log.log('failure for existing user:'+anonName+'; probably you have bad cookie state in development...');
+							return createAnonPlayer();
 						});
 				}
 			}
